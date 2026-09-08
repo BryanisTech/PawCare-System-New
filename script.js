@@ -61,3 +61,13 @@
     });
 
     // (Pwedeng isunod dito sa baba yung script mo para sa Eye Open/Closed)
+
+   document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuButton.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+    });
+});
+

@@ -3,194 +3,1139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+
+    <title>PawCare | Register</title>
+
     <link rel="stylesheet" href="./src/output.css">
 </head>
-    <body>
 
-        <div class="relative
-                    w-full
-                    min-h-screen 
-                    bg-cover
-                    bg-center
-                    bg-no-repeat
-                    flex 
-                    items-center 
-                    justify-center
-                    overflow-hidden"
-                    style="background-image: url('./img/gradient.png');">
+<body class="bg-[#fffafa] text-[#202020]">
 
-                <div class="absolute top-10 left-20
-                        w-72 h-72
-                        bg-white/30
-                        rounded-full
-                        blur-3xl">
-                </div>
+<!-- =====================================================
+                         NAVBAR
+====================================================== -->
 
-                <div class="absolute bottom-10 right-20
-                            w-80 h-80
-                            bg-pink-300/30
-                            rounded-full
-                            blur-3xl">
-                </div>
+<header class="sticky top-0 z-[1000] w-full border-b border-pink-100 bg-white/95 backdrop-blur-md">
 
-                <img src="./img/pink.png" class="absolute top-12 right-20 w-35 opacity-30 rotate-20">
+    <nav class="relative mx-auto flex h-[90px] w-full max-w-[1240px]
+                items-center justify-between px-5 sm:px-6 lg:px-8">
 
-                <img src="./img/pink.png" class="absolute bottom-20 left-24 w-45 opacity-25 -rotate-20">
+        <!-- LOGO -->
+        <a href="index.html" class="flex items-center gap-2">
 
-                <img src="./img/brown.png" class="absolute top-[45%] right-16 w-16 opacity-10">
+            <div class="flex h-[52px] w-[52px] items-center justify-center
+                        rounded-full bg-black sm:h-[58px] sm:w-[58px]">
 
-                <div class="absolute -bottom-75 -right-37.5 w-212.5 h-125 rounded-[50%] border-2 border-white/40"></div>
+                <img
+                    src="./images/logo-paw.png"
+                    alt="PawCare Logo"
+                    class="h-[40px] w-[40px] object-contain"
+                >
 
-                <div class="relative z-10 w-full max-w-2xl px-9 py-10 bg-white/35 border border-white/60 rounded-[28px] backdrop-blur-xl shadow-[0_20px_60px_rgba(120,50,80,0.20)]">
-
-
-    <!-- Heading -->
-    <h4 class="text-center mb-2 text-3xl font-bold text-[#3D3032] leading-tight">
-        Create an Account <br>
-    </h4>
-    <p class="text-center mb-4 text-sm text-[#3D3032]">
-        Sign up to get started!
-    </p>
-
-    <!-- Pink Divider -->
-    <div class="w-10 h-0.75 bg-pink-400 rounded-full mx-auto mt-4 mb-8"></div>
-
-    <form action="/register" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-5" id="registerForm">
-
-        <!-- Column 1: Full Name -->
-        <div class="relative">
-            <label for="username" class="block mb-2 text-sm font-semibold text-[#3D3032]">Full Name:</label>
-            <div class="relative">
-                <!-- User Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pink-400 pointer-events-none">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-                <input type="text" id="username" name="username" placeholder="Ex. John Smith" required
-                       class="w-full h-12 pl-12 pr-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/60 text-sm font-medium text-[#3D3032] placeholder-[#B9A5A8] shadow-[0_4px_15px_rgba(255,255,255,0.15)] outline-none focus:bg-white/45 focus:border-pink-300 focus:ring-2 focus:ring-pink-300/30 transition duration-300">
             </div>
+
+            <div class="text-[24px] font-extrabold sm:text-[28px]">
+                <span>Paw</span>
+                <span class="text-[#f43f8e]">Care</span>
+            </div>
+
+        </a>
+
+
+        <!-- DESKTOP MENU -->
+        <div class="hidden items-center gap-8 lg:flex xl:gap-12">
+
+            <a href="index.html#about"
+               class="transition hover:text-[#f43f8e]">
+                About us
+            </a>
+
+            <a href="index.html#home"
+               class="transition hover:text-[#f43f8e]">
+                Home
+            </a>
+
+            <a href="index.html#services"
+               class="transition hover:text-[#f43f8e]">
+                Services
+            </a>
+
+            <a href="index.html#grooming"
+               class="transition hover:text-[#f43f8e]">
+                Grooming
+            </a>
+
+            <a href="index.html#contact"
+               class="transition hover:text-[#f43f8e]">
+                Contact
+            </a>
+
         </div>
 
-        <!-- Column 2: Email -->
-        <div class="relative">
-            <label for="email" class="block mb-2 text-sm font-semibold text-[#3D3032]">Email:</label>
-            <div class="relative">
-                <!-- Mail Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pink-400 pointer-events-none">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="m3 7 9 6 9-6"/>
-                </svg>
-                <input type="email" id="email" name="email" placeholder="john.smith@gmail.com" required
-                       class="w-full h-12 pl-12 pr-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/60 text-sm font-medium text-[#3D3032] placeholder-[#B9A5A8] shadow-[0_4px_15px_rgba(255,255,255,0.15)] outline-none focus:bg-white/45 focus:border-pink-300 focus:ring-2 focus:ring-pink-300/30 transition duration-300">
-            </div>
-        </div>
 
-        <!-- Column 1: Phone Number -->
-        <div class="relative">
-            <label for="phonenumber" class="block mb-2 text-sm font-semibold text-[#3D3032]">Phone Number:</label>
-            <div class="relative">
-                <!-- Phone Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pink-400 pointer-events-none">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                </svg>
-                <input type="tel" id="phonenumber" name="phonenumber" placeholder="Ex. 09XXXXXXXXX" inputmode="numeric" pattern="09[0-9]{9}" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required
-                       class="w-full h-12 pl-12 pr-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/60 text-sm font-medium text-[#3D3032] placeholder-[#B9A5A8] shadow-[0_4px_15px_rgba(255,255,255,0.15)] outline-none focus:bg-white/45 focus:border-pink-300 focus:ring-2 focus:ring-pink-300/30 transition duration-300">
-            </div>
-        </div>
+        <!-- DESKTOP RIGHT -->
+        <div class="hidden items-center gap-7 lg:flex">
 
-        <!-- Column 2: Address -->
-        <div class="relative">
-            <label for="address" class="block mb-2 text-sm font-semibold text-[#3D3032]">Address:</label>
-            <div class="relative">
-                <!-- Map Pin Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pink-400 pointer-events-none">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-                <input type="text" id="address" name="address" placeholder="Ex. 123 Main St" required
-                       class="w-full h-12 pl-12 pr-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/60 text-sm font-medium text-[#3D3032] placeholder-[#B9A5A8] shadow-[0_4px_15px_rgba(255,255,255,0.15)] outline-none focus:bg-white/45 focus:border-pink-300 focus:ring-2 focus:ring-pink-300/30 transition duration-300">
-            </div>
-        </div>
+            <a href="login.html"
+               class="font-semibold transition hover:text-[#f43f8e]">
+                Log in
+            </a>
 
-       <!-- Main Password Field (May Eye Icon) -->
-<div class="mb-4">
-    <label for="password" class="block mb-2 text-sm font-semibold text-[#3D3032]">
-        Password:
-    </label>
-    
-    <div class="relative">
-        <!-- Lock Icon sa kaliwa -->
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pink-400 pointer-events-none">
-            <rect x="5" y="10" width="14" height="11" rx="2"/>
-            <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-        </svg>
-
-        <input type="password" id="password" name="password" placeholder="Enter your password" required
-               class="w-full h-12 pl-12 pr-12 rounded-xl bg-white/30 backdrop-blur-md border border-white/60 text-sm font-medium text-[#3D3032] placeholder-[#B9A5A8] shadow-[0_4px_15px_rgba(255,255,255,0.15)] outline-none focus:bg-white/45 focus:border-pink-300 focus:ring-2 focus:ring-pink-300/30 transition duration-300">
-        
-        <!-- Eye Toggle Button sa kanan -->
-        <button type="button" id="togglePassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-[#B9A5A8] hover:text-[#3D3032] transition-colors focus:outline-none">
-            
-            <!-- Eye Open Icon (Naka-show by default kapag encrypted) -->
-            <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            </svg>
-            
-            <!-- Eye Closed Icon (Nakatago by default - may 'hidden' class) -->
-            <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-            </svg>
-        </button>
-    </div>
-</div>
-
-<!-- Confirm Password Field (Walang Eye Icon) -->
-<div class="mb-4">
-    <label for="confirm_password" class="block mb-2 text-sm font-semibold text-[#3D3032]">
-        Confirm Password:
-    </label>
-    
-    <div class="relative">
-        <!-- Lock Icon sa kaliwa -->
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pink-400 pointer-events-none">
-            <rect x="5" y="10" width="14" height="11" rx="2"/>
-            <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-        </svg>
-        
-        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required
-               class="w-full h-12 pl-12 pr-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/60 text-sm font-medium text-[#3D3032] placeholder-[#B9A5A8] shadow-[0_4px_15px_rgba(255,255,255,0.15)] outline-none focus:bg-white/45 focus:border-pink-300 focus:ring-2 focus:ring-pink-300/30 transition duration-300">
-    </div>
-
-    <p id="passwordError" class="text-red-400 text-xs font-semibold mt-1 hidden">
-        ❌ Passwords do not match!
-    </p>
-</div>
-
-        <!-- Submit Button (Spans 2 columns) -->
-        <div class="md:col-span-2 mt-2">
-            <button type="submit" class="w-full text-white px-4 py-3 rounded-xl bg-linear-to-r from-pink-300 to-pink-500 font-semibold hover:scale-105 hover:shadow-xl duration-300 mb-6">
+            <a href="register.html"
+               class="rounded-full bg-[#f43f8e]
+                      px-7 py-3 font-semibold text-white">
                 Register
-            </button>
-            
-            <!-- Login Link -->
-            <div class="text-center text-sm text-[#3D3032]">
-                Already Have an Account? 
-                <a href="index.html" class="font-semibold text-[#D98C9A] hover:underline">
-                    Login
+            </a>
+
+        </div>
+
+
+        <!-- BURGER -->
+        <button
+            id="registerMenuButton"
+            type="button"
+            class="relative z-[9999] flex h-11 w-11 cursor-pointer
+                   flex-col items-center justify-center gap-[5px] lg:hidden"
+            aria-label="Open menu"
+        >
+            <span class="pointer-events-none h-[3px] w-7 rounded bg-black"></span>
+            <span class="pointer-events-none h-[3px] w-7 rounded bg-black"></span>
+            <span class="pointer-events-none h-[3px] w-7 rounded bg-black"></span>
+        </button>
+
+
+        <!-- MOBILE MENU -->
+        <div
+            id="registerMobileMenu"
+            class="absolute left-4 right-4 top-[82px] z-[999]
+                   hidden rounded-2xl border border-pink-100
+                   bg-white p-4 shadow-xl lg:hidden"
+        >
+
+            <div class="flex flex-col">
+
+                <a href="index.html#about"
+                   class="rounded-xl px-4 py-3 hover:bg-pink-50">
+                    About us
                 </a>
+
+                <a href="index.html#home"
+                   class="rounded-xl px-4 py-3 hover:bg-pink-50">
+                    Home
+                </a>
+
+                <a href="index.html#services"
+                   class="rounded-xl px-4 py-3 hover:bg-pink-50">
+                    Services
+                </a>
+
+                <a href="index.html#grooming"
+                   class="rounded-xl px-4 py-3 hover:bg-pink-50">
+                    Grooming
+                </a>
+
+                <a href="index.html#contact"
+                   class="rounded-xl px-4 py-3 hover:bg-pink-50">
+                    Contact
+                </a>
+
+                <div class="my-2 border-t border-pink-100"></div>
+
+                <a href="login.html"
+                   class="rounded-xl px-4 py-3 font-semibold">
+                    Log in
+                </a>
+
+                <a href="register.html"
+                   class="mt-2 rounded-full bg-[#f43f8e]
+                          px-5 py-3 text-center font-semibold text-white">
+                    Register
+                </a>
+
             </div>
-        </div>
-
-    </form>
-
-</div>
 
         </div>
 
-        <script src="script.js
-        "></script>
+    </nav>
 
-    </body>
+</header>
 
+
+<!-- =====================================================
+                    REGISTER SECTION
+====================================================== -->
+
+<main>
+
+<section class="mx-auto w-full max-w-[1240px] px-6 py-3">
+
+    <div class="grid items-start gap-8 lg:grid-cols-[52%_48%]">
+
+        <!-- =================================================
+                            LEFT SIDE
+        ================================================== -->
+
+        <div class="relative hidden min-h-[760px] lg:block">
+
+            <!-- TOP PINK BACKGROUND -->
+            <img
+                src="./images/hero-bg.png"
+                alt=""
+                class="absolute left-1/2 top-[35px]
+                       w-[95%] max-w-[610px]
+                       -translate-x-1/2 object-contain"
+            >
+
+            <!-- PETS -->
+            <img
+                src="./images/register-pets.png"
+                alt="Dog and cat"
+                class="absolute left-1/2 top-[85px] z-10
+                       w-[88%] max-w-[540px]
+                       -translate-x-1/2 object-contain"
+            >
+
+            <!-- REGISTER DECORATION -->
+            <div class="absolute left-1/2 top-[390px] z-20
+                        w-[92%] max-w-[570px]
+                        -translate-x-1/2">
+
+                <img
+                    src="./images/register-decoration.png"
+                    alt=""
+                    class="w-full object-contain"
+                >
+
+                <!-- TEXT INSIDE DECORATION -->
+                <div class="absolute inset-0
+            flex -translate-y-[35px] flex-col
+            items-center justify-center
+            px-16 text-center">
+
+                    <h1 class="text-[34px] font-extrabold leading-[1.05]">
+
+                        Care starts with
+
+                        <br>
+
+                        <span class="text-[#f43f83]">
+                            Knowing your pet.
+                        </span>
+
+                    </h1>
+
+                    <p class="mt-4 max-w-[340px]
+                              text-[14px] leading-[19px]
+                              text-gray-500">
+
+                        Join PawCare and keep all your pet's
+                        information, appointments, and care
+                        in one place.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- BENEFITS -->
+            <div class="absolute bottom-[-70px] left-1/2 z-30
+                        flex w-full max-w-[570px]
+                        -translate-x-1/2
+                        items-center justify-between gap-5">
+
+                <!-- TRUSTED -->
+                <div class="flex items-center gap-3">
+
+                    <div class="flex h-[58px] w-[58px]
+                                shrink-0 items-center justify-center
+                                rounded-full bg-[#fbdbe9]">
+
+                        <img
+                            src="./images/paw-pink.png"
+                            alt=""
+                            class="h-9 w-9 object-contain"
+                        >
+
+                    </div>
+
+                    <p class="text-[14px] font-semibold leading-5">
+                        Trusted
+                        <br>
+                        <span class="font-normal text-gray-600">
+                            Care
+                        </span>
+                    </p>
+
+                </div>
+
+
+                <!-- HAPPIER -->
+                <div class="flex items-center gap-3">
+
+                    <div class="flex h-[58px] w-[58px]
+                                shrink-0 items-center justify-center
+                                rounded-full bg-[#fbdbe9]">
+
+                        <img
+                            src="./images/heart.png"
+                            alt=""
+                            class="h-14 w-14 object-contain"
+                        >
+
+                    </div>
+
+                    <p class="text-[14px] font-semibold leading-5">
+                        Happier
+                        <br>
+                        <span class="font-normal text-gray-600">
+                            Pets
+                        </span>
+                    </p>
+
+                </div>
+
+
+                <!-- STRONGER -->
+                <div class="flex items-center gap-3">
+
+                    <div class="flex h-[58px] w-[58px]
+                                shrink-0 items-center justify-center
+                                rounded-full bg-[#fbdbe9]">
+
+                        <img
+                            src="./images/community.png"
+                            alt=""
+                            class="h-9 w-9 object-contain"
+                        >
+
+                    </div>
+
+                    <p class="text-[14px] font-semibold leading-5">
+                        Stronger
+                        <br>
+                        <span class="font-normal text-gray-600">
+                            Pet Communities
+                        </span>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+                         REGISTER CARD
+        ================================================== -->
+
+        <div class="w-full">
+
+            <div class="mx-auto w-full max-w-[590px]
+                        rounded-[24px]
+                        border border-gray-200
+                        bg-white
+                        px-7 py-6
+                        shadow-sm">
+
+
+                <!-- TITLE -->
+                <h2 class="text-left text-[30px]
+                           font-extrabold leading-[0.95]">
+
+                    Create your
+
+                    <br>
+
+                    <span class="text-[#f43f83]">
+                        PawCare
+                    </span>
+
+                    account
+
+                    <img
+                        src="./images/paw-pink.png"
+                        alt=""
+                        class="ml-1 inline-block
+                               h-[27px] w-[27px]
+                               object-contain align-middle"
+                    >
+
+                </h2>
+
+                <p class="mt-2 text-left
+                          text-[14px] text-gray-500">
+                    Join our community of pet lovers!
+                </p>
+
+
+                <form id="registerForm" class="mt-5" novalidate>
+
+
+                    <!-- =====================================
+                        1 OWNER INFORMATION
+                    ====================================== -->
+
+                    <div class="mb-4">
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="flex h-[30px] w-[30px]
+                                        shrink-0 items-center justify-center
+                                        rounded-full bg-[#f43f83]
+                                        text-[14px] font-bold text-white">
+                                1
+                            </div>
+
+                            <h3 class="whitespace-nowrap
+                                       text-[16px] font-bold">
+                                Owner Information
+                            </h3>
+
+                            <div class="h-px flex-1 bg-pink-100"></div>
+
+                            <span class="whitespace-nowrap
+                                         text-[11px] text-gray-400">
+                                Tell us about your self
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OWNER FIELDS -->
+                    <div class="grid grid-cols-1 gap-x-5 gap-y-3 sm:grid-cols-2">
+
+                        <!-- FULL NAME -->
+                        <div>
+
+                            <label for="fullName"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Full Name
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/user.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="fullName"
+                                    name="fullName"
+                                    type="text"
+                                    placeholder="Enter your full name"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-3 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+                        <div>
+
+                            <label for="email"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Email Address
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/email1.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="your@email.com"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-3 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PHONE -->
+                        <div>
+
+                            <label for="phone"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Phone Number
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/phone.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="tel"
+                                    placeholder="e.g. 0912 345 6789"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-3 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+                        <div>
+
+                            <label for="address"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Address
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/location.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="address"
+                                    name="address"
+                                    type="text"
+                                    placeholder="Your address"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-3 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="my-5 border-t border-gray-200"></div>
+
+
+                    <!-- =====================================
+                          2 PET INFORMATION
+                    ====================================== -->
+
+                    <div class="mb-3">
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="flex h-[30px] w-[30px]
+                                        shrink-0 items-center justify-center
+                                        rounded-full bg-[#f43f83]
+                                        text-[14px] font-bold text-white">
+                                2
+                            </div>
+
+                            <h3 class="whitespace-nowrap
+                                       text-[16px] font-bold">
+                                Pet Information
+                            </h3>
+
+                            <div class="h-px flex-1 bg-pink-100"></div>
+
+                            <span class="whitespace-nowrap
+                                         text-[10px] text-gray-400">
+                                Add your first pet (you can add more later)
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PET INFO = THREE COLUMNS LIKE FIGMA -->
+                    <div class="grid grid-cols-1
+                                gap-x-4 gap-y-3
+                                sm:grid-cols-3">
+
+
+                        <!-- PET NAME -->
+                        <div>
+
+                            <label for="petName"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Pet Name
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/pet-name.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="petName"
+                                    name="petName"
+                                    type="text"
+                                    placeholder="e.g. Brownie"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-2 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PET TYPE -->
+                        <div>
+
+                            <label for="petType"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Pet Type
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/pet-type.png"
+                                    alt=""
+                                    class="pointer-events-none
+                                           absolute left-3 top-1/2 z-10
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <select
+                                    id="petType"
+                                    name="petType"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           appearance-none rounded-lg
+                                           border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-8 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+                                    <option value="dog" selected>Dog</option>
+                                    <option value="cat">Cat</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="hamster">Hamster</option>
+                                    <option value="other">Other</option>
+                                </select>
+
+                                <span class="pointer-events-none
+                                             absolute right-3 top-1/2
+                                             -translate-y-1/2
+                                             text-gray-500">
+                                    ▼
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BREED -->
+                        <div>
+
+                            <label for="breed"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Breed
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/bone.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="breed"
+                                    name="breed"
+                                    type="text"
+                                    placeholder="e.g. Aspin"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-2 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- GENDER -->
+                        <div>
+
+                            <label for="gender"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Gender
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/gender.png"
+                                    alt=""
+                                    class="pointer-events-none
+                                           absolute left-3 top-1/2 z-10
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <select
+                                    id="gender"
+                                    name="gender"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           appearance-none rounded-lg
+                                           border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-8 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+
+                                </select>
+
+                                <span class="pointer-events-none
+                                             absolute right-3 top-1/2
+                                             -translate-y-1/2
+                                             text-gray-500">
+                                    ▼
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BIRTHDAY -->
+                        <div>
+
+                            <label for="birthday"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Birthday/Age
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/calendar.png"
+                                    alt=""
+                                    class="pointer-events-none
+                                           absolute left-3 top-1/2 z-10
+                                           h-[19px] w-[19px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="birthday"
+                                    name="birthday"
+                                    type="date"
+                                    required
+                                    class="form-input h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-2 text-[12px]
+                                           text-gray-500 outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================
+                             UPLOAD PET PHOTO — FIGMA DESIGN
+                        ================================== -->
+
+                        <div>
+
+                            <label class="mb-1 block
+                                          text-[13px] font-semibold">
+                                Upload Pet Photo
+                            </label>
+
+                            <input
+                                id="petPhoto"
+                                name="petPhoto"
+                                type="file"
+                                accept="image/png,image/jpeg,image/webp"
+                                class="hidden"
+                            >
+
+
+                            <!-- OUTER INPUT BOX -->
+                            <div class="flex h-[43px] w-full
+                                        items-center
+                                        rounded-lg
+                                        border border-gray-300
+                                        bg-[#fafafa]
+                                        px-2">
+
+
+                                <!-- PHOTO ICON -->
+                                <img
+                                    src="./images/upload.png"
+                                    alt=""
+                                    class="mr-2 h-[19px] w-[19px]
+                                           shrink-0 object-contain"
+                                >
+
+
+                                <!-- FILE NAME -->
+                                <span
+                                    id="photoFileName"
+                                    class="min-w-0 flex-1
+                                           truncate text-[11px]
+                                           text-gray-400">
+                                </span>
+
+
+                                <!-- PINK CHOOSE PHOTO PILL -->
+                                <button
+                                    id="choosePhotoButton"
+                                    type="button"
+                                    class="ml-auto shrink-0
+                                           rounded-full
+                                           border border-[#f7b4cf]
+                                           bg-[#fde7f0]
+                                           px-4 py-[7px]
+                                           text-[11px] font-semibold
+                                           text-[#f43f83]
+                                           transition
+                                           hover:bg-[#fbd5e5]"
+                                >
+                                    Choose Photo
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHOTO PREVIEW -->
+                    <div id="photoPreviewContainer"
+                         class="mt-3 hidden">
+
+                        <div class="flex items-center gap-3
+                                    rounded-lg border border-pink-100
+                                    bg-pink-50 p-2">
+
+                            <img
+                                id="photoPreview"
+                                src=""
+                                alt="Pet preview"
+                                class="h-12 w-12 rounded-lg object-cover"
+                            >
+
+                            <span class="text-[12px] text-gray-500">
+                                Pet photo selected
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="my-5 border-t border-gray-200"></div>
+
+
+                    <!-- =====================================
+                         3 ACCOUNT SECURITY
+                    ====================================== -->
+
+                    <div class="mb-4">
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="flex h-[30px] w-[30px]
+                                        shrink-0 items-center justify-center
+                                        rounded-full bg-[#f43f83]
+                                        text-[14px] font-bold text-white">
+                                3
+                            </div>
+
+                            <h3 class="whitespace-nowrap
+                                       text-[16px] font-bold">
+                                Account Security
+                            </h3>
+
+                            <div class="h-px flex-1 bg-pink-100"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+
+                        <!-- PASSWORD -->
+                        <div>
+
+                            <label for="password"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Password
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/lock.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[18px] w-[18px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    minlength="8"
+                                    placeholder="Create a password"
+                                    required
+                                    class="h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-10 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                                <button
+                                    id="togglePassword"
+                                    type="button"
+                                    class="absolute right-3 top-1/2
+                                           -translate-y-1/2"
+                                >
+
+                                    <img
+                                        src="./images/eye.png"
+                                        alt=""
+                                        class="h-[18px] w-[18px]"
+                                    >
+
+                                </button>
+
+                            </div>
+
+                            <p id="passwordError"
+                               class="mt-1 hidden text-[11px] text-red-500">
+                                Password must contain at least 8 characters.
+                            </p>
+
+                        </div>
+
+
+                        <!-- CONFIRM -->
+                        <div>
+
+                            <label for="confirmPassword"
+                                   class="mb-1 block text-[13px] font-semibold">
+                                Confirm Password
+                            </label>
+
+                            <div class="relative">
+
+                                <img
+                                    src="./images/lock.png"
+                                    alt=""
+                                    class="absolute left-3 top-1/2
+                                           h-[18px] w-[18px]
+                                           -translate-y-1/2 object-contain"
+                                >
+
+                                <input
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    type="password"
+                                    placeholder="Confirm your password"
+                                    required
+                                    class="h-[43px] w-full
+                                           rounded-lg border border-gray-300
+                                           bg-[#fafafa]
+                                           pl-10 pr-10 text-[12px]
+                                           outline-none
+                                           focus:border-[#f43f83]"
+                                >
+
+                                <button
+                                    id="toggleConfirmPassword"
+                                    type="button"
+                                    class="absolute right-3 top-1/2
+                                           -translate-y-1/2"
+                                >
+
+                                    <img
+                                        src="./images/eye.png"
+                                        alt=""
+                                        class="h-[18px] w-[18px]"
+                                    >
+
+                                </button>
+
+                            </div>
+
+                            <p id="confirmPasswordError"
+                               class="mt-1 hidden text-[11px] text-red-500">
+                                Passwords do not match.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TERMS -->
+                    <label class="mt-4 flex cursor-pointer
+                                  items-center gap-2
+                                  text-[11px]">
+
+                        <input
+                            id="terms"
+                            name="terms"
+                            type="checkbox"
+                            required
+                            class="h-4 w-4 accent-[#f43f83]"
+                        >
+
+                        <span class="text-gray-500">
+
+                            I agree to the
+
+                            <a href="#"
+                               class="text-[#f43f83]">
+                                Terms of Service
+                            </a>
+
+                            and
+
+                            <a href="#"
+                               class="text-[#f43f83]">
+                                Privacy Policy
+                            </a>
+
+                        </span>
+
+                    </label>
+
+                    <p id="termsError"
+                       class="mt-1 hidden text-[11px] text-red-500">
+                        Please accept the Terms of Service and Privacy Policy.
+                    </p>
+
+
+                    <!-- CREATE ACCOUNT -->
+                    <button
+                        type="submit"
+                        class="mt-4 flex h-[48px] w-full
+                               items-center justify-center gap-4
+                               rounded-xl bg-[#f43f83]
+                               text-[15px] font-bold text-white
+                               transition hover:bg-[#df3077]"
+                    >
+                        Create Account
+                        <span class="text-[20px] font-normal">→</span>
+                    </button>
+
+
+                    <!-- LOGIN -->
+                    <p class="mt-3 text-center
+                              text-[12px] text-gray-500">
+
+                        Already have an account?
+
+                        <a href="login.html"
+                           class="font-semibold text-[#f43f83]">
+                            Log in
+                        </a>
+
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script src="./register.js"></script>
+
+</body>
 </html>

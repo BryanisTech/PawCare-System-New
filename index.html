@@ -1,257 +1,654 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PawCare</title>
+
+    <!-- Palitan ito kung iba ang location ng compiled Tailwind CSS mo -->
     <link rel="stylesheet" href="./src/output.css">
- </head>
- <body>
+</head>
 
-    
-   <div class="relative
-               w-full
-               min-h-screen 
-               bg-cover
-               bg-center
-               bg-no-repeat
-               flex 
-               items-center 
-               justify-center
-               overflow-hidden"
-        style="background-image: url('./img/gradient.png');">
+<body class="m-0 bg-white font-sans text-[#171717]">
 
-        <div class="absolute top-10 left-20
-                    w-72 h-72
-                    bg-white/30
-                    rounded-full
-                    blur-3xl">
-        </div>
+    <!-- =====================================================
+                         NAVIGATION
+    ====================================================== -->
+    <header class="sticky top-0 z-1000 w-full border-b border-pink-100 bg-white/95 backdrop-blur-md">
+    <nav class="relative mx-auto flex h-[90px] w-full max-w-[1240px]
+                items-center justify-between px-5 sm:px-6 lg:px-8">
 
-        <div class="absolute bottom-10 right-20
-                    w-80 h-80
-                    bg-pink-300/30
-                    rounded-full
-                    blur-3xl">
-        </div>
-
-        <img src="./img/pink.png" class="absolute top-12 right-20 w-35 opacity-30 rotate-20">
-
-        <img src="./img/pink.png" class="absolute bottom-20 left-24 w-45 opacity-25 -rotate-20">
-
-        <img src="./img/brown.png" class="absolute top-[45%] right-16 w-16 opacity-10">
-
-        <div class="absolute -bottom-75 -right-37.5 w-212.5 h-125 rounded-[50%] border-2 border-white/40"></div>
-
-   
-        <div class="relative z-10
-                    w-97.5
-                    max-w-[90%]
-                    px-9
-                    py-10
-                    bg-white/35
-                    border
-                    border-white/60
-                    rounded-[28px]
-                    backdrop-blur-xl
-                    shadow-[0_20px_60px_rgba(120,50,80,0.20)]">
-
-             <div class="mx-auto mb-4
-                         w-22 h-22
-                         rounded-full
-                         bg-white/60
-                         border border-white/80
-                         flex items-center justify-center
-                         shadow-lg">
-                    
-                    <img src="./img/logo.png" class="w-20 h-20 object-contain">
+        <!-- LOGO -->
+        <a href="index.html" class="flex items-center gap-2">
+            <div class="flex h-[52px] w-[52px] items-center justify-center
+                        rounded-full bg-black sm:h-[58px] sm:w-[58px]">
+                <img
+                    src="./images/logo-paw.png"
+                    alt="PawCare Logo"
+                    class="h-[40px] w-[40px] object-contain"
+                >
             </div>
 
-             <h4 class="text-center mb-5 text-3xl font-bold text-[#3D3032] leading-tight">
-                Welcome Back to <br>
-                PawCare
-            </h4>
-            <p class="text-center mb-4 text-sm text-[#3D3032]">
-                Sign in to continue!
-            </p>
+            <div class="text-[24px] font-extrabold sm:text-[28px]">
+                <span class="text-[#202020]">Paw</span>
+                <span class="text-[#f33b8f]">Care</span>
+            </div>
+        </a>
 
-            <div class="w-10 h-0.75 bg-pink-400 rounded-full mx-auto mt-4 mb-6"></div>
-
-            <form action="">
-                
-                <div class="mb-4">
-                    <label 
-                        for="email"
-                        class="block mb-2 text-sm font-semibold text-[#3D3032]"
-                    >
-                        Email:
-                    </label>
-
-                    <div class="relative">
-
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          class="absolute left-4 top-1/2 -translate-y-1/2
-                              w-5 h-5 text-pink-400 pointer-events-none"
-                        >
-                          <rect x="3" y="5" width="18" height="14" rx="2"/>
-                          <path d="m3 7 9 6 9-6"/>
-                            
-                        </svg>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email"
-                        required
-                        
-                        class="w-full 
-                            h-12
-                            pl-12
-                            pr-4
-                            rounded-xl
-
-                            bg-white/30
-                            backdrop-blur-md
-                            border border-white/60
-
-                            text-sm
-                            font-medium
-                            text-[#3D3032]
-
-                            placeholder-[#B9A5A8]
-
-                            shadow-[0_4px_15px_rgba(255,255,255,0.15)]
-
-                            outline-none
-
-                            focus:bg-white/45
-                            focus:border-pink-300
-                            focus:ring-2
-                            focus:ring-pink-300/30
-
-                            transition duration-300"
-                    >
-                     </div>
-
-                
-                <div class="mb-4">
-                    <label 
-                        for="password"
-                        class="block 
-                        mb-2 
-                        text-sm 
-                        font-semibold 
-                        text-[#3D3032]"
-                    >
-                        Password:
-                    </label>
-
-                    
-                    <div class="relative">
-
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pink-400 pointer-events-none"
-                        >
-                         <rect x="5" y="10" width="14" height="11" rx="2"/>
-                         <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-                         </svg>
-
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Enter your password"
-                            required
-                            
-                            class="w-full 
-                                h-12
-                                pl-12
-                                pr-12
-                                rounded-xl
-
-                                bg-white/30
-                                backdrop-blur-md
-                                border border-white/60
-
-                                text-sm
-                                font-medium
-                                text-[#3D3032]
-
-                                placeholder-[#B9A5A8]
-
-                                shadow-[0_4px_15px_rgba(255,255,255,0.15)]
-
-                                outline-none
-
-                                focus:bg-white/45
-                                focus:border-pink-300
-                                focus:ring-2
-                                focus:ring-pink-300/30
-
-                                transition duration-300"
-                        >
-                        
-                        <button 
-                            type="button" 
-                            id="togglePassword" 
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-[#B9A5A8] hover:text-[#3D3032] transition-colors focus:outline-none"
-                        >
-                            
-                            <svg id="eyeOpen" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            </svg>
-                            
-                            <svg id="eyeClosed" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="mb-5">
-
-                    <label class="flex items-center gap-2
-                                  text-sm font-semibold text-[#3d3032]
-                                  cursor-pointer">
-
-                                <input type="checkbox" class="w-4 h-4 accent-pink-500 cursor-pointer">
-
-                                <span>Remember Me</span>
-                            
-                    </label>
-
-                </div>
-
-                <button type="submit" class="w-full text-white px-4 py-3 rounded-xl bg-linear-to-r from-pink-300 to-pink-500 font-semibold hover:scale-105 hover:shadow-xl duration-300 mb-6">Login</button>
-
-                <div class="register text-center text-sm text-[#3D3032]">
-                    Don't Have an Account? 
-                    <a href="register.html" class="font-semibold text-[#D98C9A] hover:underline">
-                        Register
-                    </a>
-                </div>
-
-
-            </form>
-
-
-
+        <!-- DESKTOP MENU -->
+        <div class="hidden items-center gap-8 lg:flex xl:gap-12">
+            <a href="#about" class="hover:text-[#f33b8f]">About us</a>
+            <a href="#home" class="hover:text-[#f33b8f]">Home</a>
+            <a href="#services" class="hover:text-[#f33b8f]">Services</a>
+            <a href="#grooming" class="hover:text-[#f33b8f]">Grooming</a>
+            <a href="#contact" class="hover:text-[#f33b8f]">Contact</a>
         </div>
 
+        <!-- DESKTOP LOGIN -->
+        <div class="hidden items-center gap-7 lg:flex">
+            <a href="login.html"
+               class="font-semibold hover:text-[#f33b8f]">
+                Log in
+            </a>
+
+            <a href="register.html"
+               class="rounded-full bg-[#f33b8f] px-7 py-3
+                      font-semibold text-white transition
+                      hover:bg-[#db2e7b]">
+                Register
+            </a>
+        </div>
+
+        <!-- BURGER -->
+        <button
+    id="menuButton"
+    type="button"
+    onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
+    class="relative z-9999 flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-1.25 lg:hidden"
+    aria-label="Open menu"
+>
+    <span class="pointer-events-none block h-0.75 w-7 rounded bg-black"></span>
+    <span class="pointer-events-none block h-0.75 w-7 rounded bg-black"></span>
+    <span class="pointer-events-none block h-0.75 w-7 rounded bg-black"></span>
+</button>
+
+        <!-- MOBILE MENU -->
+<div
+    id="mobileMenu"
+    class="absolute left-4 right-4 top-[82px] z-[999]
+           hidden rounded-2xl border border-pink-100
+           bg-white p-4 shadow-xl lg:hidden"
+>
+    <div class="flex flex-col">
+
+        <a href="#about"
+           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+            About us
+        </a>
+
+        <a href="#home"
+           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+            Home
+        </a>
+
+        <a href="#services"
+           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+            Services
+        </a>
+
+        <a href="#grooming"
+           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+            Grooming
+        </a>
+
+        <a href="#contact"
+           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+            Contact
+        </a>
+
+        <div class="my-2 border-t border-pink-100"></div>
+
+        <a href="login.html"
+           class="rounded-xl px-4 py-3 font-semibold">
+            Log in
+        </a>
+
+        <a href="register.html"
+           class="mt-2 rounded-full bg-[#f33b8f]
+                  px-5 py-3 text-center font-semibold text-white">
+            Register
+        </a>
+
     </div>
-    
-    
-   <script src="script.js"></script>
-    
- </body>
- </html>
+</div>
+
+</nav>
+</header>
+
+
+    <!-- =====================================================
+                            HERO
+    ====================================================== -->
+    <main>
+
+        <section
+            id="home"
+            class="relative w-full overflow-hidden bg-white"
+        >
+
+            <div
+                class="mx-auto grid min-h-[695px]
+                       w-full max-w-[1240px]
+                       grid-cols-1 items-center
+                       px-6 py-14
+                       lg:grid-cols-[46%_54%]
+                       lg:px-8 lg:py-0"
+            >
+
+                <!-- ==========================================
+                              HERO LEFT
+                =========================================== -->
+                <div class="relative z-20 lg:pb-3">
+
+                    <!-- SMALL LABEL -->
+                    <div
+                        class="mb-4 flex items-center gap-2
+                               text-[14px] font-extrabold
+                               text-[#f33b8f]"
+                    >
+                        <span class="text-[20px]">♥</span>
+
+                        <span>
+                            YOUR PET'S HEALTH, OUR PRIORITY
+                        </span>
+                    </div>
+
+
+                    <!-- HEADING -->
+                    <h1
+                        class="max-w-[570px]
+                               text-[52px] font-extrabold
+                               leading-[1.08]
+                               tracking-[-2px]
+                               text-[#171717]
+                               sm:text-[60px]
+                               lg:text-[64px]"
+                    >
+                        Better Care.
+
+                        <span class="mt-2 block text-[#f33b8f]">
+                            Happier Pets.
+                        </span>
+
+                        <span class="mt-2 block">
+                            Every Day.
+                        </span>
+                    </h1>
+
+
+                    <!-- DESCRIPTION -->
+                    <p
+                        class="mt-6 max-w-[480px]
+                               text-[17px]
+                               leading-[1.45]
+                               text-[#686868]"
+                    >
+                        Professional and compassionate veterinary care
+                        <br class="hidden sm:block">
+                        for your furry family members.
+                    </p>
+
+
+                    <!-- BUTTONS -->
+                    <div
+                        class="mt-9 flex flex-wrap items-center gap-6"
+                    >
+
+                        <!-- BOOK APPOINTMENT -->
+                        <a
+                            href="#appointment"
+                            class="group flex h-[64px]
+                                   min-w-[285px]
+                                   items-center justify-between
+                                   rounded-[22px]
+                                   bg-[#f33b8f]
+                                   px-6
+                                   text-[15px] font-bold
+                                   text-white
+                                   shadow-sm
+                                   transition duration-300
+                                   hover:-translate-y-1
+                                   hover:bg-[#df2f7d]
+                                   hover:shadow-xl"
+                        >
+
+                            <span class="flex items-center gap-3">
+
+                                <img
+                                    src="./images/calendar-white.png"
+                                    alt=""
+                                    class="h-7 w-7 object-contain"
+                                >
+
+                                Book Appointment
+
+                            </span>
+
+                            <img
+                                src="./images/arrow-white.png"
+                                alt=""
+                                class="h-6 w-6 object-contain
+                                       transition duration-300
+                                       group-hover:translate-x-1"
+                            >
+
+                        </a>
+
+
+                        <!-- EXPLORE SERVICES -->
+                        <a
+                            href="#services"
+                            class="group flex h-[64px]
+                                   min-w-[260px]
+                                   items-center justify-between
+                                   rounded-[22px]
+                                   border-2 border-[#f33b8f]
+                                   bg-white
+                                   px-7
+                                   text-[15px] font-bold
+                                   text-[#171717]
+                                   transition duration-300
+                                   hover:-translate-y-1
+                                   hover:bg-[#fff2f7]
+                                   hover:shadow-lg"
+                        >
+
+                            Explore Services
+
+                            <span
+                                class="text-[30px] font-light
+                                       transition duration-300
+                                       group-hover:translate-x-1"
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                              HERO RIGHT
+                =========================================== -->
+                <div
+                    class="relative mt-14
+                           min-h-[520px]
+                           lg:mt-0 lg:h-[650px]"
+                >
+
+                    <!-- PINK DECORATIVE BACKGROUND -->
+                    <img
+                        src="./images/hero-bg.png"
+                        alt=""
+                        class="absolute
+                               left-[1%] top-[4%]
+                               z-0
+                               w-[105%]
+                               max-w-none
+                               object-contain"
+                    >
+
+
+                    <!-- PETS -->
+                  <img
+    src="./images/pets.png"
+    alt="Pomeranian dog and cat"
+    class="absolute
+           bottom-10
+           left-1/2
+           -translate-x-1/2
+           z-10
+           w-[125%]
+           max-w-none
+           object-contain
+           drop-shadow-sm"
+>
+
+                    <!-- ======================================
+                         TRUSTED PET CARE FLOATING CARD
+                    ======================================= -->
+                    <div
+                        class="absolute
+                               right-[4%] top-8.75
+                               z-30
+                               flex w-62.5
+                               items-center gap-4
+                               rounded-[20px]
+                               border border-[#e7e7e7]
+                               bg-white/95
+                               px-4 py-4
+                               shadow-[0_8px_25px_rgba(0,0,0,0.07)]
+                               backdrop-blur"
+                    >
+
+                        <div
+                            class="flex h-16 w-16
+                                   shrink-0 items-center justify-center
+                                   rounded-full bg-[#fce0ec]"
+                        >
+                            <img
+                                src="./images/heart.png"
+                                alt=""
+                                class="h-16 w-16 object-contain"
+                            >
+                        </div>
+
+
+                        <div>
+                            <h3
+                                class="text-[14px]
+                                       font-extrabold
+                                       text-[#202020]"
+                            >
+                                Trusted Pet Care
+                            </h3>
+
+                            <p
+                                class="mt-1 text-[13px]
+                                       leading-[1.2]
+                                       text-[#666]"
+                            >
+                                Professional
+                                <br>
+                                veterinary services
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         EASY APPOINTMENT FLOATING CARD
+                    ======================================= -->
+                    <div
+                        class="absolute
+                               right-[-9%] top-50
+                               z-30
+                               flex w-67.5
+                               items-center gap-4
+                               rounded-[20px]
+                               border border-[#e7e7e7]
+                               bg-white/95
+                               px-4 py-4
+                               shadow-[0_8px_25px_rgba(0,0,0,0.07)]
+                               backdrop-blur"
+                    >
+
+                        <div
+                            class="flex h-16 w-16
+                                   shrink-0 items-center justify-center
+                                   rounded-full bg-[#fce0ec]"
+                        >
+                            <img
+                                src="./images/calendar-pink.png"
+                                alt=""
+                                class="h-7 w-7 object-contain"
+                            >
+                        </div>
+
+
+                        <div>
+                            <h3
+                                class="text-[14px]
+                                       font-extrabold
+                                       text-[#202020]"
+                            >
+                                Easy Appointment
+                            </h3>
+
+                            <p
+                                class="mt-1 text-[13px]
+                                       text-[#666]"
+                            >
+                                Book your visit online
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+                         OUR SERVICES
+        ================================================== -->
+        <section
+            id="services"
+            class="w-full bg-[#fdebf2]
+                   px-6 pb-20 pt-7"
+        >
+
+            <div class="mx-auto w-full max-w-350">
+
+                <!-- SECTION HEADING -->
+                <div class="mx-auto text-center">
+
+                    <p
+                        class="text-[13px] font-extrabold
+                               uppercase text-[#f33b8f]"
+                    >
+                        Our Services
+                    </p>
+
+
+                    <h2
+                        class="mt-2
+                               text-[30px] font-extrabold
+                               leading-[1.05]
+                               tracking-[-1px]
+                               text-[#111]"
+                    >
+                        Everything Your Pet Needs,
+
+                        <span class="block text-[#f33b8f]">
+                            All in One Place.
+                        </span>
+                    </h2>
+
+
+                    <p
+                        class="mx-auto mt-5
+                               max-w-162.5            
+                               text-[16px]
+                               leading-[1.35]
+                               text-[#777]"
+                    >
+                        From routine check-ups to specialized care,
+                        we're here to keep your pets
+                        <br class="hidden md:block">
+                        healthy, happy, and thriving.
+                    </p>
+
+                </div>
+
+
+                <!-- ==========================================
+                             SERVICE CARDS
+                =========================================== -->
+                <div
+                    class="mt-8 grid
+                           grid-cols-1
+                           gap-6
+                           sm:grid-cols-2
+                           lg:grid-cols-5"
+                >
+
+                    <!-- CARD 1 -->
+                    <div
+                        class="group relative
+                               min-h-[245px]
+                               rounded-[22px]
+                               border border-[#e5dfe2]
+                               bg-white
+                               p-6
+                               transition duration-300
+                               hover:-translate-y-2
+                               hover:shadow-xl"
+                    >
+
+                        <div
+                            class="flex h-[72px] w-[72px]
+                                   items-center justify-center
+                                   rounded-full
+                                   bg-[#fbd9e8]"
+                        >
+                            <img
+                                src="./images/stethoscope.png"
+                                alt="Veterinary checkup"
+                                class="h-11 w-11 object-contain"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <!-- CARD 2 -->
+                    <div
+                        class="group relative
+                               min-h-[245px]
+                               rounded-[22px]
+                               border border-[#e5dfe2]
+                               bg-white
+                               p-6
+                               transition duration-300
+                               hover:-translate-y-2
+                               hover:shadow-xl"
+                    >
+
+                        <div
+                            class="flex h-[72px] w-[72px]
+                                   items-center justify-center
+                                   rounded-full
+                                   bg-[#fbd9e8]"
+                        >
+                            <img
+                                src="./images/syringe.png"
+                                alt="Vaccination"
+                                class="h-11 w-11 object-contain"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <!-- CARD 3 -->
+                    <div
+                        class="group relative
+                               min-h-[245px]
+                               rounded-[22px]
+                               border border-[#e5dfe2]
+                               bg-white
+                               p-6
+                               transition duration-300
+                               hover:-translate-y-2
+                               hover:shadow-xl"
+                    >
+
+                        <div
+                            class="flex h-[72px] w-[72px]
+                                   items-center justify-center
+                                   rounded-full
+                                   bg-[#fbd9e8]"
+                        >
+                            <img
+                                src="./images/tooth.png"
+                                alt="Dental care"
+                                class="h-11 w-11 object-contain"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <!-- CARD 4 -->
+                    <div
+                        class="group relative
+                               min-h-[245px]
+                               rounded-[22px]
+                               border border-[#e5dfe2]
+                               bg-white
+                               p-6
+                               transition duration-300
+                               hover:-translate-y-2
+                               hover:shadow-xl"
+                    >
+
+                        <div
+                            class="flex h-[72px] w-[72px]
+                                   items-center justify-center
+                                   rounded-full
+                                   bg-[#fbd9e8]"
+                        >
+                            <img
+                                src="./images/paw-pink.png"
+                                alt="Pet care"
+                                class="h-11 w-11 object-contain"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <!-- CARD 5 -->
+                    <div
+                        class="group relative
+                               min-h-[245px]
+                               rounded-[22px]
+                               border border-[#e5dfe2]
+                               bg-white
+                               p-6
+                               transition duration-300
+                               hover:-translate-y-2
+                               hover:shadow-xl"
+                    >
+
+                        <div
+                            class="flex h-[72px] w-[72px]
+                                   items-center justify-center
+                                   rounded-full
+                                   bg-[#fbd9e8]"
+                        >
+                            <img
+                                src="./images/heartbeat.png"
+                                alt="Pet wellness"
+                                class="h-11 w-11 object-contain"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NEXT FIGMA SECTION WILL GO HERE
+        ================================================== -->
+
+    </main>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
