@@ -8,6 +8,9 @@
     <title>PawCare | Register</title>
 
     <link rel="stylesheet" href="./src/output.css">
+
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body class="bg-[#fffafa] text-[#202020]">
@@ -263,7 +266,7 @@
 
 
             <!-- BENEFITS -->
-            <div class="absolute bottom-17.5 left-1/2 z-30
+            <div class="absolute -bottom-18.25 left-1/2 z-30
                         flex w-full max-w-142.5
                         -translate-x-1/2
                         items-center justify-between gap-5">
@@ -1093,191 +1096,177 @@
 
                     <div class="mb-4">
 
-                        <div class="flex min-w-0
-                                    items-center gap-3">
+    <div class="flex min-w-0 items-center gap-3">
 
-                            <div class="flex h-7.5 w-7.5
-                                        shrink-0 items-center justify-center
-                                        rounded-full bg-[#f43f83]
-                                        text-[14px] font-bold text-white">
+        <div class="flex h-7.5 w-7.5
+                    shrink-0 items-center justify-center
+                    rounded-full bg-[#f43f83]
+                    text-[14px] font-bold text-white">
 
-                                3
+            3
 
-                            </div>
+        </div>
 
-                            <h3 class="shrink-0
-                                       text-[16px] font-bold">
+        <h3 class="shrink-0 text-[16px] font-bold">
 
-                                Account Security
+            Account Security
 
-                            </h3>
+        </h3>
 
-                            <div class="h-px min-w-0
-                                        flex-1 bg-pink-100">
-                            </div>
+        <div class="h-px min-w-0 flex-1 bg-pink-100"></div>
 
-                        </div>
+    </div>
 
-                    </div>
+</div>
 
 
-                    <!-- SECURITY GRID -->
-                    <div class="grid min-w-0 grid-cols-1
-                                gap-4
-                                md:grid-cols-2">
+<!-- SECURITY GRID -->
+<div class="grid min-w-0 grid-cols-1
+            gap-4
+            md:grid-cols-2">
 
 
-                        <!-- PASSWORD -->
-                        <div class="min-w-0">
+    <!-- PASSWORD -->
+    <div class="min-w-0">
 
-                            <label
-                                for="password"
-                                class="mb-1 block
-                                       text-[13px] font-semibold"
-                            >
+        <label
+            for="password"
+            class="mb-1 block text-[13px] font-semibold"
+        >
+            Password
+        </label>
 
-                                Password
+        <div class="relative min-w-0">
 
-                            </label>
+            <!-- LOCK ICON -->
+            <img
+                src="./images/lock.png"
+                alt=""
+                class="pointer-events-none
+                       absolute left-3 top-1/2
+                       h-4.5 w-4.5
+                       -translate-y-1/2
+                       object-contain"
+            >
 
-                            <div class="relative min-w-0">
+            <input
+                id="password"
+                name="password"
+                type="password"
+                minlength="8"
+                placeholder="Create a password"
+                required
+                class="block h-10.75
+                       w-full min-w-0 max-w-full
+                       rounded-lg
+                       border border-gray-300
+                       bg-[#fafafa]
+                       pl-10 pr-10
+                       text-[12px]
+                       outline-none
+                       focus:border-[#f43f83]"
+            >
 
-                                <img
-                                    src="./images/lock.png"
-                                    alt=""
-                                    class="pointer-events-none
-                                           absolute left-3 top-1/2
-                                           h-4.5 w-4.5
-                                           -translate-y-1/2
-                                           object-contain"
-                                >
+            <!-- PASSWORD EYE -->
+            <button
+                id="togglePassword"
+                type="button"
+                aria-label="Show password"
+                class="absolute right-3 top-1/2
+                       flex h-7 w-7
+                       -translate-y-1/2
+                       cursor-pointer
+                       items-center justify-center
+                       text-[16px] text-gray-500
+                       transition
+                       hover:text-[#f43f83]"
+            >
+                <i id="passwordEye"
+                   class="fa-solid fa-eye"></i>
+            </button>
 
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    minlength="8"
-                                    placeholder="Create a password"
-                                    required
-                                    class="block h-10.75
-                                           w-full min-w-0 max-w-full
-                                           rounded-lg
-                                           border border-gray-300
-                                           bg-[#fafafa]
-                                           pl-10 pr-10
-                                           text-[12px]
-                                           outline-none
-                                           focus:border-[#f43f83]"
-                                >
+        </div>
 
-                                <button
-                                    id="togglePassword"
-                                    type="button"
-                                    aria-label="Show password"
-                                    class="absolute right-3 top-1/2
-                                           flex h-7 w-7
-                                           -translate-y-1/2
-                                           items-center justify-center"
-                                >
+        <p
+            id="passwordError"
+            class="mt-1 hidden text-[11px] text-red-500"
+        >
+            Password must contain at least 8 characters.
+        </p>
 
-                                    <img
-                                        src="./images/eye.png"
-                                        alt=""
-                                        class="h-4.5 w-4.5"
-                                    >
-
-                                </button>
-
-                            </div>
-
-                            <p
-                                id="passwordError"
-                                class="mt-1 hidden
-                                       text-[11px] text-red-500"
-                            >
-
-                                Password must contain at least 8 characters.
-
-                            </p>
-
-                        </div>
+    </div>
 
 
-                        <!-- CONFIRM PASSWORD -->
-                        <div class="min-w-0">
+    <!-- CONFIRM PASSWORD -->
+    <div class="min-w-0">
 
-                            <label
-                                for="confirmPassword"
-                                class="mb-1 block
-                                       text-[13px] font-semibold"
-                            >
+        <label
+            for="confirmPassword"
+            class="mb-1 block text-[13px] font-semibold"
+        >
+            Confirm Password
+        </label>
 
-                                Confirm Password
+        <div class="relative min-w-0">
 
-                            </label>
+            <!-- LOCK ICON -->
+            <img
+                src="./images/lock.png"
+                alt=""
+                class="pointer-events-none
+                       absolute left-3 top-1/2
+                       h-4.5 w-4.5
+                       -translate-y-1/2
+                       object-contain"
+            >
 
-                            <div class="relative min-w-0">
+            <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm your password"
+                required
+                class="block h-10.75
+                       w-full min-w-0 max-w-full
+                       rounded-lg
+                       border border-gray-300
+                       bg-[#fafafa]
+                       pl-10 pr-10
+                       text-[12px]
+                       outline-none
+                       focus:border-[#f43f83]"
+            >
 
-                                <img
-                                    src="./images/lock.png"
-                                    alt=""
-                                    class="pointer-events-none
-                                           absolute left-3 top-1/2
-                                           h-4.5 w-4.5
-                                           -translate-y-1/2
-                                           object-contain"
-                                >
+            <!-- CONFIRM PASSWORD EYE -->
+            <button
+                id="toggleConfirmPassword"
+                type="button"
+                aria-label="Show confirm password"
+                class="absolute right-3 top-1/2
+                       flex h-7 w-7
+                       -translate-y-1/2
+                       cursor-pointer
+                       items-center justify-center
+                       text-[16px] text-gray-500
+                       transition
+                       hover:text-[#f43f83]"
+            >
+                <i id="confirmPasswordEye"
+                   class="fa-solid fa-eye"></i>
+            </button>
 
-                                <input
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    type="password"
-                                    placeholder="Confirm your password"
-                                    required
-                                    class="block h-10.75
-                                           w-full min-w-0 max-w-full
-                                           rounded-lg
-                                           border border-gray-300
-                                           bg-[#fafafa]
-                                           pl-10 pr-10
-                                           text-[12px]
-                                           outline-none
-                                           focus:border-[#f43f83]"
-                                >
+        </div>
 
-                                <button
-                                    id="toggleConfirmPassword"
-                                    type="button"
-                                    aria-label="Show confirm password"
-                                    class="absolute right-3 top-1/2
-                                           flex h-7 w-7
-                                           -translate-y-1/2
-                                           items-center justify-center"
-                                >
+        <p
+            id="confirmPasswordError"
+            class="mt-1 hidden text-[11px] text-red-500"
+        >
+            Passwords do not match.
+        </p>
 
-                                    <img
-                                        src="./images/eye.png"
-                                        alt=""
-                                        class="h-4.5 w-4.5"
-                                    >
+    </div>
 
-                                </button>
-
-                            </div>
-
-                            <p
-                                id="confirmPasswordError"
-                                class="mt-1 hidden
-                                       text-[11px] text-red-500"
-                            >
-
-                                Passwords do not match.
-
-                            </p>
-
-                        </div>
-
-                    </div>
+</div>
 
 
                     <!-- TERMS -->

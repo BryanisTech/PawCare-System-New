@@ -20,21 +20,38 @@ document.addEventListener("DOMContentLoaded", function () {
     // PASSWORD SHOW / HIDE
     // =========================
 
-    const password = document.getElementById("loginPassword");
-    const passwordToggle = document.getElementById("passwordToggle");
+   const password = document.getElementById("password");
+const passwordToggle = document.getElementById("togglePassword");
+const passwordEye = document.getElementById("passwordEye");
 
-    if (password && passwordToggle) {
+if (password && passwordToggle && passwordEye) {
 
-        passwordToggle.addEventListener("click", function () {
+    passwordToggle.addEventListener("click", function () {
 
-            if (password.type === "password") {
-                password.type = "text";
-            } else {
-                password.type = "password";
-            }
+        if (password.type === "password") {
 
-        });
+            // SHOW PASSWORD
+            password.type = "text";
 
-    }
+            passwordEye.classList.remove("fa-eye");
+            passwordEye.classList.add("fa-eye-slash");
+
+            passwordToggle.setAttribute("aria-label", "Hide password");
+
+        } else {
+
+            // HIDE PASSWORD
+            password.type = "password";
+
+            passwordEye.classList.remove("fa-eye-slash");
+            passwordEye.classList.add("fa-eye");
+
+            passwordToggle.setAttribute("aria-label", "Show password");
+
+        }
+
+    });
+
+}
 
 });

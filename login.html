@@ -8,6 +8,9 @@
     <title>PawCare | Login</title>
 
     <link rel="stylesheet" href="./src/output.css">
+
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body class="m-0 bg-white font-sans text-[#171717]">
@@ -524,94 +527,83 @@
                     </div>
 
 
-                    <!-- PASSWORD -->
-                    <div class="mt-5">
+                   <!-- PASSWORD -->
+<div class="mt-5">
 
+    <label for="password"
+           class="mb-2 block text-[14px] font-semibold">
+        Password
+    </label>
 
-                        <div class="mb-2 flex
-                                    items-center justify-between gap-3">
+    <div class="relative min-w-0">
 
+        <!-- LOCK ICON -->
+        <img
+            src="./images/lock.png"
+            alt=""
+            class="pointer-events-none
+                   absolute left-4 top-1/2
+                   h-5 w-5
+                   -translate-y-1/2
+                   object-contain"
+        >
 
-                            <label for="password"
-                                   class="text-[14px] font-semibold">
+        <!-- PASSWORD INPUT -->
+        <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Enter your password"
+            required
+            class="h-12
+                   w-full min-w-0 max-w-full
+                   rounded-lg
+                   border border-gray-300
+                   bg-[#fafafa]
+                   pl-12 pr-12
+                   text-[14px]
+                   outline-none
+                   transition
+                   focus:border-[#f43f83]
+                   focus:ring-2
+                   focus:ring-pink-100"
+        >
 
-                                Password
+        <!-- EYE BUTTON -->
+        <button
+            id="togglePassword"
+            type="button"
+            aria-label="Show password"
+            class="absolute right-4 top-1/2
+                   flex h-8 w-8
+                   -translate-y-1/2
+                   cursor-pointer
+                   items-center justify-center
+                   text-[18px] text-gray-500
+                   transition
+                   hover:text-[#f43f83]"
+        >
+            <i id="passwordEye"
+               class="fa-solid fa-eye"></i>
+        </button>
 
-                            </label>
+    </div>
 
+    <!-- FORGOT PASSWORD -->
+    <div class="mt-2 text-right">
 
-                            <a href="#"
-                               class="shrink-0
-                                      text-[12px] font-semibold
-                                      text-[#f43f83]
-                                      hover:underline
-                                      sm:text-[13px]">
+        <a href="#"
+           class="text-[12px] font-semibold
+                  text-[#f43f83]
+                  hover:underline
+                  sm:text-[13px]">
+            Forgot password?
+        </a>
 
-                                Forgot password?
+    </div>
 
-                            </a>
-
-                        </div>
-
-
-                        <div class="relative min-w-0">
-
-
-                            <img
-                                src="./images/lock.png"
-                                alt=""
-                                class="pointer-events-none
-                                       absolute left-4 top-1/2
-                                       h-5 w-5
-                                       -translate-y-1/2
-                                       object-contain"
-                            >
-
-
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                autocomplete="current-password"
-                                placeholder="Enter your password"
-                                required
-                                class="h-12
-                                       w-full min-w-0 max-w-full
-                                       rounded-lg
-                                       border border-gray-300
-                                       bg-[#fafafa]
-                                       pl-12 pr-12
-                                       text-[14px]
-                                       outline-none
-                                       transition
-                                       focus:border-[#f43f83]
-                                       focus:ring-2
-                                       focus:ring-pink-100"
-                            >
-
-
-                            <button
-                                id="togglePassword"
-                                type="button"
-                                aria-label="Show password"
-                                class="absolute right-4 top-1/2
-                                       flex h-8 w-8
-                                       -translate-y-1/2
-                                       items-center justify-center"
-                            >
-
-                                <img
-                                    src="./images/eye.png"
-                                    alt=""
-                                    class="h-5 w-5 object-contain"
-                                >
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
+</div>
 
                     <!-- REMEMBER ME -->
                     <label class="mt-4 flex

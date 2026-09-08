@@ -29,40 +29,95 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================================
 
     const password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
+const confirmPassword = document.getElementById("confirmPassword");
 
-    const togglePassword = document.getElementById("togglePassword");
-    const toggleConfirmPassword =
-        document.getElementById("toggleConfirmPassword");
+const togglePassword = document.getElementById("togglePassword");
+const toggleConfirmPassword =
+    document.getElementById("toggleConfirmPassword");
+
+const passwordEye = document.getElementById("passwordEye");
+const confirmPasswordEye =
+    document.getElementById("confirmPasswordEye");
 
 
-    function togglePasswordVisibility(input) {
+// PASSWORD
+if (password && togglePassword && passwordEye) {
 
-        if (input.type === "password") {
-            input.type = "text";
+    togglePassword.addEventListener("click", function () {
+
+        if (password.type === "password") {
+
+            // SHOW PASSWORD
+            password.type = "text";
+
+            passwordEye.classList.remove("fa-eye");
+            passwordEye.classList.add("fa-eye-slash");
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
         } else {
-            input.type = "password";
+
+            // HIDE PASSWORD
+            password.type = "password";
+
+            passwordEye.classList.remove("fa-eye-slash");
+            passwordEye.classList.add("fa-eye");
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
         }
 
-    }
+    });
+
+}
 
 
-    if (togglePassword) {
+// CONFIRM PASSWORD
+if (
+    confirmPassword &&
+    toggleConfirmPassword &&
+    confirmPasswordEye
+) {
 
-        togglePassword.addEventListener("click", function () {
-            togglePasswordVisibility(password);
-        });
+    toggleConfirmPassword.addEventListener("click", function () {
 
-    }
+        if (confirmPassword.type === "password") {
 
+            // SHOW CONFIRM PASSWORD
+            confirmPassword.type = "text";
 
-    if (toggleConfirmPassword) {
+            confirmPasswordEye.classList.remove("fa-eye");
+            confirmPasswordEye.classList.add("fa-eye-slash");
 
-        toggleConfirmPassword.addEventListener("click", function () {
-            togglePasswordVisibility(confirmPassword);
-        });
+            toggleConfirmPassword.setAttribute(
+                "aria-label",
+                "Hide confirm password"
+            );
 
-    }
+        } else {
+
+            // HIDE CONFIRM PASSWORD
+            confirmPassword.type = "password";
+
+            confirmPasswordEye.classList.remove("fa-eye-slash");
+            confirmPasswordEye.classList.add("fa-eye");
+
+            toggleConfirmPassword.setAttribute(
+                "aria-label",
+                "Show confirm password"
+            );
+
+        }
+
+    });
+
+}
 
 
     // =====================================================
