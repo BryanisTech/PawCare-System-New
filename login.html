@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,499 +10,765 @@
     <link rel="stylesheet" href="./src/output.css">
 </head>
 
-<body class="bg-[#fffafa] text-[#171717]">
+<body class="m-0 bg-white font-sans text-[#171717]">
 
-    <!-- ================= NAVBAR ================= -->
-   <header class="sticky top-0 z-1000 w-full border-b border-pink-100 bg-white/95 backdrop-blur-md">
-    <nav class="relative mx-auto flex h-[90px] w-full max-w-[1240px]
+
+<!-- =====================================================
+                        NAVIGATION
+====================================================== -->
+
+<header class="sticky top-0 z-1000 w-full
+               border-b border-pink-100
+               bg-white/95 backdrop-blur-md">
+
+    <nav class="relative mx-auto flex h-22.5 w-full max-w-310
                 items-center justify-between px-5 sm:px-6 lg:px-8">
+
 
         <!-- LOGO -->
         <a href="index.html" class="flex items-center gap-2">
-            <div class="flex h-[52px] w-[52px] items-center justify-center
-                        rounded-full bg-black sm:h-[58px] sm:w-[58px]">
+
+            <div class="flex h-13 w-13
+                        items-center justify-center rounded-full bg-black
+                        sm:h-14.5 sm:w-14.5">
+
                 <img
                     src="./images/logo-paw.png"
                     alt="PawCare Logo"
-                    class="h-[40px] w-[40px] object-contain"
+                    class="h-10 w-10 object-contain"
                 >
+
             </div>
 
             <div class="text-[24px] font-extrabold sm:text-[28px]">
                 <span class="text-[#202020]">Paw</span>
                 <span class="text-[#f33b8f]">Care</span>
             </div>
+
         </a>
 
-        <!-- DESKTOP MENU -->
+
+        <!-- DESKTOP NAV -->
         <div class="hidden items-center gap-8 lg:flex xl:gap-12">
-            <a href="#about" class="hover:text-[#f33b8f]">About us</a>
-            <a href="index.html" class="hover:text-[#f33b8f]">Home</a>
-            <a href="index.html#services" class="hover:text-[#f33b8f]">Services</a>
-            <a href="#grooming" class="hover:text-[#f33b8f]">Grooming</a>
-            <a href="#contact" class="hover:text-[#f33b8f]">Contact</a>
+
+            <a href="index.html#about"
+               class="text-sm transition hover:text-[#f43f83]">
+                About us
+            </a>
+
+            <a href="index.html"
+               class="text-sm transition hover:text-[#f43f83]">
+                Home
+            </a>
+
+            <a href="index.html#services"
+               class="text-sm transition hover:text-[#f43f83]">
+                Services
+            </a>
+
+            <a href="index.html#grooming"
+               class="text-sm transition hover:text-[#f43f83]">
+                Grooming
+            </a>
+
+            <a href="index.html#contact"
+               class="text-sm transition hover:text-[#f43f83]">
+                Contact
+            </a>
+
         </div>
 
-        <!-- DESKTOP LOGIN -->
+
+        <!-- DESKTOP RIGHT -->
         <div class="hidden items-center gap-7 lg:flex">
+
             <a href="login.html"
-               class="font-semibold hover:text-[#f33b8f]">
+               class="text-sm font-semibold text-[#f43f83]">
                 Log in
             </a>
 
             <a href="register.html"
-               class="rounded-full bg-[#f33b8f] px-7 py-3
-                      font-semibold text-white transition
-                      hover:bg-[#db2e7b]">
+               class="rounded-full bg-[#f43f83]
+                      px-7 py-3 text-sm font-semibold text-white
+                      transition hover:bg-[#df3077]">
                 Register
             </a>
+
         </div>
 
-        <!-- BURGER -->
-        <button
+
+       <!-- MOBILE BURGER -->
+<button
     id="menuButton"
     type="button"
     onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
-    class="relative z-9999 flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-1.25 lg:hidden"
     aria-label="Open menu"
+    class="relative z-9999 flex h-11 w-11
+           cursor-pointer flex-col items-center
+           justify-center gap-1.25 lg:hidden"
 >
-    <span class="pointer-events-none block h-0.75 w-7 rounded bg-black"></span>
-    <span class="pointer-events-none block h-0.75 w-7 rounded bg-black"></span>
-    <span class="pointer-events-none block h-0.75 w-7 rounded bg-black"></span>
+
+    <span class="pointer-events-none h-0.75 w-7 rounded bg-black"></span>
+    <span class="pointer-events-none h-0.75 w-7 rounded bg-black"></span>
+    <span class="pointer-events-none h-0.75 w-7 rounded bg-black"></span>
+
 </button>
 
-        <!-- MOBILE MENU -->
+
+<!-- MOBILE MENU -->
 <div
     id="mobileMenu"
-    class="absolute left-4 right-4 top-[82px] z-[999]
-           hidden rounded-2xl border border-pink-100
-           bg-white p-4 shadow-xl lg:hidden"
+    class="absolute left-4 right-4 top-20.5
+           z-999 hidden rounded-2xl
+           border border-pink-100
+           bg-white p-4 shadow-xl
+           lg:hidden"
 >
     <div class="flex flex-col">
 
-        <a href="#about"
-           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+        <a href="index.html#about"
+           class="rounded-xl px-4 py-3 hover:bg-pink-50">
             About us
         </a>
 
-        <a href="#home"
-           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+        <a href="index.html"
+           class="rounded-xl px-4 py-3 hover:bg-pink-50">
             Home
         </a>
 
-        <a href="#services"
-           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+        <a href="index.html#services"
+           class="rounded-xl px-4 py-3 hover:bg-pink-50">
             Services
         </a>
 
-        <a href="#grooming"
-           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+        <a href="index.html#grooming"
+           class="rounded-xl px-4 py-3 hover:bg-pink-50">
             Grooming
         </a>
 
-        <a href="#contact"
-           class="rounded-xl px-4 py-3 font-medium hover:bg-pink-50">
+        <a href="index.html#contact"
+           class="rounded-xl px-4 py-3 hover:bg-pink-50">
             Contact
         </a>
 
         <div class="my-2 border-t border-pink-100"></div>
 
         <a href="login.html"
-           class="rounded-xl px-4 py-3 font-semibold">
+           class="rounded-xl px-4 py-3 font-semibold text-[#f43f83]">
             Log in
         </a>
 
         <a href="register.html"
-           class="mt-2 rounded-full bg-[#f33b8f]
-                  px-5 py-3 text-center font-semibold text-white">
+           class="mt-2 rounded-full bg-[#f43f83]
+                  px-5 py-3 text-center
+                  font-semibold text-white">
             Register
         </a>
 
     </div>
 </div>
 
-</nav>
+    </nav>
+
 </header>
 
 
-    <!-- ================= LOGIN SECTION ================= -->
-    <main>
-
-        <section class="mx-auto max-w-[1240px] px-6 py-12">
-
-            <div class="grid items-center gap-16 lg:grid-cols-2">
-
-
-                <!-- ================= LEFT ================= -->
-                <div class="relative min-h-[650px]">
-
-                    <!-- Pink background decoration -->
-                    <img
-                        src="./images/hero-bg.png"
-                        alt=""
-                        class="absolute left-1/2 top-8 w-[95%] max-w-[610px]
-                               -translate-x-1/2 object-contain"
-                    >
-
-
-                    <!-- PETS -->
-                    <img
-                        src="./images/login-pets.png"
-                        alt="Dog and cat"
-                        class="absolute left-1/2 top-[80px] z-10
-                               w-[82%] max-w-[500px]
-                               -translate-x-1/2 object-contain"
-                    >
-
-
-                    <!-- WELCOME DECORATION -->
-                    <div
-                        class="absolute bottom-[90px] left-1/2 z-20
-                               w-[92%] max-w-[570px]
-                               -translate-x-1/2"
-                    >
-
-                        <img
-                            src="./images/welcome-bg.png"
-                            alt=""
-                            class="w-full"
-                        >
-
-                        <div class="absolute inset-0 flex flex-col items-center justify-center">
-
-                            <h1 class="text-[42px] font-extrabold leading-none">
-                                Welcome
-                                <span class="text-[#f43f8e]">
-                                    Back
-                                </span>
-                            </h1>
-
-                            <p class="mt-3 text-center text-[17px] leading-5 text-gray-500">
-                                Because every pet deserves<br>
-                                a healthier, happier tomorrow.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <!-- ================= PET BENEFITS ================= -->
-<div
-    class="absolute bottom-0 left-1/2 z-30
-           flex w-full max-w-[570px]
-           -translate-x-1/2
-           items-center justify-between gap-4"
->
-
-    <!-- TRUSTED CARE -->
-    <div class="flex items-center gap-3">
-
-        <div
-            class="flex h-[58px] w-[58px]
-                   shrink-0 items-center justify-center
-                   rounded-full bg-[#fbdbe9]"
-        >
-            <img
-                src="./images/paw-pink.png"
-                alt="Trusted Care"
-                class="h-9 w-9 object-contain"
-            >
-        </div>
-
-        <p class="text-[15px] font-semibold leading-5">
-            Trusted
-            <br>
-            <span class="font-normal text-gray-600">
-                Care
-            </span>
-        </p>
-
-    </div>
-
-
-    <!-- HAPPIER PETS -->
-    <div class="flex items-center gap-3">
-
-        <div
-            class="flex h-[58px] w-[58px]
-                   shrink-0 items-center justify-center
-                   rounded-full bg-[#fbdbe9]"
-        >
-            <img
-                src="./images/heart.png"
-                alt="Happier Pets"
-                class="h-14 w-14 object-contain"
-            >
-        </div>
-
-        <p class="text-[15px] font-semibold leading-5">
-            Happier
-            <br>
-            <span class="font-normal text-gray-600">
-                Pets
-            </span>
-        </p>
-
-    </div>
-
-
-    <!-- STRONGER COMMUNITIES -->
-    <div class="flex items-center gap-3">
-
-        <div
-            class="flex h-[58px] w-[58px]
-                   shrink-0 items-center justify-center
-                   rounded-full bg-[#fbdbe9]"
-        >
-            <img
-                src="./images/community.png"
-                alt="Pet Communities"
-                class="h-9 w-9 object-contain"
-            >
-        </div>
-
-        <p class="text-[15px] font-semibold leading-5">
-            Stronger
-            <br>
-            <span class="font-normal text-gray-600">
-                Pet Communities
-            </span>
-        </p>
-
-    </div>
-
-</div>
-
-                </div>
-
-
-                <!-- ================= RIGHT LOGIN CARD ================= -->
-                <div>
-
-                    <div
-                        class="mx-auto max-w-[510px] rounded-[24px]
-                               border border-gray-200 bg-white
-                               px-10 py-9 shadow-sm"
-                    >
-
-                        <!-- LOGO -->
-                        <div class="mb-5 flex justify-center">
-
-                            <div class="flex h-[86px] w-[86px]
-                                        items-center justify-center rounded-full bg-black">
-
-                                <img
-                                    src="./images/logo-paw.png"
-                                    alt="PawCare"
-                                    class="h-[58px] w-[58px] object-contain"
-                                >
-
-                            </div>
-
-                        </div>
-
-
-                        <h2 class="text-center text-[30px] font-bold">
-                            Log in to your account
-                        </h2>
-
-                        <p class="mt-1 text-center text-[15px] text-gray-500">
-                            Access your pet's information, appointments, and more.
-                        </p>
-
-
-                        <!-- FORM -->
-                        <form class="mt-8">
-
-                            <!-- EMAIL -->
-                            <label class="mb-2 block font-semibold">
-                                Email Address
-                            </label>
-
-                            <div class="relative">
-
-                                <img
-                                    src="./images/email.png"
-                                    alt=""
-                                    class="absolute left-4 top-1/2 h-5 w-5
-                                           -translate-y-1/2 object-contain"
-                                >
-
-                                <input
-                                    type="email"
-                                    placeholder="your@gmail.com"
-                                    class="h-[48px] w-full rounded-lg
-                                           border border-gray-300 bg-[#fafafa]
-                                           pl-12 pr-4 outline-none
-                                           transition
-                                           focus:border-[#f43f8e]
-                                           focus:ring-2 focus:ring-pink-100"
-                                >
-
-                            </div>
-
-
-                            <!-- PASSWORD -->
-                            <label class="mb-2 mt-5 block font-semibold">
-                                Password
-                            </label>
-
-                            <div class="relative">
-
-                                <img
-                                    src="./images/lock.png"
-                                    alt=""
-                                    class="absolute left-4 top-1/2 h-5 w-5
-                                           -translate-y-1/2 object-contain"
-                                >
-
-                                <input
-                                    id="loginPassword"
-                                    type="password"
-                                    placeholder="Enter Your Password"
-                                    class="h-[48px] w-full rounded-lg
-                                           border border-gray-300 bg-[#fafafa]
-                                           pl-12 pr-12 outline-none
-                                           transition
-                                           focus:border-[#f43f8e]
-                                           focus:ring-2 focus:ring-pink-100"
-                                >
-
-                                <button
-                                    id="passwordToggle"
-                                    type="button"
-                                    class="absolute right-4 top-1/2
-                                           -translate-y-1/2"
-                                >
-                                    <img
-                                        src="./images/eye.png"
-                                        alt="Show password"
-                                        class="h-5 w-5"
-                                    >
-                                </button>
-
-                            </div>
-
-
-                            <!-- FORGOT PASSWORD -->
-                            <div class="mt-3 text-right">
-
-                                <a href="#"
-                                   class="font-semibold text-[#f43f8e]">
-                                    Forgot password?
-                                </a>
-
-                            </div>
-
-
-                            <!-- REMEMBER -->
-                            <label class="mt-5 flex cursor-pointer items-center gap-3">
-
-                                <input
-                                    type="checkbox"
-                                    class="h-4 w-4 accent-[#f43f8e]"
-                                >
-
-                                <span class="font-medium">
-                                    Remember me
-                                </span>
-
-                            </label>
-
-
-                            <!-- LOGIN -->
-                            <button
-                                type="submit"
-                                class="mt-6 h-[52px] w-full rounded-xl
-                                       bg-[#f43f8e] font-bold text-white
-                                       transition hover:bg-[#e72f7d]"
-                            >
-                                Log in
-                            </button>
-
-                            <!-- ================= OR CONTINUE WITH ================= -->
-<div class="mt-6">
-
-    <div class="flex items-center gap-4">
-        <div class="h-px flex-1 bg-gray-200"></div>
-
-        <span class="text-[13px] text-gray-500">
-            or continue with
-        </span>
-
-        <div class="h-px flex-1 bg-gray-200"></div>
-    </div>
-
-
-    <!-- SOCIAL LOGIN BUTTONS -->
-    <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-        <!-- GOOGLE -->
-        <button
-            type="button"
-            class="flex h-[46px] items-center justify-center gap-3
-                   rounded-lg border border-gray-300 bg-white
-                   text-[14px] font-medium text-gray-700
-                   transition hover:bg-gray-50"
-        >
-            <img
-                src="./images/google.png"
-                alt="Google"
-                class="h-5 w-5 object-contain"
-            >
-
-            Continue with Google
-        </button>
-
-
-        <!-- FACEBOOK -->
-        <button
-            type="button"
-            class="flex h-[46px] items-center justify-center gap-3
-                   rounded-lg border border-gray-300 bg-white
-                   text-[14px] font-medium text-gray-700
-                   transition hover:bg-gray-50"
-        >
-            <img
-                src="./images/facebook.png"
-                alt="Facebook"
-                class="h-5 w-5 object-contain"
-            >
-
-            Continue with Facebook
-        </button>
-
-    </div>
-
-
-    <!-- REGISTER LINK -->
-    <p class="mt-5 text-center text-[14px] text-gray-500">
-        Don't have an account?
-
-        <a
-            href="register.html"
-            class="font-semibold text-[#f43f8e] hover:underline"
-        >
-            Register now
-        </a>
-    </p>
-
-</div>
-
-                        </form>
-
-                    </div>
+<!-- =====================================================
+                        LOGIN SECTION
+====================================================== -->
+
+<main>
+
+<section class="mx-auto w-full max-w-310
+                overflow-hidden px-4 py-8
+                sm:px-6 sm:py-10
+                lg:overflow-visible lg:px-8 lg:py-12">
+
+
+    <div class="grid min-w-0 grid-cols-1
+                items-center gap-10
+                lg:grid-cols-2 lg:gap-16">
+
+
+        <!-- =================================================
+                            LEFT SIDE
+        ================================================== -->
+
+        <div class="relative min-h-0 w-full min-w-0
+                    pb-4
+                    sm:min-h-180 sm:pb-0
+                    lg:min-h-162.5">
+
+
+            <!-- =============================================
+                        ILLUSTRATION
+            ============================================== -->
+
+            <div class="relative mx-auto
+                        h-78.75 w-full max-w-142.5
+                        sm:h-130
+                        lg:h-auto lg:max-w-none">
+
+
+                <!-- HERO BACKGROUND -->
+                <img
+                    src="./images/hero-bg.png"
+                    alt=""
+                    class="absolute left-1/2 top-2
+                           w-[94%] max-w-152.5
+                           -translate-x-1/2 object-contain
+                           sm:top-8 sm:w-[95%]"
+                >
+
+
+                <!-- PETS -->
+                <img
+                    src="./images/login-pets.png"
+                    alt="Dog and cat"
+                    class="absolute left-1/2 top-8.75
+                           z-10 w-[80%] max-w-125
+                           -translate-x-1/2 object-contain
+                           sm:top-20 sm:w-[82%]"
+                >
+
+            </div>
+
+
+            <!-- =============================================
+                      WELCOME DECORATION
+            ============================================== -->
+
+            <div class="relative z-20 mx-auto
+                        -mt-13.75
+                        w-[92%] max-w-142.5
+                        sm:absolute sm:bottom-25
+                        sm:left-1/2 sm:mt-0
+                        sm:-translate-x-1/2
+                        lg:bottom-22.5">
+
+
+                <img
+                    src="./images/welcome-bg.png"
+                    alt=""
+                    class="w-full object-contain"
+                >
+
+
+                <!-- TEXT INSIDE DECORATION -->
+                <div class="absolute inset-0
+                            flex flex-col items-center
+                            justify-center
+                            px-6 text-center">
+
+                    <h1 class="text-[27px]
+                               font-extrabold leading-[1.05]
+                               sm:text-[42px]">
+
+                        Welcome Back
+
+                    </h1>
+
+
+                    <p class="mt-2
+                              text-[12px] leading-4
+                              text-gray-500
+                              sm:mt-3 sm:text-[17px]
+                              sm:leading-5">
+
+                        Your pet's health journey continues here.
+
+                    </p>
 
                 </div>
 
             </div>
 
-        </section>
 
-    </main>
+            <!-- =============================================
+                         BENEFITS
+            ============================================== -->
+
+            <div class="relative z-30 mx-auto
+                        mt-6 grid
+                        w-full max-w-142.5
+                        grid-cols-1 gap-4 px-4
+
+                        sm:absolute sm:bottom-0 sm:left-1/2
+                        sm:mt-0 sm:-translate-x-1/2
+                        sm:grid-cols-3 sm:px-0
+
+                        lg:flex lg:items-center
+                        lg:justify-between lg:gap-4">
 
 
-    <script src="./login.js"></script>
+                <!-- TRUSTED CARE -->
+                <div class="flex min-w-0
+                            items-center justify-center gap-3
+                            sm:justify-start">
+
+                    <div class="flex h-13 w-13
+                                shrink-0 items-center justify-center
+                                rounded-full bg-[#fbdbe9]
+                                sm:h-14.5 sm:w-14.5">
+
+                        <img
+                            src="./images/paw-pink.png"
+                            alt="Trusted Care"
+                            class="h-8 w-8 object-contain
+                                   sm:h-9 sm:w-9"
+                        >
+
+                    </div>
+
+                    <p class="min-w-0
+                              text-[14px] font-semibold leading-5
+                              sm:text-[15px]">
+
+                        Trusted
+
+                        <br>
+
+                        <span class="font-normal text-gray-600">
+                            Care
+                        </span>
+
+                    </p>
+
+                </div>
+
+
+                <!-- HAPPIER PETS -->
+                <div class="flex min-w-0
+                            items-center justify-center gap-3
+                            sm:justify-start">
+
+                    <div class="flex h-13 w-13
+                                shrink-0 items-center justify-center
+                                rounded-full bg-[#fbdbe9]
+                                sm:h-14.5 sm:w-14.5">
+
+                        <img
+                            src="./images/heart.png"
+                            alt="Happier Pets"
+                            class="h-12 w-12 object-contain
+                                   sm:h-14 sm:w-14"
+                        >
+
+                    </div>
+
+                    <p class="min-w-0
+                              text-[14px] font-semibold leading-5
+                              sm:text-[15px]">
+
+                        Happier
+
+                        <br>
+
+                        <span class="font-normal text-gray-600">
+                            Pets
+                        </span>
+
+                    </p>
+
+                </div>
+
+
+                <!-- STRONGER COMMUNITIES -->
+                <div class="flex min-w-0
+                            items-center justify-center gap-3
+                            sm:justify-start">
+
+                    <div class="flex h-13 w-13
+                                shrink-0 items-center justify-center
+                                rounded-full bg-[#fbdbe9]
+                                sm:h-14.5 sm:w-14.5">
+
+                        <img
+                            src="./images/community.png"
+                            alt="Stronger Pet Communities"
+                            class="h-8 w-8 object-contain
+                                   sm:h-9 sm:w-9"
+                        >
+
+                    </div>
+
+                    <p class="min-w-0
+                              text-[14px] font-semibold leading-5
+                              sm:text-[15px]">
+
+                        Stronger
+
+                        <br>
+
+                        <span class="font-normal text-gray-600">
+                            Pet Communities
+                        </span>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+                            RIGHT SIDE
+        ================================================== -->
+
+        <div class="w-full min-w-0">
+
+
+            <!-- LOGIN CARD -->
+            <div class="mx-auto w-full min-w-0
+                        max-w-127.5
+                        rounded-3xl
+                        border border-gray-200
+                        bg-white
+                        px-5 py-7
+                        shadow-sm
+                        sm:px-10 sm:py-9">
+
+
+                <!-- LOGO -->
+                <div class="mx-auto flex
+                            h-18.5 w-18.5
+                            items-center justify-center
+                            rounded-full bg-black">
+
+                    <img
+                        src="./images/logo-paw.png"
+                        alt="PawCare Logo"
+                        class="h-13 w-13 object-contain"
+                    >
+
+                </div>
+
+
+                <!-- TITLE -->
+                <h2 class="mt-5 text-center
+                           text-[26px] font-extrabold
+                           sm:text-[30px]">
+
+                    Log in to your account
+
+                </h2>
+
+
+                <p class="mt-2 text-center
+                          text-[13px] text-gray-500
+                          sm:text-[14px]">
+
+                    Welcome back! Please enter your details.
+
+                </p>
+
+
+                <!-- =========================================
+                              LOGIN FORM
+                ========================================== -->
+
+                <form class="mt-7" action="#" method="post">
+
+
+                    <!-- EMAIL -->
+                    <div>
+
+                        <label for="email"
+                               class="mb-2 block
+                                      text-[14px] font-semibold">
+
+                            Email Address
+
+                        </label>
+
+
+                        <div class="relative min-w-0">
+
+
+                            <img
+                                src="./images/email.png"
+                                alt=""
+                                class="pointer-events-none
+                                       absolute left-4 top-1/2
+                                       h-5 w-5
+                                       -translate-y-1/2
+                                       object-contain"
+                            >
+
+
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                autocomplete="email"
+                                placeholder="your@email.com"
+                                required
+                                class="h-12
+                                       w-full min-w-0 max-w-full
+                                       rounded-lg
+                                       border border-gray-300
+                                       bg-[#fafafa]
+                                       pl-12 pr-4
+                                       text-[14px]
+                                       outline-none
+                                       transition
+                                       focus:border-[#f43f83]
+                                       focus:ring-2
+                                       focus:ring-pink-100"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="mt-5">
+
+
+                        <div class="mb-2 flex
+                                    items-center justify-between gap-3">
+
+
+                            <label for="password"
+                                   class="text-[14px] font-semibold">
+
+                                Password
+
+                            </label>
+
+
+                            <a href="#"
+                               class="shrink-0
+                                      text-[12px] font-semibold
+                                      text-[#f43f83]
+                                      hover:underline
+                                      sm:text-[13px]">
+
+                                Forgot password?
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="relative min-w-0">
+
+
+                            <img
+                                src="./images/lock.png"
+                                alt=""
+                                class="pointer-events-none
+                                       absolute left-4 top-1/2
+                                       h-5 w-5
+                                       -translate-y-1/2
+                                       object-contain"
+                            >
+
+
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Enter your password"
+                                required
+                                class="h-12
+                                       w-full min-w-0 max-w-full
+                                       rounded-lg
+                                       border border-gray-300
+                                       bg-[#fafafa]
+                                       pl-12 pr-12
+                                       text-[14px]
+                                       outline-none
+                                       transition
+                                       focus:border-[#f43f83]
+                                       focus:ring-2
+                                       focus:ring-pink-100"
+                            >
+
+
+                            <button
+                                id="togglePassword"
+                                type="button"
+                                aria-label="Show password"
+                                class="absolute right-4 top-1/2
+                                       flex h-8 w-8
+                                       -translate-y-1/2
+                                       items-center justify-center"
+                            >
+
+                                <img
+                                    src="./images/eye.png"
+                                    alt=""
+                                    class="h-5 w-5 object-contain"
+                                >
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REMEMBER ME -->
+                    <label class="mt-4 flex
+                                  cursor-pointer items-center gap-2
+                                  text-[13px] text-gray-600">
+
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            class="h-4 w-4 shrink-0
+                                   accent-[#f43f83]"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <!-- LOGIN BUTTON -->
+                    <button
+                        type="submit"
+                        class="mt-6 h-12.5
+                               w-full max-w-full
+                               rounded-xl
+                               bg-[#f43f83]
+                               text-[15px] font-bold
+                               text-white
+                               transition
+                               hover:bg-[#df3077]
+                               active:scale-[0.99]"
+                    >
+
+                        Log in
+
+                    </button>
+
+
+                    <!-- DIVIDER -->
+                    <div class="my-6 flex
+                                items-center gap-4">
+
+                        <div class="h-px min-w-0 flex-1 bg-gray-200"></div>
+
+                        <span class="shrink-0
+                                     text-[12px] text-gray-400
+                                     sm:text-[13px]">
+
+                            or continue with
+
+                        </span>
+
+                        <div class="h-px min-w-0 flex-1 bg-gray-200"></div>
+
+                    </div>
+
+
+                    <!-- SOCIAL LOGIN -->
+                    <div class="grid min-w-0
+                                grid-cols-1 gap-3
+                                sm:grid-cols-2">
+
+
+                        <!-- GOOGLE -->
+                        <button
+                            type="button"
+                            class="flex h-12
+                                   min-w-0 items-center
+                                   justify-center gap-3
+                                   rounded-lg
+                                   border border-gray-300
+                                   bg-white
+                                   text-[13px] font-semibold
+                                   transition
+                                   hover:bg-gray-50"
+                        >
+
+                            <img
+                                src="./images/google.png"
+                                alt="Google"
+                                class="h-5 w-5 shrink-0 object-contain"
+                            >
+
+                            <span>
+                                Google
+                            </span>
+
+                        </button>
+
+
+                        <!-- FACEBOOK -->
+                        <button
+                            type="button"
+                            class="flex h-12
+                                   min-w-0 items-center
+                                   justify-center gap-3
+                                   rounded-lg
+                                   border border-gray-300
+                                   bg-white
+                                   text-[13px] font-semibold
+                                   transition
+                                   hover:bg-gray-50"
+                        >
+
+                            <img
+                                src="./images/facebook.png"
+                                alt="Facebook"
+                                class="h-5 w-5 shrink-0 object-contain"
+                            >
+
+                            <span>
+                                Facebook
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- REGISTER -->
+                    <p class="mt-6 text-center
+                              text-[13px] text-gray-500
+                              sm:text-[14px]">
+
+                        Don't have an account?
+
+                        <a href="register.html"
+                           class="font-semibold
+                                  text-[#f43f83]
+                                  hover:underline">
+
+                            Register now
+
+                        </a>
+
+                    </p>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+                          JAVASCRIPT
+====================================================== -->
+
+<script src="./login.js"></script>
 
 </body>
 </html>
