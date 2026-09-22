@@ -15,24 +15,19 @@
 
 <body class="bg-[#fffafa] text-[#202020]">
 
-<!-- =====================================================
-                         NAVBAR
-====================================================== -->
-
-<header class="sticky top-0 z-1000 w-full
-               border-b border-pink-100
-               bg-white/95 backdrop-blur-md">
-
+<!-- ========================================
+     NAVIGATION
+========================================= -->
+<header class="sticky top-0 z-1000 w-full border-b border-pink-100 bg-white/95 backdrop-blur-md">
     <nav class="relative mx-auto flex h-22.5 w-full max-w-310
                 items-center justify-between px-5 sm:px-6 lg:px-8">
 
         <!-- LOGO -->
         <a href="index.html" class="flex items-center gap-2">
 
-            <div class="flex h-13 w-13
-                        items-center justify-center
-                        rounded-full bg-black
-                        sm:h-14.5 sm:w-14.5">
+            <!-- Logo Icon -->
+            <div class="group relative flex h-13 w-13 items-center justify-center
+                        rounded-full bg-black sm:h-14.5 sm:w-14.5">
 
                 <img
                     src="./images/logo-paw.png"
@@ -40,11 +35,23 @@
                     class="h-10 w-10 object-contain"
                 >
 
+                <!-- Logo Tooltip -->
+                <div class="pointer-events-none absolute left-1/2 top-full z-50
+                            mt-2 -translate-x-1/2 whitespace-nowrap
+                            rounded-md bg-[#222] px-3 py-1.5
+                            text-[12px] font-medium text-white
+                            opacity-0 shadow-md
+                            transition-opacity duration-200
+                            group-hover:opacity-100">
+                    PawCare Logo
+                </div>
+
             </div>
 
+            <!-- Brand Name -->
             <div class="text-[24px] font-extrabold sm:text-[28px]">
-                <span>Paw</span>
-                <span class="text-[#f43f8e]">Care</span>
+                <span class="text-[#202020]">Paw</span>
+                <span class="text-[#f33b8f]">Care</span>
             </div>
 
         </a>
@@ -53,45 +60,77 @@
         <!-- DESKTOP MENU -->
         <div class="hidden items-center gap-8 lg:flex xl:gap-12">
 
-            <a href="index.html#about"
-               class="transition hover:text-[#f43f8e]">
+            <a
+                href="#about"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
                 About us
             </a>
 
-            <a href="index.html#home"
-               class="transition hover:text-[#f43f8e]">
+            <a
+                href="index.html"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
                 Home
             </a>
 
-            <a href="index.html#services"
-               class="transition hover:text-[#f43f8e]">
+            <a
+                href="index.html#services"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
                 Services
             </a>
 
-            <a href="index.html#grooming"
-               class="transition hover:text-[#f43f8e]">
+            <a
+                href="#grooming"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
                 Grooming
             </a>
 
-            <a href="index.html#contact"
-               class="transition hover:text-[#f43f8e]">
+            <a
+                href="#contact"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
                 Contact
             </a>
 
         </div>
 
 
-        <!-- DESKTOP RIGHT -->
+        <!-- DESKTOP ACCOUNT ACTIONS -->
         <div class="hidden items-center gap-7 lg:flex">
 
-            <a href="login.html"
-               class="font-semibold transition hover:text-[#f43f8e]">
+            <!-- Log In -->
+            <a
+                href="login.html"
+                class="font-semibold
+                       transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
                 Log in
             </a>
 
-            <a href="register.html"
-               class="rounded-full bg-[#f43f8e]
-                      px-7 py-3 font-semibold text-white">
+            <!-- Register -->
+            <a
+                href="register.html"
+                class="rounded-full bg-[#f43f8e]
+                       px-7 py-3 font-semibold text-white
+                       transition-transform duration-150
+                       hover:bg-[#d92f78]
+                       active:scale-95"
+            >
                 Register
             </a>
 

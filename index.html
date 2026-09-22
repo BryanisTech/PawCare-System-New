@@ -6,58 +6,131 @@
 
     <title>PawCare</title>
 
-    <!-- Palitan ito kung iba ang location ng compiled Tailwind CSS mo -->
+    
     <link rel="stylesheet" href="./src/output.css">
 </head>
 
-<body class="m-0 bg-white font-sans text-[#171717]">
+<body class="m-0 min-h-[3000px] w-full bg-white font-sans text-[#171717]">
 
-    <!-- =====================================================
-                         NAVIGATION
-    ====================================================== -->
-    <header class="sticky top-0 z-1000 w-full border-b border-pink-100 bg-white/95 backdrop-blur-md">
+    <!-- ========================================
+     NAVIGATION
+========================================= -->
+<header class="sticky top-0 z-1000 w-full border-b border-pink-100 bg-white/95 backdrop-blur-md">
     <nav class="relative mx-auto flex h-22.5 w-full max-w-310
                 items-center justify-between px-5 sm:px-6 lg:px-8">
 
         <!-- LOGO -->
         <a href="index.html" class="flex items-center gap-2">
-            <div class="flex h-13 w-13 items-center justify-center
+
+            <!-- Logo Icon -->
+            <div class="group relative flex h-13 w-13 items-center justify-center
                         rounded-full bg-black sm:h-14.5 sm:w-14.5">
+
                 <img
                     src="./images/logo-paw.png"
                     alt="PawCare Logo"
                     class="h-10 w-10 object-contain"
                 >
+
+                <!-- Logo Tooltip -->
+                <div class="pointer-events-none absolute left-1/2 top-full z-50
+                            mt-2 -translate-x-1/2 whitespace-nowrap
+                            rounded-md bg-[#222] px-3 py-1.5
+                            text-[12px] font-medium text-white
+                            opacity-0 shadow-md
+                            transition-opacity duration-200
+                            group-hover:opacity-100">
+                    PawCare Logo
+                </div>
+
             </div>
 
+            <!-- Brand Name -->
             <div class="text-[24px] font-extrabold sm:text-[28px]">
                 <span class="text-[#202020]">Paw</span>
                 <span class="text-[#f33b8f]">Care</span>
             </div>
+
         </a>
+
 
         <!-- DESKTOP MENU -->
         <div class="hidden items-center gap-8 lg:flex xl:gap-12">
-            <a href="#about" class="hover:text-[#f33b8f]">About us</a>
-            <a href="#home" class="hover:text-[#f33b8f]">Home</a>
-            <a href="#services" class="hover:text-[#f33b8f]">Services</a>
-            <a href="#grooming" class="hover:text-[#f33b8f]">Grooming</a>
-            <a href="#contact" class="hover:text-[#f33b8f]">Contact</a>
+
+            <a
+                href="#about"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
+                About us
+            </a>
+
+            <a
+                href="index.html"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
+                Home
+            </a>
+
+            <a
+                href="#services"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
+                Services
+            </a>
+
+            <a
+                href="#grooming"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
+                Grooming
+            </a>
+
+            <a
+                href="#contact"
+                class="transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
+                Contact
+            </a>
+
         </div>
 
-        <!-- DESKTOP LOGIN -->
+
+        <!-- DESKTOP ACCOUNT ACTIONS -->
         <div class="hidden items-center gap-7 lg:flex">
-            <a href="login.html"
-               class="font-semibold hover:text-[#f33b8f]">
+
+            <!-- Log In -->
+            <a
+                href="login.html"
+                class="font-semibold
+                       transition-transform duration-150
+                       hover:text-[#f33b8f] hover:underline
+                       active:scale-110"
+            >
                 Log in
             </a>
 
-            <a href="register.html"
-               class="rounded-full bg-[#f33b8f] px-7 py-3
-                      font-semibold text-white transition
-                      hover:bg-[#db2e7b]">
+            <!-- Register -->
+            <a
+                href="register.html"
+                class="rounded-full bg-[#f43f8e]
+                       px-7 py-3 font-semibold text-white
+                       transition-transform duration-150
+                       hover:bg-[#d92f78]
+                       active:scale-95"
+            >
                 Register
             </a>
+
         </div>
 
         <!-- BURGER -->
@@ -247,34 +320,35 @@
 
 
                         <!-- EXPLORE SERVICES -->
-                        <a
-                            href="#services"
-                            class="group flex h-16
-                                   min-w-65
-                                   items-center justify-between
-                                   rounded-[22px]
-                                   border-2 border-[#f33b8f]
-                                   bg-white
-                                   px-7
-                                   text-[15px] font-bold
-                                   text-[#171717]
-                                   transition duration-300
-                                   hover:-translate-y-1
-                                   hover:bg-[#fff2f7]
-                                   hover:shadow-lg"
-                        >
+<a
+    href="#services"
+    class="group flex h-16 min-w-65
+           items-center justify-between
+           rounded-[22px]
+           border-2 border-[#f33b8f]
+           bg-white px-7
+           text-[15px] font-bold
+           text-[#171717]
+           transition-all duration-300
+           hover:-translate-y-1
+           hover:bg-[#fff2f7]
+           hover:shadow-lg"
+>
+    <span>
+        Explore Services
+    </span>
 
-                            Explore Services
-
-                            <span
-                                class="text-[30px] font-light
-                                       transition duration-300
-                                       group-hover:translate-x-1"
-                            >
-                                →
-                            </span>
-
-                        </a>
+    <img
+        src="./images/arrow-white.png"
+        alt=""
+        aria-hidden="true"
+        class="h-6 w-6
+               shrink-0 object-contain
+               brightness-0
+               transition-transform duration-300
+               group-hover:translate-x-1.5"
+    >
+</a>
 
                     </div>
 
@@ -427,220 +501,545 @@
         </section>
 
 
+      
         <!-- =================================================
-                         OUR SERVICES
+                     OUR SERVICES
+================================================== -->
+<section
+    id="services"
+    class="w-full bg-[#fdebf2] px-6 pb-12 pt-7"
+>
+    <div class="mx-auto w-full max-w-350">
+
+        <!-- SECTION HEADING -->
+        <div class="mx-auto text-center">
+
+            <p class="text-[13px] font-extrabold uppercase text-[#f33b8f]">
+                Our Services
+            </p>
+
+            <h2 class="mt-2 text-3xl font-extrabold
+                       leading-[1.05] tracking-[-1px]
+                       text-[#111]">
+                Everything Your Pet Needs,
+
+                <span class="block text-[#f33b8f]">
+                    All in One Place.
+                </span>
+            </h2>
+
+            <p class="mx-auto mt-5 max-w-162.5
+                      text-base leading-[1.35]
+                      text-[#777]">
+                From routine check-ups to specialized care,
+                we're here to keep your pets
+                <br class="hidden md:block">
+                healthy, happy, and thriving.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+                         SERVICE CARDS
         ================================================== -->
-        <section
-            id="services"
-            class="w-full bg-[#fdebf2]
-                   px-6 pb-20 pt-7"
-        >
+        <div class="mt-8 grid grid-cols-1 gap-6
+                    sm:grid-cols-2
+                    lg:grid-cols-5 lg:gap-10">
 
-            <div class="mx-auto w-full max-w-350">
 
-                <!-- SECTION HEADING -->
-                <div class="mx-auto text-center">
+            <!-- =================================================
+                 CARD 1 — GENERAL CHECK-UP
+            ================================================== -->
+            <div class="group relative flex min-h-62.5 flex-col
+                        items-center text-center
+                        rounded-[22px]
+                        border border-[#e5dfe2]
+                        bg-white p-6
+                        transition duration-300
+                        hover:-translate-y-2
+                        hover:shadow-xl">
 
-                    <p
-                        class="text-[13px] font-extrabold
-                               uppercase text-[#f33b8f]"
+                <!-- ICON -->
+                <div class="flex size-18
+                            items-center justify-center
+                            rounded-full bg-[#fbd9e8]">
+
+                    <img
+                        src="./images/stethoscope.png"
+                        alt="Veterinary checkup"
+                        class="size-11 object-contain"
                     >
-                        Our Services
-                    </p>
-
-
-                    <h2
-                        class="mt-2
-                               text-[30px] font-extrabold
-                               leading-[1.05]
-                               tracking-[-1px]
-                               text-[#111]"
-                    >
-                        Everything Your Pet Needs,
-
-                        <span class="block text-[#f33b8f]">
-                            All in One Place.
-                        </span>
-                    </h2>
-
-
-                    <p
-                        class="mx-auto mt-5
-                               max-w-162.5            
-                               text-[16px]
-                               leading-[1.35]
-                               text-[#777]"
-                    >
-                        From routine check-ups to specialized care,
-                        we're here to keep your pets
-                        <br class="hidden md:block">
-                        healthy, happy, and thriving.
-                    </p>
 
                 </div>
 
+                <!-- TITLE -->
+                <h3 class="mt-5 text-base
+                           font-extrabold text-[#211D24]">
+                    General Check-Up
+                </h3>
 
-                <!-- ==========================================
-                             SERVICE CARDS
-                =========================================== -->
-                <div
-                    class="mt-8 grid
-                           grid-cols-1
-                           gap-6
-                           sm:grid-cols-2
-                           lg:grid-cols-5"
-                >
+                <!-- DESCRIPTION -->
+                <p class="mt-2 text-[13px]
+                          leading-[1.4] text-[#777]">
+                    Routine exams for a healthier,
+                    longer life.
+                </p>
 
-                    <!-- CARD 1 -->
-                    <div
-                        class="group relative
-                               min-h-61.25
-                               rounded-[22px]
-                               border border-[#e5dfe2]
-                               bg-white
-                               p-6
-                               transition duration-300
-                               hover:-translate-y-2
-                               hover:shadow-xl"
+                <!-- BUTTON -->
+                <div class="mt-auto pt-5">
+
+                    <button
+                        type="button"
+                        class="group/btn relative
+                               h-12 w-42.5
+                               cursor-pointer
+                               border-0 bg-transparent p-0
+                               text-xs font-bold uppercase"
                     >
 
-                        <div
-                            class="flex h-18 w-18
-                                   items-center justify-center
-                                   rounded-full
-                                   bg-[#fbd9e8]"
-                        >
-                            <img
-                                src="./images/stethoscope.png"
-                                alt="Veterinary checkup"
-                                class="h-11 w-11 object-contain"
-                            >
-                        </div>
+                        <!-- EXPANDING CIRCLE -->
+                        <span class="absolute left-0 top-0
+                                     flex h-12 w-12
+                                     items-center overflow-hidden
+                                     rounded-full bg-[#f33b8f]
+                                     transition-all duration-450
+                                     ease-[cubic-bezier(0.65,0,0.076,1)]
+                                     group-hover/btn:w-full">
 
-                    </div>
+                            <!-- ARROW -->
+                           <span class="relative ml-3.5 block
+                                        h-0.5 w-4.5
+                                      bg-white
+                                        transition-all duration-450
+                                        ease-[cubic-bezier(0.65,0,0.076,1)]
+                                        group-hover/btn:translate-x-4"
+                           >
 
+                                <span class="absolute right-0 top-1/2
+                                             h-2.25 w-2.25
+                                             -translate-y-1/2
+                                             rotate-45
+                                             border-r-2 border-t-2
+                                           border-white"
+                                ></span>
 
-                    <!-- CARD 2 -->
-                    <div
-                        class="group relative
-                               min-h-61.25
-                               rounded-[22px]
-                               border border-[#e5dfe2]
-                               bg-white
-                               p-6
-                               transition duration-300
-                               hover:-translate-y-2
-                               hover:shadow-xl"
-                    >
+                        </span>
 
-                        <div
-                            class="flex h-18 w-18
-                                   items-center justify-center
-                                   rounded-full
-                                   bg-[#fbd9e8]"
-                        >
-                            <img
-                                src="./images/syringe.png"
-                                alt="Vaccination"
-                                class="h-11 w-11 object-contain"
-                            >
-                        </div>
+                        </span>
 
-                    </div>
+                        <!-- BUTTON TEXT -->
+                        <span class="absolute inset-0
+                                     flex items-center justify-center
+                                     pl-7
+                                     text-[#282936]
+                                     transition-colors duration-450
+                                     ease-[cubic-bezier(0.65,0,0.076,1)]
+                                     group-hover/btn:text-white">
+                            Learn More
+                        </span>
 
-
-                    <!-- CARD 3 -->
-                    <div
-                        class="group relative
-                               min-h-61.25
-                               rounded-[22px]
-                               border border-[#e5dfe2]
-                               bg-white
-                               p-6
-                               transition duration-300
-                               hover:-translate-y-2
-                               hover:shadow-xl"
-                    >
-
-                        <div
-                            class="flex h-18 w-18
-                                   items-center justify-center
-                                   rounded-full
-                                   bg-[#fbd9e8]"
-                        >
-                            <img
-                                src="./images/tooth.png"
-                                alt="Dental care"
-                                class="h-11 w-11 object-contain"
-                            >
-                        </div>
-
-                    </div>
-
-
-                    <!-- CARD 4 -->
-                    <div
-                        class="group relative
-                               min-h-61.25
-                               rounded-[22px]
-                               border border-[#e5dfe2]
-                               bg-white
-                               p-6
-                               transition duration-300
-                               hover:-translate-y-2
-                               hover:shadow-xl"
-                    >
-
-                        <div
-                            class="flex h-18 w-18
-                                   items-center justify-center
-                                   rounded-full
-                                   bg-[#fbd9e8]"
-                        >
-                            <img
-                                src="./images/paw-pink.png"
-                                alt="Pet care"
-                                class="h-11 w-11 object-contain"
-                            >
-                        </div>
-
-                    </div>
-
-
-                    <!-- CARD 5 -->
-                    <div
-                        class="group relative
-                               min-h-61.25
-                               rounded-[22px]
-                               border border-[#e5dfe2]
-                               bg-white
-                               p-6
-                               transition duration-300
-                               hover:-translate-y-2
-                               hover:shadow-xl"
-                    >
-
-                        <div
-                            class="flex h-18 w-18
-                                   items-center justify-center
-                                   rounded-full
-                                   bg-[#fbd9e8]"
-                        >
-                            <img
-                                src="./images/heartbeat.png"
-                                alt="Pet wellness"
-                                class="h-11 w-11 object-contain"
-                            >
-                        </div>
-
-                    </div>
+                    </button>
 
                 </div>
 
             </div>
 
-        </section>
 
+            <!-- =================================================
+                 CARD 2 — VACCINATION
+            ================================================== -->
+            <div class="group relative flex min-h-62.5 flex-col
+                        items-center text-center
+                        rounded-[22px]
+                        border border-[#e5dfe2]
+                        bg-white p-6
+                        transition duration-300
+                        hover:-translate-y-2
+                        hover:shadow-xl">
+
+                <!-- ICON -->
+                <div class="flex size-18
+                            items-center justify-center
+                            rounded-full bg-[#fbd9e8]">
+
+                    <img
+                        src="./images/syringe.png"
+                        alt="Pet vaccination"
+                        class="size-11 object-contain"
+                    >
+
+                </div>
+
+                <!-- TITLE -->
+                <h3 class="mt-5 text-base
+                           font-extrabold text-[#211D24]">
+                    Vaccination
+                </h3>
+
+                <!-- DESCRIPTION -->
+                <p class="mt-2 text-[13px]
+                          leading-[1.4] text-[#777]">
+                    Protecting your pets from
+                    preventable diseases.
+                </p>
+
+                <!-- BUTTON -->
+                <div class="mt-auto pt-5">
+
+                    <button
+                        type="button"
+                        class="group/btn relative
+                               h-12 w-42.5
+                               cursor-pointer
+                               border-0 bg-transparent p-0
+                               text-xs font-bold uppercase"
+                    >
+
+                        <!-- EXPANDING CIRCLE -->
+                        <span class="absolute left-0 top-0
+                                     flex h-12 w-12
+                                     items-center overflow-hidden
+                                     rounded-full bg-[#f33b8f]
+                                     transition-all duration-450
+                                     ease-[cubic-bezier(0.65,0,0.076,1)]
+                                     group-hover/btn:w-full">
+
+                            <!-- ARROW -->
+                             <span class="relative ml-3.5 block
+                                        h-0.5 w-4.5
+                                      bg-white
+                                        transition-all duration-450
+                                        ease-[cubic-bezier(0.65,0,0.076,1)]
+                                        group-hover/btn:translate-x-4"
+                           >
+
+                                <span class="absolute right-0 top-1/2
+                                             h-2.25 w-2.25
+                                             -translate-y-1/2
+                                             rotate-45
+                                             border-r-2 border-t-2
+                                           border-white"
+                                ></span>
+
+                        </span>
+
+                        </span>
+
+
+                        <!-- BUTTON TEXT -->
+                        <span class="absolute inset-0
+                                     flex items-center justify-center
+                                     pl-7
+                                     text-[#282936]
+                                     transition-colors duration-450
+                                     group-hover/btn:text-white">
+                            Learn More
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CARD 3 — DENTAL CARE
+            ================================================== -->
+            <div class="group relative flex min-h-62.5 flex-col
+                        items-center text-center
+                        rounded-[22px]
+                        border border-[#e5dfe2]
+                        bg-white p-6
+                        transition duration-300
+                        hover:-translate-y-2
+                        hover:shadow-xl">
+
+                <!-- ICON -->
+                <div class="flex size-18
+                            items-center justify-center
+                            rounded-full bg-[#fbd9e8]">
+
+                    <img
+                        src="./images/tooth.png"
+                        alt="Pet dental care"
+                        class="size-11 object-contain"
+                    >
+
+                </div>
+
+                <!-- TITLE -->
+                <h3 class="mt-5 text-base
+                           font-extrabold text-[#211D24]">
+                    Dental Care
+                </h3>
+
+                <!-- DESCRIPTION -->
+                <p class="mt-2 text-[13px]
+                          leading-[1.4] text-[#777]">
+                    A cleaner smile for a healthier
+                    pet.
+                </p>
+
+                <!-- BUTTON -->
+                <div class="mt-auto pt-5">
+
+                    <button
+                        type="button"
+                        class="group/btn relative
+                               h-12 w-42.5
+                               cursor-pointer
+                               border-0 bg-transparent p-0
+                               text-xs font-bold uppercase"
+                    >
+
+                        <!-- EXPANDING CIRCLE -->
+                        <span class="absolute left-0 top-0
+                                     flex h-12 w-12
+                                     items-center overflow-hidden
+                                     rounded-full bg-[#f33b8f]
+                                     transition-all duration-450
+                                     ease-[cubic-bezier(0.65,0,0.076,1)]
+                                     group-hover/btn:w-full">
+
+                            <!-- ARROW -->
+                             <span class="relative ml-3.5 block
+                                        h-0.5 w-4.5
+                                      bg-white
+                                        transition-all duration-450
+                                        ease-[cubic-bezier(0.65,0,0.076,1)]
+                                        group-hover/btn:translate-x-4"
+                           >
+
+                                <span class="absolute right-0 top-1/2
+                                             h-2.25 w-2.25
+                                             -translate-y-1/2
+                                             rotate-45
+                                             border-r-2 border-t-2
+                                           border-white"
+                                ></span>
+
+                        </span>
+
+                        </span>
+
+
+                        <!-- BUTTON TEXT -->
+                        <span class="absolute inset-0
+                                     flex items-center justify-center
+                                     pl-7
+                                     text-[#282936]
+                                     transition-colors duration-450
+                                     group-hover/btn:text-white">
+                            Learn More
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CARD 4 — GROOMING
+            ================================================== -->
+            <div class="group relative flex min-h-62.5 flex-col
+                        items-center text-center
+                        rounded-[22px]
+                        border border-[#e5dfe2]
+                        bg-white p-6
+                        transition duration-300
+                        hover:-translate-y-2
+                        hover:shadow-xl">
+
+                <!-- ICON -->
+                <div class="flex size-18
+                            items-center justify-center
+                            rounded-full bg-[#fbd9e8]">
+
+                    <img
+                        src="./images/paw-pink.png"
+                        alt="Pet grooming"
+                        class="size-11 object-contain"
+                    >
+
+                </div>
+
+                <!-- TITLE -->
+                <h3 class="mt-5 text-base
+                           font-extrabold text-[#211D24]">
+                    Grooming
+                </h3>
+
+                <!-- DESCRIPTION -->
+                <p class="mt-2 text-[13px]
+                          leading-[1.4] text-[#777]">
+                    Keep them clean, comfortable,
+                    and happy.
+                </p>
+
+                <!-- BUTTON -->
+                <div class="mt-auto pt-5">
+
+                    <button
+                        type="button"
+                        class="group/btn relative
+                               h-12 w-42.5
+                               cursor-pointer
+                               border-0 bg-transparent p-0
+                               text-xs font-bold uppercase"
+                    >
+
+                        <!-- EXPANDING CIRCLE -->
+                        <span class="absolute left-0 top-0
+                                     flex h-12 w-12
+                                     items-center overflow-hidden
+                                     rounded-full bg-[#f33b8f]
+                                     transition-all duration-450
+                                     ease-[cubic-bezier(0.65,0,0.076,1)]
+                                     group-hover/btn:w-full">
+
+                            <!-- ARROW -->
+                            <span class="relative ml-3.5 block
+                                        h-0.5 w-4.5
+                                      bg-white
+                                        transition-all duration-450
+                                        ease-[cubic-bezier(0.65,0,0.076,1)]
+                                        group-hover/btn:translate-x-4"
+                           >
+
+                                <span class="absolute right-0 top-1/2
+                                             h-2.25 w-2.25
+                                             -translate-y-1/2
+                                             rotate-45
+                                             border-r-2 border-t-2
+                                           border-white"
+                                ></span>
+
+                        </span>
+
+                        </span>
+
+                        <!-- BUTTON TEXT -->
+                        <span class="absolute inset-0
+                                     flex items-center justify-center
+                                     pl-7
+                                     text-[#282936]
+                                     transition-colors duration-450
+                                     group-hover/btn:text-white">
+                            Learn More
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CARD 5 — SPECIALIZED CARE
+            ================================================== -->
+            <div class="group relative flex min-h-62.5 flex-col
+                        items-center text-center
+                        rounded-[22px]
+                        border border-[#e5dfe2]
+                        bg-white p-6
+                        transition duration-300
+                        hover:-translate-y-2
+                        hover:shadow-xl">
+
+                <!-- ICON -->
+                <div class="flex size-18
+                            items-center justify-center
+                            rounded-full bg-[#fbd9e8]">
+
+                    <img
+                        src="./images/heartbeat.png"
+                        alt="Specialized veterinary care"
+                        class="size-11 object-contain"
+                    >
+
+                </div>
+
+                <!-- TITLE -->
+                <h3 class="mt-5 text-base
+                           font-extrabold text-[#211D24]">
+                    Specialized Care
+                </h3>
+
+                <!-- DESCRIPTION -->
+                <p class="mt-2 text-[13px]
+                          leading-[1.4] text-[#777]">
+                    Advanced treatment
+                    for their unique needs.
+                </p>
+
+                <!-- BUTTON -->
+                <div class="mt-auto pt-5">
+
+                    <button
+                        type="button"
+                        class="group/btn relative
+                               h-12 w-42.5
+                               cursor-pointer
+                               border-0 bg-transparent p-0
+                               text-xs font-bold uppercase"
+                    >
+
+                        <!-- EXPANDING CIRCLE -->
+                        <span class="absolute left-0 top-0
+                                     flex h-12 w-12
+                                     items-center overflow-hidden
+                                     rounded-full bg-[#f33b8f]
+                                     transition-all duration-450
+                                     ease-[cubic-bezier(0.65,0,0.076,1)]
+                                     group-hover/btn:w-full">
+
+                            <!-- ARROW -->
+                            <span class="relative ml-3.5 block
+                                        h-0.5 w-4.5
+                                      bg-white
+                                        transition-all duration-450
+                                        ease-[cubic-bezier(0.65,0,0.076,1)]
+                                        group-hover/btn:translate-x-4"
+                           >
+
+                                <span class="absolute right-0 top-1/2
+                                             h-2.25 w-2.25
+                                             -translate-y-1/2
+                                             rotate-45
+                                             border-r-2 border-t-2
+                                           border-white"
+                                ></span>
+
+                        </span>
+
+                        </span>
+
+
+                        <!-- BUTTON TEXT -->
+                        <span class="absolute inset-0
+                                     flex items-center justify-center
+                                     pl-7
+                                     text-[#282936]
+                                     transition-colors duration-450
+                                     group-hover/btn:text-white">
+                            Learn More
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
 
         <!-- =================================================
              NEXT FIGMA SECTION WILL GO HERE
