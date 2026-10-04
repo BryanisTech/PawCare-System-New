@@ -552,3 +552,55 @@ if (
     });
 
 });
+
+
+
+const registerForm = document.getElementById("registerForm");
+
+registerForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    // Create Supabase account
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password
+    });
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    // Create profile
+    const { error: profileError } = await supabaseClient
+        .from("profiles")
+        .insert({
+            id: data.user.id,
+            full_name: fullName,
+            phone_number: phone,
+            address: address,
+            role: "pet_owner"
+        });
+
+    if (profileError) {
+        alert(profileError.message);
+        return;
+    }
+
+    alert("Account created successfully!");
+
+    window.location.href = "login.html";
+});

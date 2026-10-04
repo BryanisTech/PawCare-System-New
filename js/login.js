@@ -55,3 +55,47 @@ if (password && passwordToggle && passwordEye) {
 }
 
 });
+
+const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    // Login using Supabase Auth
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
+
+    if (error) {
+        alert("Invalid email or password.");
+        return;
+    }
+
+    // Get the user's role from profiles
+    const { data: profile, error: profileError } = await supabaseClient
+        .from("profiles")
+        .select("role")
+        .eq("id", data.user.id)
+        .single();
+
+    if (profileError) {
+        alert("Could not find your user profile.");
+        console.log(profileError);
+        return;
+    }
+
+    // Redirect based on role
+    if (profile.role === "admin") {
+        window.location.href = "admin/dashboard.html";
+    } 
+    else if (profile.role === "veterinarian") {
+        window.location.href = "veterinarian/dashboard.html";
+    } 
+    else if (profile.role === "pet_owner") {
+        window.location.href = "dashboard.html";
+    }
+});
