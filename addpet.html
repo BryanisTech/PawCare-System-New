@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Pets</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="sticky top-0 z-1000 w-full border-pink-100 bg-pink-100 backdrop-blur-md">
+        <nav class="relative mx-auto flex h-20 w-full max-w-310
+                    items-center justify-between px-5 sm:px-6 lg:px-8">
+
+            <!-- LOGO -->
+            <a href="dashboard.html" class="flex items-center gap-2">
+
+                <!-- Logo Icon -->
+                <div class="group relative flex h-11 w-11 items-center justify-center
+                            rounded-full bg-black sm:h-14.5 sm:w-14.5">
+
+                    <img
+                        src="./images/logo-paw.png"
+                        alt="PawCare Logo"
+                        class="h-10 w-10 object-contain"
+                    >
+
+                    <!-- Logo Tooltip -->
+                    <div class="pointer-events-none absolute left-1/2 top-full z-50
+                                mt-2 -translate-x-1/2 whitespace-nowrap
+                                rounded-md bg-[#222] px-3 py-1.5
+                                text-[12px] font-medium text-white
+                                opacity-0 shadow-md
+                                transition-opacity duration-200
+                                group-hover:opacity-100">
+                        PawCare Logo
+                    </div>
+
+                </div>
+
+                    <!-- Brand Name -->
+                <div class="text-[20px] font-extrabold sm:text-[20px]">
+                    <span class="text-[#202020]">Paw</span>
+                    <span class="text-[#f33b8f]">Care</span>
+                </div>
+
+            </a>
+
+            <div class="ml-auto flex items-center gap-2">
+
+               
+                <button class="w-10 h-10 flex items-center justify-center rounded-full transition">
+                    <img src="./images/notification.png" class="w-6 h-6">
+                </button>
+
+                <!-- PROFILE -->
+                <div class="desktop-actions">
+
+                    <div class="relative">
+
+                        <!-- PROFILE BUTTON -->
+                        <button
+                            id="profileButton"
+                            type="button"
+                            class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-pink-100 transition">
+
+                            <!-- Profile Image -->
+                            <img
+                                src="./images/profile.png"
+                                class="w-9 h-9 rounded-full">
+
+                            <!-- Name -->
+                            <div class="text-left">
+
+                                <p
+                                    id="fullName"
+                                    class="text-sm font-semibold text-gray-700">
+                                    User
+                                </p>
+
+                                <p class="text-xs text-gray-400">
+                                    Account
+                                </p>
+
+                            </div>
+
+                            <!-- Arrow -->
+                            <i
+                                id="profileArrow"
+                                class="fa-solid fa-chevron-down text-xs text-gray-500 transition-transform duration-200">
+                            </i>
+
+                        </button>
+
+
+                       <div
+                            id="profileDropdown"
+                            class="hidden absolute right-0 top-14 w-72 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50">
+
+                            <!-- HEADER -->
+                            <div class="bg-gradient-to-r from-pink-500 to-pink-600 px-5 py-5 text-white">
+
+                                <div class="flex items-center gap-3">
+
+                                    <!-- Icon -->
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20">
+                                        <i class="fa-solid fa-user text-lg"></i>
+                                    </div>
+
+                                    <!-- User Information -->
+                                    <div class="min-w-0">
+
+                                        <p
+                                            id="dropdownUsername"
+                                            class="truncate font-semibold">
+                                            User
+                                        </p>
+
+                                        <p
+                                            id="userEmail"
+                                            class="truncate text-xs text-pink-100">
+                                            user@email.com
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="fixed top-[150px] left-[60px] w-56 h-[500px] bg-pink-100 rounded-xl p-5 shadow-md flex flex-col">
+
+            <nav class="space-y-2">
+
+                <a href="dashboard.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/dashboards.png" class="w-7 h-7" >
+                    Dashboard
+                </a>
+
+                <a href="mypets.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/mypets.png" class="w-7 h-7" >
+                    My Pets
+                </a>
+
+                <a href="appointments.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/appointment.png" class="w-7 h-7" >
+                    Appointments
+                </a>
+
+                <a href="medical-records.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/ehealthcard.png" class="w-7 h-7">
+                    eHealth Card
+                </a>
+
+            </nav>
+            <div class="mt-auto -mx-5" >
+                <a href="logout.html"
+                    class="flex items-center justify-center gap-2 px-5 py-3 text-gray-700 hover:bg-red-600 hover:text-white transition">
+                    <img src="./images/logout.png" class="w-5 h-5">
+                    LogOut
+                 </a>
+            </div>
+        </div>
+
+        
+    </header>
+
+   <div class="mt-10 mx-[200px] translate-x-[100px] bg-white rounded-2xl shadow-md p-8">
+        <!-- Title -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+            Add Pet Information
+        </h2>
+
+        <!-- Pet Information Form -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Pet Name -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Pet Name
+                </label>
+                <input 
+                    type="text"
+                    id="petName"
+                    placeholder="Enter pet name"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300">
+            </div>
+
+           <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Species
+                </label>
+
+                <select 
+                    id="species"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg">
+                    
+                    <option value="">Select species</option>
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Bird">Bird</option>
+                    <option value="Rabbit">Rabbit</option>
+                    <option value="Hamster">Hamster</option>
+                    <option value="Guinea Pig">Guinea Pig</option>
+                    <option value="Reptile">Reptile</option>
+                    <option value="Other">Other</option>
+
+                </select>
+
+                <!-- This replaces the dropdown when Other is selected -->
+                <input
+                    type="text"
+                    id="customSpecies"
+                    placeholder="Enter species"
+                    class="hidden w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg">
+            </div>
+
+            <!-- Breed -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Breed
+                </label>
+                <input 
+                    type="text"
+                    id="breed"
+                    placeholder="Enter breed"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300">
+            </div>
+
+            <!-- Gender -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Gender
+                </label>
+                <select 
+                    id="gender"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300">
+                    <option value="">Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+           <!-- Date of Birth -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Date of Birth
+            </label>
+
+            <input 
+                type="date"
+                id="dateOfBirth"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300">
+        </div>
+
+        <!-- Age -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Age
+            </label>
+
+            <input 
+                type="text"
+                id="age"
+                placeholder="Age will be calculated"
+                readonly
+                class="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-600">
+        </div>
+
+            <!-- Weight -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Weight (kg)
+                    <span class="text-gray-400 font-normal">(Optional)</span>
+                </label>
+
+                <input 
+                    type="number"
+                    id="weight"
+                    placeholder="Enter weight if known"
+                    step="0.1"
+                    min="0"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300">
+            </div>
+
+            <!-- Coat Color -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Coat Color
+                </label>
+                <input 
+                    type="text"
+                    id="coatColor"
+                    placeholder="Enter coat color"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300">
+            </div>
+
+            <!-- Pet Photo -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Pet Photo
+                </label>
+                <input 
+                    type="file"
+                    id="petPhoto"
+                    accept="image/*"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg">
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-end gap-4 mt-8">
+
+            <a 
+                href="pets.html"
+                class="px-5 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition">
+                Cancel
+            </a>
+
+            <button 
+                type="button"
+                id="savePetButton"
+                class="px-5 py-3 bg-pink-500 hover:bg-pink-600 text-white font-medium rounded-lg transition">
+                Save Pet
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/addpet.js"></script>
+
+</body>
+</html>

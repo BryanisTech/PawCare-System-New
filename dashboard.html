@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Pawcare Dashboard</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 <body class="m-0 min-h-screen w-full overflow-x-hidden bg-white font-sans text-[#171717]">
@@ -55,86 +56,86 @@
                 </button>
 
                 <!-- PROFILE -->
-    <div class="desktop-actions">
+                <div class="desktop-actions">
 
-        <div class="relative">
+                    <div class="relative">
 
-            <!-- PROFILE BUTTON -->
-            <button
-                id="profileButton"
-                type="button"
-                class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-pink-100 transition">
+                        <!-- PROFILE BUTTON -->
+                        <button
+                            id="profileButton"
+                            type="button"
+                            class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-pink-100 transition">
 
-                <!-- Profile Image -->
-                <img
-                    src="./images/profile.png"
-                    class="w-9 h-9 rounded-full">
+                            <!-- Profile Image -->
+                            <img
+                                src="./images/profile.png"
+                                class="w-9 h-9 rounded-full">
 
-                <!-- Name -->
-                <div class="text-left">
+                            <!-- Name -->
+                            <div class="text-left">
 
-                    <p
-                        id="fullName"
-                        class="text-sm font-semibold text-gray-700">
-                        User
-                    </p>
+                                <p
+                                    id="fullName"
+                                    class="text-sm font-semibold text-gray-700">
+                                    User
+                                </p>
 
-                    <p class="text-xs text-gray-400">
-                        Account
-                    </p>
+                                <p class="text-xs text-gray-400">
+                                    Account
+                                </p>
 
-                </div>
+                            </div>
 
-                <!-- Arrow -->
-                <i
-                    id="profileArrow"
-                    class="fa-solid fa-chevron-down text-xs text-gray-500 transition-transform duration-200">
-                </i>
+                            <!-- Arrow -->
+                            <i
+                                id="profileArrow"
+                                class="fa-solid fa-chevron-down text-xs text-gray-500 transition-transform duration-200">
+                            </i>
 
-            </button>
+                        </button>
 
 
-            <!-- PROFILE DROPDOWN -->
-            <div
-                id="profileDropdown"
-                class="hidden absolute right-0 top-14 w-72 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50">
+                        <!-- PROFILE DROPDOWN -->
+                        <div
+                            id="profileDropdown"
+                            class="hidden absolute right-0 top-14 w-72 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50">
 
-                <!-- HEADER -->
-                <div class="bg-gradient-to-r from-pink-500 to-pink-600 px-5 py-5 text-white">
+                            <!-- HEADER -->
+                            <div class="bg-gradient-to-r from-pink-500 to-pink-600 px-5 py-5 text-white">
 
-                    <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-3">
 
-                        <!-- Icon -->
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20">
-                            <i class="fa-solid fa-user text-lg"></i>
-                        </div>
+                                    <!-- Icon -->
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20">
+                                        <i class="fa-solid fa-user text-lg"></i>
+                                    </div>
 
-                        <!-- User Information -->
-                        <div class="min-w-0">
+                                    <!-- User Information -->
+                                    <div class="min-w-0">
 
-                            <p
-                                id="dropdownUsername"
-                                class="truncate font-semibold">
-                                User
-                            </p>
+                                        <p
+                                            id="dropdownUsername"
+                                            class="truncate font-semibold">
+                                            User
+                                        </p>
 
-                            <p
-                                id="userEmail"
-                                class="truncate text-xs text-pink-100">
-                                user@email.com
-                            </p>
+                                        <p
+                                            id="userEmail"
+                                            class="truncate text-xs text-pink-100">
+                                            user@email.com
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
                     </div>
 
                 </div>
-
-            </div>
-
-        </div>
-
-    </div>
 
             </div>
 
@@ -149,7 +150,7 @@
                     Dashboard
                 </a>
 
-                <a href="pets.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                <a href="mypets.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
                     <img src="./images/mypets.png" class="w-7 h-7" >
                     My Pets
                 </a>
@@ -189,21 +190,27 @@
 
         <div class="ml-[300px] mt-8 grid w-[calc(100%-340px)] grid-cols-3 gap-5">
 
-            <!-- tOtal pets -->
+           
             <div class="h-32 rounded-xl bg-pink-100 p-5 shadow-sm">
-                <p class="text-sm text-gray-500">Total Pets</p>
+                <p class="text-sm text-gray-500">
+                    Total Pets
+                </p>
                 <h2 class="mt-2 text-3xl font-bold text-gray-800"></h2>
             </div>
 
-            <!-- upcoming appointments -->
+            
             <div class="h-32 rounded-xl bg-pink-100 p-5 shadow-sm">
-                <p class="text-sm text-gray-500">Upcoming Appointments</p>
+                <p class="text-sm text-gray-500">
+                    Upcoming Appointments
+                </p>
                 <h2 class="mt-2 text-3xl font-bold text-gray-800"></h2>
             </div>
 
-            <!-- vaccination reminders -->
+            
             <div class="h-32 rounded-xl bg-pink-100 p-5 shadow-sm">
-                <p class="text-sm text-gray-500">Vaccination Reminders</p>
+                <p class="text-sm text-gray-500">
+                    Vaccination Reminders
+                </p>
                 <h2 class="mt-2 text-3xl font-bold text-gray-800"></h2>
             </div>
 
@@ -235,7 +242,7 @@
                                border border-gray-200 text-gray-600
                                hover:bg-pink-50 hover:text-pink-600 transition">
 
-                        <i class="fa-solid fa-chevron-left"><</i>
+                        <i class="fa-solid fa-chevron-left"></i>
 
                     </button>
 
@@ -243,7 +250,7 @@
                         id="todayButton"
                         type="button"
                         class="rounded-lg bg-pink-500 px-3 py-2
-                               text-xs font-semibold text-white
+                               text-xs font-semibold text-black
                                hover:bg-pink-600 transition">
 
                         Today
@@ -257,7 +264,7 @@
                                border border-gray-200 text-gray-600
                                hover:bg-pink-50 hover:text-pink-600 transition">
 
-                        <i class="fa-solid fa-chevron-right">></i>
+                        <i class="fa-solid fa-chevron-right"></i>
 
                     </button>
 
@@ -350,7 +357,7 @@
 
 
 
-            <!-- APPOINTMENT RESULT -->
+            
             <div class="mt-4 rounded-xl border border-gray-100 p-5">
 
                 <div class="flex items-center gap-3">
@@ -381,7 +388,7 @@
             </div>
 
 
-            <!-- VACCINATION RESULT -->
+            
             <div class="mt-4 rounded-xl border border-gray-100 p-5">
 
                 <div class="flex items-center gap-3">
@@ -423,6 +430,7 @@
     <script src="js/supabase.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/dashboard.js"></script>
+    <script src="js/profile.js"></script>
     
 </body>
 </html>
