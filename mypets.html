@@ -190,6 +190,7 @@
         </a>
     </div>
 
+    
 
     <!-- Pets Container -->
     <div id="petsContainer" class="ml-[300px] mt-8 grid w-[calc(100%-340px)] grid-cols-3 gap-5">
@@ -206,11 +207,169 @@
 
         </div>
 
-</div>
+    </div>
+
+    
+
+        <!-- EDIT PET MODAL -->
+        <div id="editPetModal"
+            class="fixed inset-0 z-50 hidden items-start justify-start bg-black/50 p-4 pl-80 pt-28">
+
+            <div class="w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-xl">
+
+                <!-- Header -->
+                <div class="mb-6 flex items-center justify-between border-b border-pink-100 pb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Edit Pet</h2>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Update your pet's information
+                        </p>
+                    </div>
+
+                    <button type="button" id="closeEditModal"
+                            class="rounded-lg px-3 py-1 text-3xl text-gray-500 hover:bg-pink-50 hover:text-pink-600">
+                        &times;
+                    </button>
+                </div>
+
+                <form id="editPetForm">
+
+                    <!-- Landscape Layout -->
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+
+                        <!-- LEFT: PET PHOTO -->
+                        <div class="rounded-xl bg-pink-50 p-5 text-center">
+
+                            <h3 class="mb-4 text-lg font-semibold text-gray-800">
+                                Pet Photo
+                            </h3>
+
+                            <div class="flex justify-center">
+                                <img id="editPetPhotoPreview"
+                                    src="./images/default-pet.png"
+                                    alt="Pet photo preview"
+                                    class="h-40 w-40 rounded-full border-4 border-white object-cover shadow-sm">
+                            </div>
+
+                            <label for="editPetPhoto"
+                                class="mt-5 block text-sm font-medium text-gray-700">
+                                Change Photo
+                            </label>
+
+                            <input id="editPetPhoto" type="file" accept="image/*"
+                                class="mt-2 block w-full rounded-lg border border-gray-300 bg-white p-2 text-sm">
+
+                            <p class="mt-2 text-xs text-gray-500">
+                                Leave empty to keep the current photo.
+                            </p>
+
+                        </div>
+
+                        <!-- RIGHT: PET DETAILS -->
+                        <div class="md:col-span-2">
+
+                            <h3 class="mb-4 text-lg font-semibold text-gray-800">
+                                Pet Information
+                            </h3>
+
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                                <div>
+                                    <label for="editPetName"
+                                        class="mb-1 block text-sm font-medium text-gray-700">
+                                        Pet Name *
+                                    </label>
+                                    <input id="editPetName" type="text" required
+                                        class="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                                </div>
+
+                                <div>
+                                    <label for="editSpecies"
+                                        class="mb-1 block text-sm font-medium text-gray-700">
+                                        Species *
+                                    </label>
+                                    <input id="editSpecies" type="text" required
+                                        class="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                                </div>
+
+                                <div>
+                                    <label for="editBreed"
+                                        class="mb-1 block text-sm font-medium text-gray-700">
+                                        Breed
+                                    </label>
+                                    <input id="editBreed" type="text"
+                                        class="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                                </div>
+
+                                <div>
+                                    <label for="editGender"
+                                        class="mb-1 block text-sm font-medium text-gray-700">
+                                        Gender
+                                    </label>
+                                    <select id="editGender"
+                                            class="w-full rounded-lg border border-gray-300 bg-white p-3 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                                        <option value="">Select gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="editDateOfBirth"
+                                        class="mb-1 block text-sm font-medium text-gray-700">
+                                        Date of Birth
+                                    </label>
+                                    <input id="editDateOfBirth" type="date"
+                                        class="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                                </div>
+
+                                <div>
+                                    <label for="editWeight"
+                                        class="mb-1 block text-sm font-medium text-gray-700">
+                                        Weight (kg)
+                                    </label>
+                                    <input id="editWeight" type="number" min="0" step="0.01"
+                                        class="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                                </div>
+
+                                <div class="sm:col-span-2">
+                                    <label for="editCoatColor"
+                                        class="mb-1 block text-sm font-medium text-gray-700">
+                                        Coat Color
+                                    </label>
+                                    <input id="editCoatColor" type="text"
+                                        class="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Buttons -->
+                    <div class="mt-7 flex justify-end gap-3 border-t border-gray-100 pt-5">
+
+                        <button type="button" id="cancelEditModal"
+                                class="rounded-lg border border-gray-300 bg-white px-6 py-2.5 font-medium text-gray-700 hover:bg-gray-100">
+                            Cancel
+                        </button>
+
+                        <button type="submit" id="savePetChanges"
+                                class="rounded-lg bg-pink-500 px-6 py-2.5 font-medium text-white transition hover:bg-pink-600">
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/profile.js"></script>
+    <script src="js/pets-utils.js"></script>
     <script src="js/mypets.js"></script>
     
 </body>

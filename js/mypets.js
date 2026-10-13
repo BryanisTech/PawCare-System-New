@@ -6,6 +6,7 @@ const addPetButton = document.getElementById("addPetButton");
 const petsContainer = document.getElementById("petsContainer");
 
 
+
 // ========================================
 // DISPLAY PETS
 // ========================================
@@ -111,11 +112,31 @@ function displayPets(pets) {
                 </div>
 
 
+                
                 <button
                     type="button"
-                    class="w-full mt-5 bg-pink-500 hover:bg-pink-600 text-white py-2.5 rounded-lg">
+                    data-pet-id="${pet.id}"
+                    class="view-medical-records-button w-full mt-5 border border-black bg-white hover:bg-pink-500 text-black py-2.5 rounded-lg">
+                    View Medical Records
+                </button>
 
-                    View Profile
+
+                
+                <button
+                    type="button"
+                    data-edit-pet-id="${pet.id}"
+                    class="edit-pet-button w-full mt-5 border border-black bg-white hover:bg-pink-500 text-black py-2.5 rounded-lg">
+
+                    Edit Pets
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="w-full mt-5 border border-black bg-white hover:bg-red-700 text-black py-2.5 rounded-lg">
+
+                    Delete Pets
 
                 </button>
 
@@ -127,69 +148,6 @@ function displayPets(pets) {
 
     });
 
-}
-
-
-// ========================================
-// CALCULATE AGE
-// ========================================
-
-function calculateAge(dateOfBirth) {
-
-    if (!dateOfBirth) {
-        return "Not provided";
-    }
-
-
-    const birthDate = new Date(dateOfBirth);
-    const today = new Date();
-
-
-    let years =
-        today.getFullYear() -
-        birthDate.getFullYear();
-
-
-    let months =
-        today.getMonth() -
-        birthDate.getMonth();
-
-
-    if (today.getDate() < birthDate.getDate()) {
-        months--;
-    }
-
-
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-
-    // Less than one year old
-    if (years === 0) {
-
-        if (months === 1) {
-            return "1 month";
-        }
-
-        return `${months} months`;
-    }
-
-
-    // Exactly years old
-    if (months === 0) {
-
-        if (years === 1) {
-            return "1 year";
-        }
-
-        return `${years} years`;
-    }
-
-
-    // Years and months
-    return `${years} years, ${months} months`;
 }
 
 
@@ -249,9 +207,234 @@ addPetButton.addEventListener("click", function () {
 
 });
 
+//Medical Records Button
+petsContainer.addEventListener("click", function (event) {
+    const button = event.target.closest(".view-medical-records-button");
+
+    if (!button) return;
+
+    const petId = button.dataset.petId;
+
+    window.location.href =
+        `medical-records.html?id=${encodeURIComponent(petId)}`;
+});
+
+
 
 // ========================================
 // LOAD PETS
 // ========================================
 
 loadPets();
+
+
+/* ========================================
+   EDIT PET MODAL
+======================================== */
+
+const editPetModal = document.getElementById("editPetModal");
+const editPetForm = document.getElementById("editPetForm");
+const closeEditModal = document.getElementById("closeEditModal");
+const cancelEditModal = document.getElementById("cancelEditModal");
+
+const editPetName = document.getElementById("editPetName");
+const editSpecies = document.getElementById("editSpecies");
+const editBreed = document.getElementById("editBreed");
+const editGender = document.getElementById("editGender");
+const editDateOfBirth = document.getElementById("editDateOfBirth");
+const editWeight = document.getElementById("editWeight");
+const editCoatColor = document.getElementById("editCoatColor");
+const editPetPhoto = document.getElementById("editPetPhoto");
+const editPetPhotoPreview = document.getElementById("editPetPhotoPreview");
+const savePetChanges = document.getElementById("savePetChanges");
+
+let selectedPet = null;
+
+
+/* Open modal and fill in current pet information */
+petsContainer.addEventListener("click", async function (event) {
+
+    const editButton = event.target.closest(".edit-pet-button");
+
+    if (!editButton) {
+        return;
+    }
+
+    const petId = editButton.dataset.editPetId;
+
+    const { data: { user }, error: userError } =
+        await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+        alert("Please log in again.");
+        return;
+    }
+
+    const { data: pet, error } = await supabaseClient
+        .from("pets")
+        .select("*")
+        .eq("id", petId)
+        .eq("owner_id", user.id)
+        .single();
+
+    if (error || !pet) {
+        console.error("Error loading pet:", error);
+        alert("Could not load this pet's information.");
+        return;
+    }
+
+    selectedPet = pet;
+
+    editPetName.value = pet.pet_name || "";
+    editSpecies.value = pet.species || "";
+    editBreed.value = pet.breed || "";
+    editGender.value = pet.gender || "";
+    editDateOfBirth.value = pet.date_of_birth || "";
+    editWeight.value = pet.weight ?? "";
+    editCoatColor.value = pet.coat_color || "";
+
+    editPetPhoto.value = "";
+    editPetPhotoPreview.src =
+        pet.photo_url || "./images/default-pet.png";
+
+    editPetModal.classList.remove("hidden");
+    editPetModal.classList.add("flex");
+});
+
+
+/* Preview a replacement photo */
+editPetPhoto.addEventListener("change", function () {
+
+    const file = editPetPhoto.files[0];
+
+    if (!file) {
+        editPetPhotoPreview.src =
+            selectedPet?.photo_url || "./images/default-pet.png";
+        return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        alert("Please select an image file.");
+        editPetPhoto.value = "";
+        return;
+    }
+
+    editPetPhotoPreview.src = URL.createObjectURL(file);
+});
+
+
+/* Close modal */
+function closePetEditor() {
+    editPetModal.classList.add("hidden");
+    editPetModal.classList.remove("flex");
+    editPetForm.reset();
+    editPetPhotoPreview.src = "./images/default-pet.png";
+    selectedPet = null;
+}
+
+closeEditModal.addEventListener("click", closePetEditor);
+cancelEditModal.addEventListener("click", closePetEditor);
+
+
+/* Save changes to Supabase */
+editPetForm.addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    if (!selectedPet) {
+        alert("Please select a pet to edit.");
+        return;
+    }
+
+    const petName = editPetName.value.trim();
+    const species = editSpecies.value.trim();
+
+    if (!petName || !species) {
+        alert("Pet name and species are required.");
+        return;
+    }
+
+    const weightValue = editWeight.value.trim();
+
+    if (weightValue !== "" &&
+        (!Number.isFinite(Number(weightValue)) || Number(weightValue) < 0)) {
+        alert("Please enter a valid weight.");
+        return;
+    }
+
+    savePetChanges.disabled = true;
+    savePetChanges.textContent = "Saving...";
+
+    try {
+        const {
+            data: { user },
+            error: userError
+        } = await supabaseClient.auth.getUser();
+
+        if (userError || !user) {
+            throw new Error("Please log in again.");
+        }
+
+        // Keep the existing photo unless a new one is selected.
+        let photoUrl = selectedPet.photo_url || null;
+        const photoFile = editPetPhoto.files[0];
+
+        // Upload replacement photo if selected.
+        if (photoFile) {
+            const extension = photoFile.name.split(".").pop();
+            const fileName =
+                `${user.id}/${crypto.randomUUID()}.${extension}`;
+
+            const { error: uploadError } = await supabaseClient
+                .storage
+                .from("pets")
+                .upload(fileName, photoFile);
+
+            if (uploadError) {
+                throw uploadError;
+            }
+
+            const { data: publicUrlData } = supabaseClient
+                .storage
+                .from("pets")
+                .getPublicUrl(fileName);
+
+            photoUrl = publicUrlData.publicUrl;
+        }
+
+        // Update only the selected pet belonging to this owner.
+        const { error: updateError } = await supabaseClient
+            .from("pets")
+            .update({
+                pet_name: petName,
+                species: species,
+                breed: editBreed.value.trim() || null,
+                gender: editGender.value || null,
+                date_of_birth: editDateOfBirth.value || null,
+                weight: weightValue === "" ? null : Number(weightValue),
+                coat_color: editCoatColor.value.trim() || null,
+                photo_url: photoUrl
+            })
+            .eq("id", selectedPet.id)
+            .eq("owner_id", user.id);
+
+        if (updateError) {
+            throw updateError;
+        }
+
+        alert("Pet information updated successfully!");
+
+        closePetEditor();
+        await loadPets();
+
+    } catch (error) {
+        console.error("Error updating pet:", error);
+        alert("Could not update pet: " + error.message);
+
+    } finally {
+        savePetChanges.disabled = false;
+        savePetChanges.textContent = "Save Changes";
+    }
+});
+
+

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="m-0 min-h-screen w-full overflow-x-hidden bg-white font-sans text-[#171717]">
+
+    <header class="sticky top-0 z-1000 w-full border-pink-100 bg-pink-100 backdrop-blur-md">
+        <nav class="relative mx-auto flex h-20 w-full max-w-310
+                    items-center justify-between px-5 sm:px-6 lg:px-8">
+
+            <!-- LOGO -->
+            <a href="dashboard.html" class="flex items-center gap-2">
+
+                <!-- Logo Icon -->
+                <div class="group relative flex h-11 w-11 items-center justify-center
+                            rounded-full bg-black sm:h-14.5 sm:w-14.5">
+
+                    <img
+                        src="./images/logo-paw.png"
+                        alt="PawCare Logo"
+                        class="h-10 w-10 object-contain"
+                    >
+
+                    <!-- Logo Tooltip -->
+                    <div class="pointer-events-none absolute left-1/2 top-full z-50
+                                mt-2 -translate-x-1/2 whitespace-nowrap
+                                rounded-md bg-[#222] px-3 py-1.5
+                                text-[12px] font-medium text-white
+                                opacity-0 shadow-md
+                                transition-opacity duration-200
+                                group-hover:opacity-100">
+                        PawCare Logo
+                    </div>
+
+                </div>
+
+                    <!-- Brand Name -->
+                <div class="text-[20px] font-extrabold sm:text-[20px]">
+                    <span class="text-[#202020]">Paw</span>
+                    <span class="text-[#f33b8f]">Care</span>
+                </div>
+
+            </a>
+
+            <div class="ml-auto flex items-center gap-2">
+
+               
+                <button class="w-10 h-10 flex items-center justify-center rounded-full transition">
+                    <img src="./images/notification.png" class="w-6 h-6">
+                </button>
+
+                <!-- PROFILE -->
+                <div class="desktop-actions">
+
+                    <div class="relative">
+
+                        <!-- PROFILE BUTTON -->
+                        <button
+                            id="profileButton"
+                            type="button"
+                            class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-pink-100 transition">
+
+                            <!-- Profile Image -->
+                            <img
+                                src="./images/profile.png"
+                                class="w-9 h-9 rounded-full">
+
+                            <!-- Name -->
+                            <div class="text-left">
+
+                                <p
+                                    id="fullName"
+                                    class="text-sm font-semibold text-gray-700">
+                                    User
+                                </p>
+
+                                <p class="text-xs text-gray-400">
+                                    Account
+                                </p>
+
+                            </div>
+
+                            <!-- Arrow -->
+                            <i
+                                id="profileArrow"
+                                class="fa-solid fa-chevron-down text-xs text-gray-500 transition-transform duration-200">
+                            </i>
+
+                        </button>
+
+
+                       <div
+                            id="profileDropdown"
+                            class="hidden absolute right-0 top-14 w-72 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50">
+
+                            <!-- HEADER -->
+                            <div class="bg-gradient-to-r from-pink-500 to-pink-600 px-5 py-5 text-white">
+
+                                <div class="flex items-center gap-3">
+
+                                    <!-- Icon -->
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20">
+                                        <i class="fa-solid fa-user text-lg"></i>
+                                    </div>
+
+                                    <!-- User Information -->
+                                    <div class="min-w-0">
+
+                                        <p
+                                            id="dropdownUsername"
+                                            class="truncate font-semibold">
+                                            User
+                                        </p>
+
+                                        <p
+                                            id="userEmail"
+                                            class="truncate text-xs text-pink-100">
+                                            user@email.com
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="fixed top-[150px] left-[60px] w-56 h-[500px] bg-pink-100 rounded-xl p-5 shadow-md flex flex-col">
+
+            <nav class="space-y-2">
+
+                <a href="dashboard.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/dashboards.png" class="w-7 h-7" >
+                    Dashboard
+                </a>
+
+                <a href="mypets.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/mypets.png" class="w-7 h-7" >
+                    My Pets
+                </a>
+
+                <a href="appointments.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/appointment.png" class="w-7 h-7" >
+                    Appointments
+                </a>
+
+                <a href="medical-records.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
+                    <img src="./images/ehealthcard.png" class="w-7 h-7">
+                    eHealth Card
+                </a>
+
+            </nav>
+            <div class="mt-auto -mx-5" >
+                <a href="logout.html"
+                    class="flex items-center justify-center gap-2 px-5 py-3 text-gray-700 hover:bg-red-600 hover:text-white transition">
+                    <img src="./images/logout.png" class="w-5 h-5">
+                    LogOut
+                 </a>
+            </div>
+        </div>
+
+        
+    </header>
+
+    
+<!-- MEDICAL RECORDS MAIN CONTENT -->
+
+<main class="ml-[300px] px-8 py-8">
+
+    <!-- PAGE HEADER -->
+    <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <p class="mb-2 text-sm font-medium text-pink-500">
+                My Pets / Medical Records
+            </p>
+            <h1 class="text-3xl font-bold text-gray-800">Medical Records</h1>
+            <p class="mt-2 text-gray-500">
+                View your pet's medical history and health information.
+            </p>
+        </div>
+
+        <button type="button" onclick="window.print()"
+            class="rounded-xl bg-pink-500 px-5 py-3 font-semibold text-white transition hover:bg-pink-600">
+            Print Records
+        </button>
+    </div>
+
+
+    <!-- PET PROFILE -->
+    <section class="mb-8 rounded-2xl border border-pink-100 bg-white p-6 shadow-sm">
+        <div class="flex flex-wrap items-center gap-5">
+
+            <div class="flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-pink-100">
+                <img
+                    id="medicalPetPhoto"
+                    src="./images/default-pet.png"
+                    alt="Pet photo"
+                    class="h-full w-full object-cover"
+                    onerror="this.onerror=null; this.src='./images/default-pet.png';">
+            </div>
+
+            <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-3">
+                    <h2 id="medicalPetName" class="text-2xl font-bold text-gray-800">
+                        Loading pet...
+                    </h2>
+
+                    <span id="medicalPetSpecies"
+                        class="rounded-full bg-pink-100 px-3 py-1 text-xs font-semibold text-pink-600">
+                        --
+                    </span>
+                </div>
+
+                <p id="medicalPetBreed" class="mt-1 text-gray-500">
+                    Loading breed...
+                </p>
+
+                <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
+                    <p>Gender: <span id="medicalPetGender" class="font-medium">--</span></p>
+                    <p>Age: <span id="medicalPetAge" class="font-medium">--</span></p>
+                    <p>Owner: <span id="medicalOwnerName" class="font-medium">--</span></p>
+                </div>
+            </div>
+
+            <div class="rounded-xl bg-gray-50 p-4">
+                <p class="text-sm text-gray-500">Medical Record</p>
+                <p class="mt-1 font-semibold text-gray-800">Pet Health Profile</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SUMMARY CARDS -->
+    <section class="mb-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+
+        <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-2xl text-blue-500">
+                    ✚
+                </div>
+                <span class="text-xs font-medium text-gray-400">TOTAL</span>
+            </div>
+            <p class="mt-5 text-sm text-gray-500">Consultations</p>
+            <h3 class="mt-1 text-3xl font-bold text-gray-800">--</h3>
+        </div>
+
+        <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-50 text-2xl text-purple-500">
+                    ♡
+                </div>
+                <span class="text-xs font-medium text-gray-400">TOTAL</span>
+            </div>
+            <p class="mt-5 text-sm text-gray-500">Vaccinations</p>
+            <h3 class="mt-1 text-3xl font-bold text-gray-800">--</h3>
+        </div>
+
+        <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-2xl text-amber-500">
+                    ◷
+                </div>
+                <span class="text-xs font-medium text-gray-400">UPCOMING</span>
+            </div>
+            <p class="mt-5 text-sm text-gray-500">Next Vaccination</p>
+            <h3 class="mt-1 text-xl font-bold text-gray-800">Not scheduled</h3>
+        </div>
+
+    </section>
+
+
+    <!-- MEDICAL RECORD TABS -->
+    <section class="mb-6 rounded-xl border border-gray-100 bg-white p-2 shadow-sm">
+        <div class="flex flex-wrap gap-2">
+
+            <button type="button" data-tab="consultations"
+                class="medical-tab rounded-lg bg-pink-500 px-5 py-3 text-sm font-semibold text-white">
+                Consultations
+            </button>
+
+            <button type="button" data-tab="vaccinations"
+                class="medical-tab rounded-lg px-5 py-3 text-sm font-medium text-gray-600 hover:bg-pink-50">
+                Vaccinations
+            </button>
+
+            <button type="button" data-tab="treatments"
+                class="medical-tab rounded-lg px-5 py-3 text-sm font-medium text-gray-600 hover:bg-pink-50">
+                Treatments
+            </button>
+
+            <button type="button" data-tab="laboratory"
+                class="medical-tab rounded-lg px-5 py-3 text-sm font-medium text-gray-600 hover:bg-pink-50">
+                Laboratory Results
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- CONSULTATION HISTORY -->
+    <section id="consultations" class="medical-content rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+        <div class="mb-6">
+            <h2 class="text-xl font-bold text-gray-800">Consultation History</h2>
+            <p class="mt-1 text-sm text-gray-500">
+                Review your pet's previous veterinary visits.
+            </p>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[650px] text-left text-sm">
+                <thead class="bg-gray-50 text-gray-500">
+                    <tr>
+                        <th class="rounded-l-lg px-4 py-4">Date</th>
+                        <th class="px-4 py-4">Visit Type</th>
+                        <th class="px-4 py-4">Veterinarian</th>
+                        <th class="rounded-r-lg px-4 py-4">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="px-4 py-8 text-center text-gray-400">
+                            No consultation records available.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- VACCINATION HISTORY -->
+    <section id="vaccinations" class="medical-content hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+        <h2 class="text-xl font-bold text-gray-800">Vaccination Records</h2>
+        <p class="mt-1 text-sm text-gray-500">
+            Track administered vaccines and recommended next doses.
+        </p>
+
+        <div class="mt-6 overflow-x-auto">
+            <table class="w-full min-w-[600px] text-left text-sm">
+                <thead class="bg-gray-50 text-gray-500">
+                    <tr>
+                        <th class="rounded-l-lg px-4 py-4">Vaccine Name</th>
+                        <th class="px-4 py-4">Date Administered</th>
+                        <th class="px-4 py-4">Next Due Date</th>
+                        <th class="rounded-r-lg px-4 py-4">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="px-4 py-8 text-center text-gray-400">
+                            No vaccination records available.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- TREATMENT HISTORY -->
+    <section id="treatments" class="medical-content hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+        <h2 class="text-xl font-bold text-gray-800">Treatment History</h2>
+        <p class="mt-1 text-sm text-gray-500">
+            View treatments and medications recorded by the veterinarian.
+        </p>
+
+        <div class="mt-6 rounded-xl border border-dashed border-gray-200 bg-gray-50 p-10 text-center">
+            <p class="text-lg font-semibold text-gray-700">No treatment records yet</p>
+            <p class="mt-2 text-sm text-gray-500">
+                Treatment details will appear here when recorded by an authorized veterinarian.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- LABORATORY RESULTS -->
+    <section id="laboratory" class="medical-content hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+        <h2 class="text-xl font-bold text-gray-800">Laboratory Results</h2>
+        <p class="mt-1 text-sm text-gray-500">
+            Review laboratory tests and diagnostic reports.
+        </p>
+
+        <div class="mt-6 rounded-xl border border-dashed border-gray-200 bg-gray-50 p-10 text-center">
+            <p class="text-lg font-semibold text-gray-700">No laboratory results yet</p>
+            <p class="mt-2 text-sm text-gray-500">
+                Verified results will appear here when available.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- NOTICE -->
+    <p class="mt-6 text-xs leading-5 text-gray-400">
+        Medical information displayed here should be based on verified veterinary records.
+    </p>
+
+</main>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/medical-records.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/pets-utils.js"></script>
+</body>
+</html>
