@@ -1,53 +1,81 @@
-// other species input field toggle when "Other" is selected from the dropdown it becames a text input 
-// field and the dropdown is hidden, and when the user clicks outside of the input field it becomes a 
-// dropdown again if the user didn't type anything in the input field.
+
+// ========================================
+// OTHER SPECIES INPUT TOGGLE
+// ========================================
+
 const species = document.getElementById("species");
 const customSpecies = document.getElementById("customSpecies");
 
 species.addEventListener("change", function () {
-
     if (species.value === "Other") {
-
         species.classList.add("hidden");
         customSpecies.classList.remove("hidden");
-
         customSpecies.focus();
-
     } else {
-
         species.classList.remove("hidden");
         customSpecies.classList.add("hidden");
-
+        customSpecies.value = "";
     }
-
 });
 
 customSpecies.addEventListener("blur", function () {
-
-    // If the user didn't type anything
     if (customSpecies.value.trim() === "") {
-
         customSpecies.value = "";
-
         customSpecies.classList.add("hidden");
         species.classList.remove("hidden");
-
         species.value = "";
-
     }
-
 });
-// this one calculates the date of birth and age of the pet and displays it in
-//  the age input field when the user selects a date from the date picker.
 
+
+// ========================================
+// SAVE PET CONFIRMATION MODAL
+// ========================================
+
+const savePetModal = document.getElementById("savePetModal");
+const savePetName = document.getElementById("savePetName");
+const cancelSavePet = document.getElementById("cancelSavePet");
+const okaySavePet = document.getElementById("okaySavePet");
+const savePetButton = document.getElementById("savePetButton");
+
+function openSavePetModal(petName) {
+    savePetName.textContent = petName || "this pet";
+    savePetModal.classList.remove("hidden");
+    savePetModal.classList.add("flex");
+}
+
+function closeSavePetModal() {
+    savePetModal.classList.add("hidden");
+    savePetModal.classList.remove("flex");
+}
+
+cancelSavePet.addEventListener("click", function () {
+    closeSavePetModal();
+});
+
+
+// ========================================
+// CALCULATE PET AGE
+// ========================================
 
 const dateOfBirth = document.getElementById("dateOfBirth");
 const age = document.getElementById("age");
 
 dateOfBirth.addEventListener("change", function () {
+    if (!dateOfBirth.value) {
+        age.value = "";
+        return;
+    }
 
-    const birthDate = new Date(dateOfBirth.value);
+    const birthDate = new Date(dateOfBirth.value + "T00:00:00");
     const today = new Date();
+
+    if (birthDate > today) {
+        age.value = "";
+        alert("Date of birth cannot be in the future.");
+        dateOfBirth.value = "";
+        return;
+    }
 
     let years = today.getFullYear() - birthDate.getFullYear();
     let months = today.getMonth() - birthDate.getMonth();
@@ -62,200 +90,155 @@ dateOfBirth.addEventListener("change", function () {
     }
 
     age.value = years + " years and " + months + " months";
-
 });
 
-// this one gets the pet photo from the petPhoto input field and saves it to the supabase storage when the user clicks the save button.
-const petPhoto = document.getElementById("petPhoto").files[0];
-const savePetButton = document.getElementById("savePetButton");
 
-savePetButton.addEventListener("click", async function () {
+// ========================================
+// SAVE PET BUTTON
+// Open confirmation modal first
+// ========================================
 
-    // Get logged-in user
-    const {
-        data: { user },
-        error: userError
-    } = await supabaseClient.auth.getUser();
+savePetButton.addEventListener("click", function (event) {
+    event.preventDefault();
 
-    if (userError || !user) {
-
-        alert("You must be logged in to add a pet.");
-        return;
-
-    }
-
-
-    // this one is in the registerPet function and it gets the values from the input fields and saves them to variables.
-
-
-    const petName =
-        document.getElementById("petName").value.trim();
-
-    const breed =
-        document.getElementById("breed").value.trim();
-
-    const gender =
-        document.getElementById("gender").value;
-
-    const dateOfBirth =
-        document.getElementById("dateOfBirth").value;
-
-    const weight =
-        document.getElementById("weight").value;
-
-    const coatColor =
-        document.getElementById("coatColor").value.trim();
-
-
-    // this one gets the species from the species dropdown or the custom species input field 
-    // depending on which one is visible. If the user selects "Other" from the dropdown, the custom 
-    // species input field is shown and the value from that field is used. If the user selects a 
-    // species from the dropdown, that value is used. If neither field has a value, an alert 
-    // is shown and the function returns early.
-
-    const speciesDropdown =
-        document.getElementById("species");
-
-    const customSpecies =
-        document.getElementById("customSpecies");
-
-    let species;
-
-    if (speciesDropdown.value === "Other") {
-
-        species = customSpecies.value.trim();
-
-    } else {
-
-        species = speciesDropdown.value;
-
-    }
-
-
-    // GET PET PHOTO
-
-
-    const petPhoto =
-        document.getElementById("petPhoto").files[0];
-
-
-    // BASIC VALIDATION
+    const petName = document.getElementById("petName").value.trim();
+    const speciesValue = species.value === "Other"
+        ? customSpecies.value.trim()
+        : species.value;
 
     if (!petName) {
-
         alert("Please enter the pet name.");
         return;
-
     }
 
-    if (!species) {
-
+    if (!speciesValue) {
         alert("Please select or enter the species.");
         return;
-
     }
 
+    const weight = document.getElementById("weight").value.trim();
 
-    // this one uploads the pet photo to the supabase storage and gets the public 
-    // URL of the uploaded photo. If the user didn't select a photo, the photoUrl
-    //  variable is set to null. If the user selected a photo, the file extension 
-    // is extracted from the file name and a new file name is generated using the 
-    // user's ID and a random UUID. The photo is then uploaded to the "pets" bucket
-    //  in supabase storage. If there is an error during upload, an alert is shown 
-    // and the function returns early. If the upload is successful, the public URL 
-    // of the uploaded photo is retrieved and saved to the photoUrl variable.
+    if (
+        weight !== "" &&
+        (!Number.isFinite(Number(weight)) || Number(weight) < 0)
+    ) {
+        alert("Please enter a valid weight.");
+        return;
+    }
 
-    let photoUrl = null;
-
-    if (petPhoto) {
-
-        const fileExtension =
-            petPhoto.name.split(".").pop();
-
-        const fileName =
-            `${user.id}/${crypto.randomUUID()}.${fileExtension}`;
+    openSavePetModal(petName);
+});
 
 
+// ========================================
+// CONFIRM AND REGISTER PET
+// ========================================
+
+okaySavePet.addEventListener("click", async function () {
+    okaySavePet.disabled = true;
+    okaySavePet.textContent = "Saving...";
+
+    try {
+        // Get logged-in user
         const {
-            error: uploadError
-        } = await supabaseClient
-            .storage
-            .from("pets")
-            .upload(fileName, petPhoto);
+            data: { user },
+            error: userError
+        } = await supabaseClient.auth.getUser();
 
-
-        if (uploadError) {
-
-            console.log("Photo upload error:", uploadError);
-
-            alert("Failed to upload pet photo.");
-
-            return;
-
+        if (userError || !user) {
+            throw new Error("You must be logged in to add a pet.");
         }
 
+        // Get pet information
+        const petName =
+            document.getElementById("petName").value.trim();
 
-        // this one gets the public URL of the uploaded pet photo from the supabase storage and saves it to the photoUrl variable.
-        const {
-            data: publicUrlData
-        } = supabaseClient
-            .storage
-            .from("pets")
-            .getPublicUrl(fileName);
+        const breed =
+            document.getElementById("breed").value.trim();
 
+        const gender =
+            document.getElementById("gender").value;
 
-        photoUrl =
-            publicUrlData.publicUrl;
+        const birthDate =
+            document.getElementById("dateOfBirth").value;
 
-    }
+        const weight =
+            document.getElementById("weight").value.trim();
 
+        const coatColor =
+            document.getElementById("coatColor").value.trim();
 
-    // ========================================
-    // SAVE PET INFORMATION
-    // ========================================
+        const speciesValue = species.value === "Other"
+            ? customSpecies.value.trim()
+            : species.value;
 
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("pets")
-        .insert([
-            {
-                owner_id: user.id,
-                pet_name: petName,
-                species: species,
-                breed: breed || null,
-                gender: gender || null,
-                date_of_birth: dateOfBirth || null,
-                weight: weight ? Number(weight) : null,
-                coat_color: coatColor || null,
-                photo_url: photoUrl
+        // Get pet photo
+        const petPhoto =
+            document.getElementById("petPhoto").files[0];
+
+        if (!petName || !speciesValue) {
+            throw new Error("Pet name and species are required.");
+        }
+
+        let photoUrl = null;
+
+        // Upload pet photo if selected
+        if (petPhoto) {
+            if (!petPhoto.type.startsWith("image/")) {
+                throw new Error("Please select a valid image file.");
             }
-        ])
-        .select();
 
+            const fileExtension = petPhoto.name.split(".").pop();
 
-    // ========================================
-    // CHECK ERROR
-    // ========================================
+            const fileName =
+                `${user.id}/${crypto.randomUUID()}.${fileExtension}`;
 
-    if (error) {
+            const { error: uploadError } = await supabaseClient
+                .storage
+                .from("pets")
+                .upload(fileName, petPhoto);
 
-        console.log("Error adding pet:", error);
+            if (uploadError) {
+                throw new Error("Failed to upload pet photo: " + uploadError.message);
+            }
 
-        alert("Failed to add pet.");
+            const { data: publicUrlData } = supabaseClient
+                .storage
+                .from("pets")
+                .getPublicUrl(fileName);
 
-        return;
+            photoUrl = publicUrlData.publicUrl;
+        }
+
+        // Save pet information to Supabase
+        const { error } = await supabaseClient
+            .from("pets")
+            .insert([
+                {
+                    owner_id: user.id,
+                    pet_name: petName,
+                    species: speciesValue,
+                    breed: breed || null,
+                    gender: gender || null,
+                    date_of_birth: birthDate || null,
+                    weight: weight ? Number(weight) : null,
+                    coat_color: coatColor || null,
+                    photo_url: photoUrl
+                }
+            ]);
+
+        if (error) {
+            throw new Error("Failed to add pet: " + error.message);
+        }
+
+        // Success
+        closeSavePetModal();
+        
+        window.location.href = "mypets.html";
+
+    } catch (error) {
+        console.error("Error adding pet:", error);
+        alert(error.message || "Failed to add pet.");
 
     }
-
-
-    // ========================================
-    // SUCCESS
-    // ========================================
-
-    alert("Pet added successfully!");
-
-    window.location.href = "pets.html";
-
 });
