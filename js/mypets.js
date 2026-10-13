@@ -134,7 +134,8 @@ function displayPets(pets) {
 
                 <button
                     type="button"
-                    class="w-full mt-5 border border-black bg-white hover:bg-red-700 text-black py-2.5 rounded-lg">
+                    data-delete-pet-id="${pet.id}"
+                    class="delete-pet-button w-full mt-5 border border-black bg-white hover:bg-red-700 hover:text-white text-black py-2.5 rounded-lg">
 
                     Delete Pets
 
@@ -149,6 +150,90 @@ function displayPets(pets) {
     });
 
 }
+
+
+// ========================================
+// DELETE PET MODAL
+// ========================================
+
+const deletePetModal = document.getElementById("deletePetModal");
+const deletePetName = document.getElementById("deletePetName");
+const cancelDeletePet = document.getElementById("cancelDeletePet");
+const confirmDeletePet = document.getElementById("confirmDeletePet");
+
+let petToDelete = null;
+
+// Open confirmation modal
+petsContainer.addEventListener("click", function (event) {
+    const button = event.target.closest(".delete-pet-button");
+
+    if (!button) return;
+
+    const petCard = button.closest(".bg-white");
+    const nameElement = petCard?.querySelector("h2");
+
+    petToDelete = button.dataset.deletePetId;
+    deletePetName.textContent = nameElement?.textContent || "this pet";
+
+    deletePetModal.classList.remove("hidden");
+    deletePetModal.classList.add("flex");
+});
+
+// Close modal
+function closeDeletePetModal() {
+    deletePetModal.classList.add("hidden");
+    deletePetModal.classList.remove("flex");
+    petToDelete = null;
+}
+
+cancelDeletePet.addEventListener("click", closeDeletePetModal);
+
+// Confirm deletion
+confirmDeletePet.addEventListener("click", async function () {
+    if (!petToDelete) return;
+
+    const petId = petToDelete;
+
+    confirmDeletePet.disabled = true;
+    confirmDeletePet.textContent = "Deleting...";
+
+    try {
+        const {
+            data: { user },
+            error: userError
+        } = await supabaseClient.auth.getUser();
+
+        if (userError || !user) {
+            throw new Error("Please log in again.");
+        }
+
+        const { data, error } = await supabaseClient
+            .from("pets")
+            .delete()
+            .eq("id", petId)
+            .eq("owner_id", user.id)
+            .select("id");
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+            throw new Error(
+                "Pet was not deleted. Please check your permissions."
+            );
+        }
+
+        closeDeletePetModal();
+        await loadPets();
+
+    } catch (error) {
+        console.error("Delete pet error:", error);
+        alert("Unable to delete pet. Please try again.");
+
+    } finally {
+        confirmDeletePet.disabled = false;
+        confirmDeletePet.textContent = "Delete Pet";
+    }
+});
 
 
 // ========================================
