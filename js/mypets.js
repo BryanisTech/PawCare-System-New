@@ -152,6 +152,51 @@ function displayPets(pets) {
 }
 
 
+/* ========================================
+   SAVE EDIT PET MODAL
+======================================== */
+
+const saveEditPetModal = document.getElementById("saveEditPetModal");
+const saveEditPetName = document.getElementById("saveEditPetName");
+const okaySaveEditPet = document.getElementById("okaySaveEditPet");
+const cancelSaveEditPet = document.getElementById("cancelSaveEditPet");
+
+let pendingSaveEdit = null;
+
+function openSaveEditPetModal(petName, saveCallback) {
+    saveEditPetName.textContent = petName || "this pet";
+    pendingSaveEdit = saveCallback;
+
+    saveEditPetModal.classList.remove("hidden");
+    saveEditPetModal.classList.add("flex");
+}
+
+function closeSaveEditPetModal() {
+    saveEditPetModal.classList.add("hidden");
+    saveEditPetModal.classList.remove("flex");
+    pendingSaveEdit = null;
+}
+
+cancelSaveEditPet.addEventListener("click", closeSaveEditPetModal);
+
+okaySaveEditPet.addEventListener("click", async function () {
+    if (!pendingSaveEdit) return;
+
+    const saveCallback = pendingSaveEdit;
+
+    okaySaveEditPet.disabled = true;
+    okaySaveEditPet.textContent = "Saving...";
+
+    try {
+        await saveCallback();
+    } finally {
+        okaySaveEditPet.disabled = false;
+        okaySaveEditPet.textContent = "Okay";
+    }
+});
+
+
+
 // ========================================
 // DELETE PET MODAL
 // ========================================
@@ -421,9 +466,8 @@ closeEditModal.addEventListener("click", closePetEditor);
 cancelEditModal.addEventListener("click", closePetEditor);
 
 
-/* Save changes to Supabase */
-editPetForm.addEventListener("submit", async function (event) {
-
+/* Save changes to Supabase after confirmation */
+editPetForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     if (!selectedPet) {
@@ -441,85 +485,93 @@ editPetForm.addEventListener("submit", async function (event) {
 
     const weightValue = editWeight.value.trim();
 
-    if (weightValue !== "" &&
-        (!Number.isFinite(Number(weightValue)) || Number(weightValue) < 0)) {
+    if (
+        weightValue !== "" &&
+        (!Number.isFinite(Number(weightValue)) ||
+            Number(weightValue) < 0)
+    ) {
         alert("Please enter a valid weight.");
         return;
     }
 
-    savePetChanges.disabled = true;
-    savePetChanges.textContent = "Saving...";
+    // Show confirmation before saving.
+    openSaveEditPetModal(petName, async function () {
+        savePetChanges.disabled = true;
+        savePetChanges.textContent = "Saving...";
 
-    try {
-        const {
-            data: { user },
-            error: userError
-        } = await supabaseClient.auth.getUser();
+        try {
+            const {
+                data: { user },
+                error: userError
+            } = await supabaseClient.auth.getUser();
 
-        if (userError || !user) {
-            throw new Error("Please log in again.");
-        }
-
-        // Keep the existing photo unless a new one is selected.
-        let photoUrl = selectedPet.photo_url || null;
-        const photoFile = editPetPhoto.files[0];
-
-        // Upload replacement photo if selected.
-        if (photoFile) {
-            const extension = photoFile.name.split(".").pop();
-            const fileName =
-                `${user.id}/${crypto.randomUUID()}.${extension}`;
-
-            const { error: uploadError } = await supabaseClient
-                .storage
-                .from("pets")
-                .upload(fileName, photoFile);
-
-            if (uploadError) {
-                throw uploadError;
+            if (userError || !user) {
+                throw new Error("Please log in again.");
             }
 
-            const { data: publicUrlData } = supabaseClient
-                .storage
+            // Keep the existing photo unless a new one is selected.
+            let photoUrl = selectedPet.photo_url || null;
+            const photoFile = editPetPhoto.files[0];
+
+            // Upload a replacement photo if selected.
+            if (photoFile) {
+                const extension = photoFile.name.split(".").pop();
+                const fileName =
+                    `${user.id}/${crypto.randomUUID()}.${extension}`;
+
+                const { error: uploadError } = await supabaseClient
+                    .storage
+                    .from("pets")
+                    .upload(fileName, photoFile);
+
+                if (uploadError) {
+                    throw uploadError;
+                }
+
+                const { data: publicUrlData } = supabaseClient
+                    .storage
+                    .from("pets")
+                    .getPublicUrl(fileName);
+
+                photoUrl = publicUrlData.publicUrl;
+            }
+
+            // Update the selected pet belonging to this owner.
+            const { error: updateError } = await supabaseClient
                 .from("pets")
-                .getPublicUrl(fileName);
+                .update({
+                    pet_name: petName,
+                    species: species,
+                    breed: editBreed.value.trim() || null,
+                    gender: editGender.value || null,
+                    date_of_birth: editDateOfBirth.value || null,
+                    weight: weightValue === ""
+                        ? null
+                        : Number(weightValue),
+                    coat_color: editCoatColor.value.trim() || null,
+                    photo_url: photoUrl
+                })
+                .eq("id", selectedPet.id)
+                .eq("owner_id", user.id);
 
-            photoUrl = publicUrlData.publicUrl;
+            if (updateError) {
+                throw updateError;
+            }
+
+            // Close both modals after a successful update.
+            closeSaveEditPetModal();
+            closePetEditor();
+            await loadPets();
+
+        } catch (error) {
+            console.error("Error updating pet:", error);
+            alert("Could not update pet: " + error.message);
+
+        } finally {
+            savePetChanges.disabled = false;
+            savePetChanges.textContent = "Save Changes";
         }
-
-        // Update only the selected pet belonging to this owner.
-        const { error: updateError } = await supabaseClient
-            .from("pets")
-            .update({
-                pet_name: petName,
-                species: species,
-                breed: editBreed.value.trim() || null,
-                gender: editGender.value || null,
-                date_of_birth: editDateOfBirth.value || null,
-                weight: weightValue === "" ? null : Number(weightValue),
-                coat_color: editCoatColor.value.trim() || null,
-                photo_url: photoUrl
-            })
-            .eq("id", selectedPet.id)
-            .eq("owner_id", user.id);
-
-        if (updateError) {
-            throw updateError;
-        }
-
-        alert("Pet information updated successfully!");
-
-        closePetEditor();
-        await loadPets();
-
-    } catch (error) {
-        console.error("Error updating pet:", error);
-        alert("Could not update pet: " + error.message);
-
-    } finally {
-        savePetChanges.disabled = false;
-        savePetChanges.textContent = "Save Changes";
-    }
+    });
 });
 
 
