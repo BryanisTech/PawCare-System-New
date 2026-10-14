@@ -9,11 +9,10 @@
 </head>
 <body class="m-0 min-h-screen w-full overflow-x-hidden bg-white font-sans text-[#171717]">
 
-    <header class="sticky top-0 z-1000 w-full border-pink-100 bg-pink-100 backdrop-blur-md">
+  <header class="fixed top-0 z-1000 w-full border-pink-100 bg-pink-100 backdrop-blur-md">
         <nav class="relative mx-auto flex h-20 w-full max-w-310
                     items-center justify-between px-5 sm:px-6 lg:px-8">
 
-            <!-- LOGO -->
             <a href="dashboard.html" class="flex items-center gap-2">
 
                 <!-- Logo Icon -->
@@ -138,43 +137,74 @@
             </div>
 
         </nav>
+        </header>
+<div class="fixed left-[60px] top-24 z-40 flex h-[calc(100vh-7rem)] w-60
+            flex-col rounded-2xl border border-pink-100 bg-white
+            p-4 shadow-lg">
 
-        <div class="fixed top-[150px] left-[60px] w-56 h-[500px] bg-pink-100 rounded-xl p-5 shadow-md flex flex-col">
+    <div class="mb-5 px-3 pt-2">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">
+            Main Menu
+        </p>
+    </div>
 
-            <nav class="space-y-2">
+    <nav class="flex flex-col gap-2">
 
-                <a href="dashboard.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
-                    <img src="./images/dashboards.png" class="w-7 h-7" >
-                    Dashboard
-                </a>
+        <a href="dashboard.html"
+           class="flex items-center gap-3 rounded-xl bg-pink-100 px-4 py-3
+                  font-semibold text-pink-700 transition duration-200">
+            <img src="./images/dashboards.png"
+                 alt=""
+                 class="h-6 w-6 object-contain">
+            <span>Dashboard</span>
+        </a>
 
-                <a href="mypets.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
-                    <img src="./images/mypets.png" class="w-7 h-7" >
-                    My Pets
-                </a>
+        <a href="mypets.html"
+           class="flex items-center gap-3 rounded-xl px-4 py-3
+                  text-gray-600 transition duration-200
+                  hover:bg-pink-50 hover:text-pink-700">
+            <img src="./images/mypets.png"
+                 alt=""
+                 class="h-6 w-6 object-contain">
+            <span>My Pets</span>
+        </a>
 
-                <a href="appointments.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
-                    <img src="./images/appointment.png" class="w-7 h-7" >
-                    Appointments
-                </a>
+        <a href="appointments.html"
+           class="flex items-center gap-3 rounded-xl px-4 py-3
+                  text-gray-600 transition duration-200
+                  hover:bg-pink-50 hover:text-pink-700">
+            <img src="./images/appointment.png"
+                 alt=""
+                 class="h-6 w-6 object-contain">
+            <span>Appointments</span>
+        </a>
 
-                <a href="medical-records.html" class="flex items-center gap-1 px-4 py-3 text-gray-700 rounded-lg  hover:text-pink-700 transition">
-                    <img src="./images/ehealthcard.png" class="w-7 h-7">
-                    eHealth Card
-                </a>
+        <a href="#"
+           class="flex items-center gap-3 rounded-xl px-4 py-3
+                  text-gray-600 transition duration-200
+                  hover:bg-pink-50 hover:text-pink-700">
+            <img src="./images/ehealthcard.png"
+                 alt=""
+                 class="h-6 w-6 object-contain">
+            <span>eHealth Card</span>
+        </a>
 
-            </nav>
-            <div class="mt-auto -mx-5" >
-                <a href="logout.html"
-                    class="flex items-center justify-center gap-2 px-5 py-3 text-gray-700 hover:bg-red-600 hover:text-white transition">
-                    <img src="./images/logout.png" class="w-5 h-5">
-                    LogOut
-                 </a>
-            </div>
-        </div>
+    </nav>
 
-        
-    </header>
+    <div class="mt-auto border-t border-gray-100 pt-4">
+        <a href="logout.html"
+           class="flex items-center gap-3 rounded-xl px-4 py-3
+                  text-gray-500 transition duration-200
+                  hover:bg-red-50 hover:text-red-600">
+            <img src="./images/logout.png"
+                 alt=""
+                 class="h-5 w-5 object-contain">
+            <span class="font-medium">Log Out</span>
+        </a>
+    </div>
+
+</div>
+
 
     
 <!-- MEDICAL RECORDS MAIN CONTENT -->
@@ -423,5 +453,6 @@
     <script src="js/medical-records.js"></script>
     <script src="js/profile.js"></script>
     <script src="js/pets-utils.js"></script>
+    <script src="js/sidebar.js"></script>
 </body>
 </html>

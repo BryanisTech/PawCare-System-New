@@ -131,4 +131,40 @@ async function loadPetInformation() {
 
 loadPetInformation();
 
+async function loadMedicalOwnerName() {
+    const ownerNameElement = document.getElementById("medicalOwnerName");
+
+    try {
+        // Get the currently logged-in user
+        const {
+            data: { user },
+            error: authError
+        } = await supabaseClient.auth.getUser();
+
+        if (authError || !user) {
+            ownerNameElement.textContent = "Not logged in";
+            return;
+        }
+
+        // Get the user's name from the profiles table
+        const { data: profile, error } = await supabaseClient
+            .from("profiles")
+            .select("full_name")
+            .eq("id", user.id)
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        ownerNameElement.textContent = profile.full_name || "Name unavailable";
+
+    } catch (error) {
+        console.error("Error loading owner name:", error);
+        ownerNameElement.textContent = "Name unavailable";
+    }
+}
+
+loadMedicalOwnerName();
+
 

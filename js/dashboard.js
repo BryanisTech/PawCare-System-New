@@ -1,215 +1,254 @@
+        // ========================================
+        // DATE HELPERS
+        // ========================================
 
-const calendarDays = document.getElementById("calendarDays");
-const currentMonth = document.getElementById("currentMonth");
+        function localDateString(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const day = String(date.getDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        }
 
-const prevMonth = document.getElementById("prevMonth");
-const nextMonth = document.getElementById("nextMonth");
-const todayButton = document.getElementById("todayButton");
+        function addDays(numberOfDays) {
+            const date = new Date();
+            date.setHours(12, 0, 0, 0);
+            date.setDate(date.getDate() + numberOfDays);
+            return date;
+        }
+
+        function formatDate(dateString) {
+            const [year, month, day] = dateString.split("-").map(Number);
+            const date = new Date(year, month - 1, day, 12);
+
+            return date.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            });
+        }
+
+        function formatTime(timeString) {
+            const [hours, minutes] = timeString.split(":").map(Number);
+            const date = new Date();
+            date.setHours(hours, minutes, 0, 0);
+
+            return date.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                minute: "2-digit"
+            });
+        }
+
+        function dateTimeValue(appointment) {
+            return new Date(
+                `${appointment.date}T${appointment.time}:00`
+            ).getTime();
+        }
+
+        function isUpcoming(appointment) {
+            return (
+                ["Pending", "Confirmed"].includes(appointment.status) &&
+                dateTimeValue(appointment) >= Date.now()
+            );
+        }
+
+        // ========================================
+        // SAMPLE APPOINTMENTS
+        // Replace these with Supabase data later.
+        // ========================================
+
+      
+
+        const appointments = [];
+
+        let nextAppointmentId = 1;
 
 
-// Current calendar date
-let calendarDate = new Date();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
+        let displayedMonth = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            1
+        );
 
-// ========================================
-// DISPLAY CALENDAR
-// ========================================
+        let selectedDate = localDateString(today);
+        let currentFilter = "All";
+
+ // ========================================
+ // CALENDAR
+ // ========================================
 
 function renderCalendar() {
+    const year = displayedMonth.getFullYear();
+    const month = displayedMonth.getMonth();
+
+    const currentMonth = document.getElementById("currentMonth");
+    const calendarDays = document.getElementById("calendarDays");
+
+    if (!currentMonth || !calendarDays) {
+        console.error("Calendar HTML elements were not found.");
+        return;
+    }
+
+    currentMonth.textContent = displayedMonth.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric"
+    });
 
     calendarDays.innerHTML = "";
 
-    const year = calendarDate.getFullYear();
-    const month = calendarDate.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-
-    // First day of the month
-    const firstDay =
-        new Date(year, month, 1).getDay();
-
-
-    // Number of days in the month
-    const daysInMonth =
-        new Date(year, month + 1, 0).getDate();
-
-
-    // Display month and year
-    currentMonth.textContent =
-        new Date(year, month).toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                year: "numeric"
-            }
-        );
-
-
-    // ========================================
-    // EMPTY SPACES BEFORE FIRST DAY
-    // ========================================
-
+    // Empty spaces before the first day of the month
     for (let i = 0; i < firstDay; i++) {
-
-        const emptyDay =
-            document.createElement("div");
-
-        emptyDay.className =
-            "min-h-[75px] bg-white";
-
-        calendarDays.appendChild(emptyDay);
-
+        const blank = document.createElement("div");
+        blank.className = "min-h-10";
+        calendarDays.appendChild(blank);
     }
 
-
-    // ========================================
-    // CREATE CALENDAR DATES
-    // ========================================
-
+    // Generate the date numbers
     for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month, day, 12);
+        const dateString = localDateString(date);
 
-        const dayButton =
-            document.createElement("button");
+        const dayAppointments = appointments.filter(appointment =>
+            appointment.date === dateString &&
+            appointment.status !== "Cancelled"
+        );
 
-        dayButton.type = "button";
+        const button = document.createElement("button");
+        button.type = "button";
 
-        dayButton.className =
-            "flex min-h-[75px] w-full items-start " +
-            "justify-center bg-white p-3 " +
-            "text-sm text-gray-700 " +
-            "hover:bg-pink-50 transition";
+        button.className =
+            "flex min-h-10 flex-col items-center justify-center gap-1 rounded-xl text-sm font-medium text-gray-800 hover:bg-pink-100";
 
-
-        // Date number
-        const dateNumber =
-            document.createElement("span");
-
-        dateNumber.textContent = day;
-
-        dateNumber.className =
-            "flex h-8 w-8 items-center justify-center " +
-            "rounded-full font-medium";
-
-
-        // ========================================
-        // CHECK IF TODAY
-        // ========================================
-
-        const today = new Date();
-
-        const isToday =
-            day === today.getDate() &&
-            month === today.getMonth() &&
-            year === today.getFullYear();
-
-
-        if (isToday) {
-
-            dateNumber.classList.add(
-                "border-2",
-                "border-pink-500",
-                "text-pink-600"
-            );
-
+        // Highlight today
+        if (dateString === localDateString(new Date())) {
+            button.classList.add("border", "border-pink-500");
         }
 
+        button.setAttribute("aria-label", formatDate(dateString));
 
-        dayButton.appendChild(dateNumber);
+        // Date number
+        const number = document.createElement("span");
+        number.textContent = String(day);
+        button.appendChild(number);
 
+        // Appointment indicator
+        if (dayAppointments.length > 0) {
+            const dot = document.createElement("span");
 
-        // ========================================
-        // CLICK DATE
-        // ========================================
+            dot.className = "h-1.5 w-1.5 rounded-full";
 
-        dayButton.addEventListener(
-            "click",
-            function () {
+            dot.classList.add(
+                dayAppointments.some(item => item.status === "Confirmed")
+                    ? "bg-green-500"
+                    : "bg-pink-500"
+            );
 
-                // Remove previous selected date
-                document
-                    .querySelectorAll(".calendar-selected")
-                    .forEach(function (button) {
+            button.appendChild(dot);
+        }
 
-                        button.classList.remove(
-                            "calendar-selected",
-                            "bg-pink-100",
-                            "text-black"
-                        );
+        // View information only; no booking action
+        button.addEventListener("click", () => {
+            selectedDate = dateString;
+            renderAppointments();
+        });
 
-                    });
-
-
-                // Add selected style
-                dayButton.classList.add(
-                    "calendar-selected",
-                    "bg-pink-100",
-                    "text-black"
-                );
-
-            }
-        );
-
-
-        calendarDays.appendChild(dayButton);
-
+        calendarDays.appendChild(button);
     }
-
 }
 
+// Previous month
+document.getElementById("prevMonth").addEventListener("click", () => {
+    displayedMonth = new Date(
+        displayedMonth.getFullYear(),
+        displayedMonth.getMonth() - 1,
+        1
+    );
 
-// ========================================
-// PREVIOUS MONTH
-// ========================================
+    renderCalendar();
+});
 
-prevMonth.addEventListener(
-    "click",
-    function () {
+// Next month
+document.getElementById("nextMonth").addEventListener("click", () => {
+    displayedMonth = new Date(
+        displayedMonth.getFullYear(),
+        displayedMonth.getMonth() + 1,
+        1
+    );
 
-        calendarDate.setMonth(
-            calendarDate.getMonth() - 1
-        );
+    renderCalendar();
+});
 
-        renderCalendar();
-
-    }
-);
-
-
-// ========================================
-// NEXT MONTH
-// ========================================
-
-nextMonth.addEventListener(
-    "click",
-    function () {
-
-        calendarDate.setMonth(
-            calendarDate.getMonth() + 1
-        );
-
-        renderCalendar();
-
-    }
-);
-
-
-// ========================================
-// TODAY BUTTON
-// ========================================
-
-todayButton.addEventListener(
-    "click",
-    function () {
-
-        calendarDate = new Date();
-
-        renderCalendar();
-
-    }
-);
-
-
-// ========================================
-// INITIALIZE CALENDAR
-// ========================================
-
+// Initial calendar display
 renderCalendar();
+
+
+function renderAppointments() {
+    const appointmentResult =
+        document.getElementById("appointmentResult");
+
+    const vaccinationResult =
+        document.getElementById("vaccinationResult");
+
+    if (!appointmentResult || !vaccinationResult) return;
+
+    const dayAppointments = appointments.filter(appointment =>
+        appointment.date === selectedDate &&
+        appointment.status !== "Cancelled"
+    );
+
+    if (dayAppointments.length === 0) {
+        appointmentResult.textContent =
+            "No appointments on " + formatDate(selectedDate);
+    } else {
+        appointmentResult.textContent = dayAppointments
+            .map(appointment =>
+                `${appointment.petName || "Pet"} · ` +
+                `${appointment.service || "Appointment"} · ` +
+                `${formatTime(appointment.time)} · ` +
+                `${appointment.status}`
+            )
+            .join(" | ");
+    }
+
+    // Vaccination reminders will be connected to your
+    // vaccination records in Supabase later.
+    vaccinationResult.textContent =
+        "No vaccination reminders for this date.";
+}
+
+async function loadTotalPets() {
+    const totalPetsElement = document.getElementById("totalPets");
+
+    if (!totalPetsElement) return;
+
+    // Get the currently logged-in user
+    const { data: { user }, error: userError } =
+        await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+        totalPetsElement.textContent = "0";
+        return;
+    }
+
+    // Count only pets belonging to this user
+    const { count, error } = await supabaseClient
+        .from("pets")
+        .select("id", { count: "exact", head: true })
+        .eq("owner_id", user.id);
+
+    if (error) {
+        console.error("Error counting pets:", error);
+        totalPetsElement.textContent = "—";
+        return;
+    }
+
+    // Display the total
+    totalPetsElement.textContent = count;
+}
+
+loadTotalPets();
