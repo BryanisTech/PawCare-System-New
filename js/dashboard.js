@@ -1,6 +1,5 @@
-        // ========================================
+
         // DATE HELPERS
-        // ========================================
 
         function localDateString(date) {
             const year = date.getFullYear();
@@ -51,68 +50,55 @@
             );
         }
 
-        // ========================================
-        // SAMPLE APPOINTMENTS
-        // Replace these with Supabase data later.
-        // ========================================
-
-      
-
         const appointments = [];
 
         let nextAppointmentId = 1;
+        async function loadDashboardAppointments() {
+            const { data: { user }, error: userError } =
+                await supabaseClient.auth.getUser();
 
+            if (userError || !user) {
+                console.error("Unable to get logged-in user:", userError);
+                return;
+            }
 
-async function loadDashboardAppointments() {
-    const { data: { user }, error: userError } =
-        await supabaseClient.auth.getUser();
+            const { data, error } = await supabaseClient
+                .from("appointments")
+                .select(`
+                    id,
+                    service,
+                    appointment_date,
+                    appointment_time,
+                    status,
+                    pets (
+                        pet_name
+                    )
+                `)
+                .eq("owner_id", user.id)
+                .order("appointment_date", { ascending: true });
 
-    if (userError || !user) {
-        console.error("Unable to get logged-in user:", userError);
-        return;
-    }
+            if (error) {
+                console.error("Error loading dashboard appointments:", error);
+                return;
+            }
 
-    const { data, error } = await supabaseClient
-        .from("appointments")
-        .select(`
-            id,
-            service,
-            appointment_date,
-            appointment_time,
-            status,
-            pets (
-                pet_name
-            )
-        `)
-        .eq("owner_id", user.id)
-        .order("appointment_date", { ascending: true });
+            appointments.length = 0;
 
-    if (error) {
-        console.error("Error loading dashboard appointments:", error);
-        return;
-    }
+            data.forEach(item => {
+                appointments.push({
+                    id: item.id,
+                    petName: item.pets?.pet_name || "Pet",
+                    service: item.service,
+                    date: item.appointment_date,
+                    time: item.appointment_time.slice(0, 5),
+                    status: item.status.charAt(0).toUpperCase()
+                        + item.status.slice(1)
+                });
+            });
 
-    appointments.length = 0;
-
-    data.forEach(item => {
-        appointments.push({
-            id: item.id,
-            petName: item.pets?.pet_name || "Pet",
-            service: item.service,
-            date: item.appointment_date,
-            time: item.appointment_time.slice(0, 5),
-            status: item.status.charAt(0).toUpperCase()
-                + item.status.slice(1)
-        });
-    });
-
-    renderCalendar();
-    renderAppointments();
-}
-
-
-
-
+            renderCalendar();
+            renderAppointments();
+        }
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -126,217 +112,214 @@ async function loadDashboardAppointments() {
         let selectedDate = localDateString(today);
         let currentFilter = "All";
 
- // ========================================
- // CALENDAR
- // ========================================
 
-function renderCalendar() {
-    const year = displayedMonth.getFullYear();
-    const month = displayedMonth.getMonth();
+        function renderCalendar() {
+            const year = displayedMonth.getFullYear();
+            const month = displayedMonth.getMonth();
 
-    const currentMonth = document.getElementById("currentMonth");
-    const calendarDays = document.getElementById("calendarDays");
+            const currentMonth = document.getElementById("currentMonth");
+            const calendarDays = document.getElementById("calendarDays");
 
-    if (!currentMonth || !calendarDays) {
-        console.error("Calendar HTML elements were not found.");
-        return;
-    }
+            if (!currentMonth || !calendarDays) {
+                console.error("Calendar HTML elements were not found.");
+                return;
+            }
 
-    currentMonth.textContent = displayedMonth.toLocaleDateString("en-US", {
-        month: "long",
-        year: "numeric"
-    });
+            currentMonth.textContent = displayedMonth.toLocaleDateString("en-US", {
+                month: "long",
+                year: "numeric"
+            });
 
-    calendarDays.innerHTML = "";
+            calendarDays.innerHTML = "";
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Empty spaces before the first day of the month
-    for (let i = 0; i < firstDay; i++) {
-        const blank = document.createElement("div");
-        blank.className = "min-h-10";
-        calendarDays.appendChild(blank);
-    }
+            // Empty spaces before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                const blank = document.createElement("div");
+                blank.className = "min-h-10";
+                calendarDays.appendChild(blank);
+            }
 
-    // Generate the date numbers
-    for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day, 12);
-        const dateString = localDateString(date);
+            // Generate the date numbers
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day, 12);
+                const dateString = localDateString(date);
 
-        const dayAppointments = appointments.filter(appointment =>
-            appointment.date === dateString &&
-            appointment.status !== "Cancelled"
-        );
+                const dayAppointments = appointments.filter(appointment =>
+                    appointment.date === dateString &&
+                    appointment.status !== "Cancelled"
+                );
 
-        const button = document.createElement("button");
-        button.type = "button";
+                const button = document.createElement("button");
+                button.type = "button";
 
-        button.className =
-            "flex min-h-10 flex-col items-center justify-center gap-1 rounded-xl text-sm font-medium text-gray-800 hover:bg-pink-100";
+                button.className =
+                    "flex min-h-10 flex-col items-center justify-center gap-1 rounded-xl text-sm font-medium text-gray-800 hover:bg-pink-100";
 
-        // Highlight today
-        if (dateString === localDateString(new Date())) {
-            button.classList.add("border", "border-pink-500");
+                // Highlight today
+                if (dateString === localDateString(new Date())) {
+                    button.classList.add("border", "border-pink-500");
+                }
+
+                button.setAttribute("aria-label", formatDate(dateString));
+
+                // Date number
+                const number = document.createElement("span");
+                number.textContent = String(day);
+                button.appendChild(number);
+
+                // Appointment indicator
+                if (dayAppointments.length > 0) {
+                    const dot = document.createElement("span");
+
+                    dot.className = "h-1.5 w-1.5 rounded-full";
+
+                    dot.classList.add(
+                        dayAppointments.some(item => item.status === "Confirmed")
+                            ? "bg-green-500"
+                            : "bg-pink-500"
+                    );
+
+                    button.appendChild(dot);
+                }
+
+                // View information only; no booking action
+                button.addEventListener("click", () => {
+                    selectedDate = dateString;
+                    renderAppointments();
+                });
+
+                calendarDays.appendChild(button);
+            }
         }
 
-        button.setAttribute("aria-label", formatDate(dateString));
-
-        // Date number
-        const number = document.createElement("span");
-        number.textContent = String(day);
-        button.appendChild(number);
-
-        // Appointment indicator
-        if (dayAppointments.length > 0) {
-            const dot = document.createElement("span");
-
-            dot.className = "h-1.5 w-1.5 rounded-full";
-
-            dot.classList.add(
-                dayAppointments.some(item => item.status === "Confirmed")
-                    ? "bg-green-500"
-                    : "bg-pink-500"
+        // Previous month
+        document.getElementById("prevMonth").addEventListener("click", () => {
+            displayedMonth = new Date(
+                displayedMonth.getFullYear(),
+                displayedMonth.getMonth() - 1,
+                1
             );
 
-            button.appendChild(dot);
-        }
-
-        // View information only; no booking action
-        button.addEventListener("click", () => {
-            selectedDate = dateString;
-            renderAppointments();
+            renderCalendar();
         });
 
-        calendarDays.appendChild(button);
-    }
-}
+        // Next month
+        document.getElementById("nextMonth").addEventListener("click", () => {
+            displayedMonth = new Date(
+                displayedMonth.getFullYear(),
+                displayedMonth.getMonth() + 1,
+                1
+            );
 
-// Previous month
-document.getElementById("prevMonth").addEventListener("click", () => {
-    displayedMonth = new Date(
-        displayedMonth.getFullYear(),
-        displayedMonth.getMonth() - 1,
-        1
-    );
+            renderCalendar();
+        });
 
-    renderCalendar();
-});
-
-// Next month
-document.getElementById("nextMonth").addEventListener("click", () => {
-    displayedMonth = new Date(
-        displayedMonth.getFullYear(),
-        displayedMonth.getMonth() + 1,
-        1
-    );
-
-    renderCalendar();
-});
-
-// Initial calendar display
-renderCalendar();
+        // Initial calendar display
+        renderCalendar();
 
 
-function renderAppointments() {
-    const appointmentResult =
-        document.getElementById("appointmentResult");
+        function renderAppointments() {
+            const appointmentResult =
+                document.getElementById("appointmentResult");
 
-    const vaccinationResult =
-        document.getElementById("vaccinationResult");
+            const vaccinationResult =
+                document.getElementById("vaccinationResult");
 
-    if (!appointmentResult || !vaccinationResult) return;
+            if (!appointmentResult || !vaccinationResult) return;
 
-    const dayAppointments = appointments.filter(appointment =>
-        appointment.date === selectedDate &&
-        appointment.status !== "Cancelled"
-    );
+            const dayAppointments = appointments.filter(appointment =>
+                appointment.date === selectedDate &&
+                appointment.status !== "Cancelled"
+            );
 
-    if (dayAppointments.length === 0) {
-        appointmentResult.textContent =
-            "No appointments on " + formatDate(selectedDate);
-    } else {
-        appointmentResult.textContent = dayAppointments
-            .map(appointment =>
-                `${appointment.petName || "Pet"} · ` +
-                `${appointment.service || "Appointment"} · ` +
-                `${formatTime(appointment.time)} · ` +
-                `${appointment.status}`
-            )
-            .join(" | ");
-    }
+            if (dayAppointments.length === 0) {
+                appointmentResult.textContent =
+                    "No appointments on " + formatDate(selectedDate);
+            } else {
+                appointmentResult.textContent = dayAppointments
+                    .map(appointment =>
+                        `${appointment.petName || "Pet"} · ` +
+                        `${appointment.service || "Appointment"} · ` +
+                        `${formatTime(appointment.time)} · ` +
+                        `${appointment.status}`
+                    )
+                    .join(" | ");
+            }
 
-    // Vaccination reminders will be connected to your
-    // vaccination records in Supabase later.
-    vaccinationResult.textContent =
-        "No vaccination reminders for this date.";
-}
+            // Vaccination reminders will be connected to your
+            // vaccination records in Supabase later.
+            vaccinationResult.textContent =
+                "No vaccination reminders for this date.";
+        }
 
-async function loadTotalPets() {
-    const totalPetsElement = document.getElementById("totalPets");
+        async function loadTotalPets() {
+            const totalPetsElement = document.getElementById("totalPets");
 
-    if (!totalPetsElement) return;
+            if (!totalPetsElement) return;
 
-    // Get the currently logged-in user
-    const { data: { user }, error: userError } =
-        await supabaseClient.auth.getUser();
+            // Get the currently logged-in user
+            const { data: { user }, error: userError } =
+                await supabaseClient.auth.getUser();
 
-    if (userError || !user) {
-        totalPetsElement.textContent = "0";
-        return;
-    }
+            if (userError || !user) {
+                totalPetsElement.textContent = "0";
+                return;
+            }
 
-    // Count only pets belonging to this user
-    const { count, error } = await supabaseClient
-        .from("pets")
-        .select("id", { count: "exact", head: true })
-        .eq("owner_id", user.id);
+            // Count only pets belonging to this user
+            const { count, error } = await supabaseClient
+                .from("pets")
+                .select("id", { count: "exact", head: true })
+                .eq("owner_id", user.id);
 
-    if (error) {
-        console.error("Error counting pets:", error);
-        totalPetsElement.textContent = "—";
-        return;
-    }
+            if (error) {
+                console.error("Error counting pets:", error);
+                totalPetsElement.textContent = "—";
+                return;
+            }
 
-    // Display the total
-    totalPetsElement.textContent = count;
-}
+            // Display the total
+            totalPetsElement.textContent = count;
+        }
 
-loadTotalPets();
+        loadTotalPets();
 
 
-async function loadUpcomingCount() {
-    const upcomingCountElement =
-        document.getElementById("upcomingCount");
+        async function loadUpcomingCount() {
+            const upcomingCountElement =
+                document.getElementById("upcomingCount");
 
-    if (!upcomingCountElement) return;
+            if (!upcomingCountElement) return;
 
-    const { data: { user }, error: userError } =
-        await supabaseClient.auth.getUser();
+            const { data: { user }, error: userError } =
+                await supabaseClient.auth.getUser();
 
-    if (userError || !user) {
-        upcomingCountElement.textContent = "0";
-        return;
-    }
+            if (userError || !user) {
+                upcomingCountElement.textContent = "0";
+                return;
+            }
 
-    const todayString = localDateString(new Date());
+            const todayString = localDateString(new Date());
 
-    const { count, error } = await supabaseClient
-        .from("appointments")
-        .select("*", { count: "exact", head: true })
-        .eq("owner_id", user.id)
-        .gte("appointment_date", todayString)
-        .in("status", ["pending", "confirmed"]);
+            const { count, error } = await supabaseClient
+                .from("appointments")
+                .select("*", { count: "exact", head: true })
+                .eq("owner_id", user.id)
+                .gte("appointment_date", todayString)
+                .in("status", ["pending", "confirmed"]);
 
-    if (error) {
-        console.error("Error counting upcoming appointments:", error);
-        upcomingCountElement.textContent = "—";
-        return;
-    }
+            if (error) {
+                console.error("Error counting upcoming appointments:", error);
+                upcomingCountElement.textContent = "—";
+                return;
+            }
 
-    upcomingCountElement.textContent = count ?? 0;
-}
+            upcomingCountElement.textContent = count ?? 0;
+        }
 
-loadUpcomingCount();
-loadDashboardAppointments();
+        loadUpcomingCount();
+        loadDashboardAppointments();
 

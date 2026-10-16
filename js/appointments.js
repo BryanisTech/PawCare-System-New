@@ -549,10 +549,12 @@
             nextContent.appendChild(card);
         }
 
-        // ========================================
-        // APPOINTMENT LIST
-        // ========================================
 
+        // This part of code create the appointment card for eacg appointment in the bottom of the page.
+        // It craates the card with the name of pets, services that user wanrs, date and time of the appointment,
+        // status like pendind,confirmed, complete and cancelled, and a notes where user can write there pets problems
+        // or other information that they want to share with the veterinary. We also add a reschedule button and a
+        // cancel button if the appointment is pending or confirmed and the date and time of the appointment is in the future.
         function createAppointmentCard(appointment) {
             const card = document.createElement("article");
             card.className =
@@ -630,9 +632,160 @@
                 actions.appendChild(cancelButton);
             }
 
+            const rescheduleButton = document.createElement("button");
+            rescheduleButton.type = "button";
+            rescheduleButton.className =
+                "rounded-lg border border-pink-200 px-3 py-2 text-xs font-semibold text-pink-600 transition hover:bg-pink-50";
+            rescheduleButton.textContent = "Reschedule Appointment";
+
+            rescheduleButton.addEventListener("click", () => {
+                openRescheduleModal(appointment);
+            });
+
+            actions.appendChild(rescheduleButton);
+
+
             card.appendChild(actions);
             return card;
+
+            
         }
+
+        // this one open the button Reschedule Appointment and show the modal where user can change the date and time of the appointment. 
+        // It also check if the new date and time is in the future and if the user already have an appointment at that time.
+        const rescheduleModal = document.getElementById("rescheduleModal");
+        const rescheduleForm = document.getElementById("rescheduleForm");
+        const rescheduleDate = document.getElementById("rescheduleDate");
+        const rescheduleTime = document.getElementById("rescheduleTime");
+        const rescheduleError = document.getElementById("rescheduleError");
+        const saveReschedule = document.getElementById("saveReschedule");
+
+        let appointmentToReschedule = null;
+
+        function openRescheduleModal(appointment) {
+            appointmentToReschedule = appointment;
+
+            rescheduleForm.reset();
+
+            rescheduleDate.min = localDateString(new Date());
+            rescheduleDate.value = appointment.date;
+            rescheduleTime.value = appointment.time;
+
+            rescheduleError.textContent = "";
+            rescheduleError.classList.add("hidden");
+
+            rescheduleModal.classList.remove("hidden");
+            rescheduleModal.classList.add("flex");
+        }
+
+        function closeRescheduleModal() {
+            rescheduleModal.classList.add("hidden");
+            rescheduleModal.classList.remove("flex");
+            appointmentToReschedule = null;
+        }
+
+        document.getElementById("closeReschedule")
+            .addEventListener("click", closeRescheduleModal);
+
+        rescheduleModal.addEventListener("click", event => {
+            if (event.target === rescheduleModal) {
+                closeRescheduleModal();
+            }
+        });
+
+        rescheduleForm.addEventListener("submit", async event => {
+            event.preventDefault();
+
+            if (!appointmentToReschedule) return;
+
+            const appointment = appointmentToReschedule;
+            const newDate = rescheduleDate.value;
+            const newTime = rescheduleTime.value;
+
+            const selectedDateTime = new Date(`${newDate}T${newTime}:00`);
+
+            if (!newDate || !newTime || selectedDateTime <= new Date()) {
+                rescheduleError.textContent =
+                    "Please choose a future date and time.";
+                rescheduleError.classList.remove("hidden");
+                return;
+            }
+
+            saveReschedule.disabled = true;
+            saveReschedule.textContent = "Saving...";
+
+            try {
+                const { data: { user }, error: userError } =
+                    await supabaseClient.auth.getUser();
+
+                if (userError || !user) {
+                    throw new Error("Please log in again before rescheduling.");
+                }
+
+                // Prevent overlapping appointments for this owner
+                const { data: conflicts, error: conflictError } =
+                    await supabaseClient
+                        .from("appointments")
+                        .select("id")
+                        .eq("owner_id", user.id)
+                        .eq("appointment_date", newDate)
+                        .eq("appointment_time", newTime)
+                        .in("status", ["pending", "confirmed"])
+                        .neq("id", appointment.id);
+
+                if (conflictError) throw conflictError;
+
+                if (conflicts.length > 0) {
+                    throw new Error(
+                        "You already have an appointment at that time. Choose another time."
+                    );
+                }
+
+                const { data: updatedRows, error: updateError } =
+                    await supabaseClient
+                        .from("appointments")
+                        .update({
+                            appointment_date: newDate,
+                            appointment_time: newTime,
+                            status: "pending"
+                        })
+                        .eq("id", appointment.id)
+                        .eq("owner_id", user.id)
+                        .in("status", ["pending", "confirmed"])
+                        .select("id");
+
+                if (updateError) throw updateError;
+
+                if (!updatedRows || updatedRows.length === 0) {
+                    throw new Error(
+                        "The appointment could not be updated. Check its status and database permissions."
+                    );
+                }
+
+                closeRescheduleModal();
+
+                await loadOwnerAppointments();
+
+                showMessage(
+                    "Appointment Rescheduled",
+                    "Your new schedule has been saved and is pending clinic confirmation.",
+                    "success"
+                );
+
+            } catch (error) {
+                console.error("Reschedule error:", error);
+
+                rescheduleError.textContent =
+                    error.message || "Unable to reschedule. Please try again.";
+
+                rescheduleError.classList.remove("hidden");
+
+            } finally {
+                saveReschedule.disabled = false;
+                saveReschedule.textContent = "Save New Schedule";
+            }
+        });
+
 
         function renderAppointments() {
             const list = document.getElementById("appointmentList");
@@ -682,9 +835,7 @@
             });
         });
 
-        // ========================================
         // CANCEL APPOINTMENT CONFIRMATION
-        // ========================================
 
         function showCancelConfirmation(appointmentId) {
             const appointment = appointments.find(item => item.id === appointmentId);

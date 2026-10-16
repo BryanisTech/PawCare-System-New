@@ -528,6 +528,74 @@
         </div>
     </div>
 
+
+    <!-- RESCHEDULE APPOINTMENT -->
+    <div id="rescheduleModal"
+        class="fixed inset-0 z-[9999] hidden items-center justify-center bg-gray-900/40 p-4">
+
+        <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+
+            <h2 class="text-xl font-bold text-gray-900">
+                Reschedule Appointment
+            </h2>
+
+            <p class="mt-2 text-sm text-gray-500">
+                Choose a new date and time for your appointment.
+            </p>
+
+            <form id="rescheduleForm" class="mt-5 space-y-4">
+
+                <div>
+                    <label for="rescheduleDate"
+                        class="mb-1 block text-sm font-semibold text-gray-700">
+                        New Date
+                    </label>
+
+                    <input
+                        id="rescheduleDate"
+                        type="date"
+                        required
+                        class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                </div>
+
+                <div>
+                    <label for="rescheduleTime"
+                        class="mb-1 block text-sm font-semibold text-gray-700">
+                        New Time
+                    </label>
+
+                    <input
+                        id="rescheduleTime"
+                        type="time"
+                        required
+                        class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100">
+                </div>
+
+                <p id="rescheduleError"
+                class="hidden text-sm text-red-600"></p>
+
+                <div class="flex gap-3 pt-2">
+
+                    <button
+                        id="closeReschedule"
+                        type="button"
+                        class="flex-1 rounded-xl border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-600 hover:bg-gray-50">
+                        Keep Current
+                    </button>
+
+                    <button
+                        id="saveReschedule"
+                        type="submit"
+                        class="flex-1 rounded-xl bg-pink-500 px-4 py-3 text-sm font-semibold text-white hover:bg-pink-600">
+                        Save New Schedule
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
       <!-- MESSAGE MODAL -->
     <div id="messageModal"
         class="modal-backdrop fixed inset-0 z-[9999] hidden items-center justify-center bg-gray-900/40 p-4">
