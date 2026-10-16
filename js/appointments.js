@@ -51,16 +51,126 @@
             );
         }
 
-        // ========================================
-        // SAMPLE APPOINTMENTS
-        // Replace these with Supabase data later.
-        // ========================================
 
-      
+        const bookingPetSelect = document.getElementById("bookingPet");
+
+        async function loadOwnerPets() {
+            bookingPetSelect.innerHTML =
+                '<option value="">Loading your pets...</option>';
+
+            const { data: { user }, error: userError } =
+                await supabaseClient.auth.getUser();
+
+            if (userError || !user) {
+                bookingPetSelect.innerHTML =
+                    '<option value="">Please log in first</option>';
+                return;
+            }
+
+            const { data: pets, error } = await supabaseClient
+                .from("pets")
+                .select("id, pet_name")
+                .eq("owner_id", user.id)
+                .order("pet_name");
+
+            if (error) {
+                console.error("Error loading pets:", error);
+                bookingPetSelect.innerHTML =
+                    '<option value="">Unable to load pets</option>';
+                return;
+            }
+
+            bookingPetSelect.innerHTML =
+                '<option value="">Select your pet</option>';
+
+            if (!pets || pets.length === 0) {
+                bookingPetSelect.innerHTML =
+                    '<option value="">No registered pets found</option>';
+                return;
+            }
+
+            pets.forEach(pet => {
+                const option = document.createElement("option");
+                option.value = pet.id;
+                option.textContent = pet.pet_name;
+                bookingPetSelect.appendChild(option);
+            });
+        }
+
+        loadOwnerPets();
+
 
         const appointments = [];
 
         let nextAppointmentId = 1;
+        
+
+        // ========================================
+        // LOAD APPOINTMENTS FROM SUPABASE
+        // ========================================
+
+        async function loadOwnerAppointments() {
+            const { data: { user }, error: userError } =
+                await supabaseClient.auth.getUser();
+
+            if (userError || !user) {
+                showMessage(
+                    "Login Required",
+                    "Please log in to view your appointments.",
+                    "error"
+                );
+                return;
+            }
+
+            const { data, error } = await supabaseClient
+                .from("appointments")
+                .select(`
+                    id,
+                    pet_id,
+                    service,
+                    appointment_date,
+                    appointment_time,
+                    notes,
+                    status,
+                    pets (
+                        pet_name
+                    )
+                `)
+                .eq("owner_id", user.id)
+                .order("appointment_date", { ascending: true })
+                .order("appointment_time", { ascending: true });
+
+            if (error) {
+                console.error("Error loading appointments:", error);
+
+                showMessage(
+                    "Loading Failed",
+                    "Unable to load your appointments. Please try again.",
+                    "error"
+                );
+                return;
+            }
+
+            // Convert database records into the format
+            // your existing calendar and cards already use.
+            appointments.length = 0;
+
+            data.forEach(item => {
+                appointments.push({
+                    id: item.id,
+                    petId: item.pet_id,
+                    pet: item.pets?.pet_name || "Unknown Pet",
+                    service: item.service,
+                    date: item.appointment_date,
+                    time: item.appointment_time.slice(0, 5),
+                    status: item.status.charAt(0).toUpperCase()
+                        + item.status.slice(1),
+                    notes: item.notes || ""
+                });
+            });
+
+            renderEverything();
+        }
 
 
         const today = new Date();
@@ -166,20 +276,17 @@
             }
         });
 
-        // ========================================
-        // CREATE APPOINTMENT (FRONT-END DEMO)
-        // ========================================
-
-        bookingForm.addEventListener("submit", event => {
+        
+        bookingForm.addEventListener("submit", async event => {
             event.preventDefault();
 
-            const pet = document.getElementById("bookingPet").value.trim();
+            const petId = bookingPetSelect.value;
             const service = document.getElementById("bookingService").value;
             const date = bookingDate.value;
             const time = document.getElementById("bookingTime").value;
             const notes = document.getElementById("bookingNotes").value.trim();
 
-            if (!pet || !service || !date || !time) {
+            if (!petId || !service || !date || !time) {
                 showMessage(
                     "Missing Information",
                     "Please complete all required fields.",
@@ -188,7 +295,9 @@
                 return;
             }
 
-            if (date < localDateString(today)) {
+            const todayString = localDateString(new Date());
+
+            if (date < todayString) {
                 showMessage(
                     "Invalid Date",
                     "Please choose today or a future date.",
@@ -208,6 +317,21 @@
                 return;
             }
 
+            // Get the currently logged-in owner.
+            const { data: { user }, error: userError } =
+                await supabaseClient.auth.getUser();
+
+            if (userError || !user) {
+                showMessage(
+                    "Login Required",
+                    "Please log in before booking an appointment.",
+                    "error"
+                );
+                return;
+            }
+
+            // Prevent a duplicate time for an active appointment
+            // already loaded for this owner.
             const timeIsTaken = appointments.some(appointment =>
                 appointment.date === date &&
                 appointment.time === time &&
@@ -217,23 +341,37 @@
             if (timeIsTaken) {
                 showMessage(
                     "Time Slot Unavailable",
-                    "There is already an active appointment at this time in this demo. Please choose another time.",
+                    "You already have an active appointment at this time. Please choose another time.",
                     "error"
                 );
                 return;
             }
 
-            appointments.push({
-                id: nextAppointmentId++,
-                pet,
-                service,
-                date,
-                time,
-                status: "Pending",
-                notes
-            });
+            // Save the appointment in Supabase.
+            const { error } = await supabaseClient
+                .from("appointments")
+                .insert({
+                    owner_id: user.id,
+                    pet_id: petId,
+                    service: service,
+                    appointment_date: date,
+                    appointment_time: time,
+                    notes: notes || null
+                });
+
+            if (error) {
+                console.error("Booking error:", error);
+
+                showMessage(
+                    "Booking Failed",
+                    "Your appointment could not be saved. Please try again.",
+                    "error"
+                );
+                return;
+            }
 
             selectedDate = date;
+
             displayedMonth = new Date(
                 Number(date.slice(0, 4)),
                 Number(date.slice(5, 7)) - 1,
@@ -244,11 +382,12 @@
             document.getElementById("statusFilter").value = "All";
 
             closeBookingModal();
-            renderEverything();
+
+            await loadOwnerAppointments();
 
             showMessage(
-                "Request Added!",
-                "Your demo appointment request has been added to this page as Pending. This does not send a request to the clinic.",
+                "Appointment Submitted!",
+                "Your appointment request has been saved successfully with Pending status.",
                 "success"
             );
         });
@@ -554,7 +693,7 @@
 
             const overlay = document.createElement("div");
             overlay.className =
-                "modal-backdrop fixed inset-0 z-[55] flex items-center justify-center bg-gray-900/40 p-4";
+                "modal-backdrop fixed inset-0 z-[9999] flex items-center justify-center bg-gray-900/40 p-4";
 
             const panel = document.createElement("div");
             panel.className =
@@ -595,17 +734,41 @@
 
             keepButton.addEventListener("click", close);
 
-            confirmButton.addEventListener("click", () => {
-                appointment.status = "Cancelled";
+            confirmButton.addEventListener("click", async () => {
+                confirmButton.disabled = true;
+                confirmButton.textContent = "Cancelling...";
+
+                const { error } = await supabaseClient
+                    .from("appointments")
+                    .update({ status: "cancelled" })
+                    .eq("id", appointment.id);
+
+                if (error) {
+                    console.error("Cancellation error:", error);
+
+                    close();
+
+                    showMessage(
+                        "Cancellation Failed",
+                        "Unable to cancel your appointment. Please try again.",
+                        "error"
+                    );
+
+                    return;
+                }
+
                 close();
-                renderEverything();
+
+                // Reload the latest appointment data from Supabase
+                await loadOwnerAppointments();
 
                 showMessage(
                     "Appointment Cancelled",
-                    "The appointment was marked as cancelled in this demo page.",
+                    "Your appointment has been cancelled successfully.",
                     "success"
                 );
             });
+
 
             overlay.addEventListener("click", event => {
                 if (event.target === overlay) close();
@@ -627,4 +790,4 @@
             renderAppointments();
         }
 
-        renderEverything();
+    loadOwnerAppointments();

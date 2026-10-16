@@ -63,6 +63,57 @@
         let nextAppointmentId = 1;
 
 
+async function loadDashboardAppointments() {
+    const { data: { user }, error: userError } =
+        await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+        console.error("Unable to get logged-in user:", userError);
+        return;
+    }
+
+    const { data, error } = await supabaseClient
+        .from("appointments")
+        .select(`
+            id,
+            service,
+            appointment_date,
+            appointment_time,
+            status,
+            pets (
+                pet_name
+            )
+        `)
+        .eq("owner_id", user.id)
+        .order("appointment_date", { ascending: true });
+
+    if (error) {
+        console.error("Error loading dashboard appointments:", error);
+        return;
+    }
+
+    appointments.length = 0;
+
+    data.forEach(item => {
+        appointments.push({
+            id: item.id,
+            petName: item.pets?.pet_name || "Pet",
+            service: item.service,
+            date: item.appointment_date,
+            time: item.appointment_time.slice(0, 5),
+            status: item.status.charAt(0).toUpperCase()
+                + item.status.slice(1)
+        });
+    });
+
+    renderCalendar();
+    renderAppointments();
+}
+
+
+
+
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
@@ -252,3 +303,40 @@ async function loadTotalPets() {
 }
 
 loadTotalPets();
+
+
+async function loadUpcomingCount() {
+    const upcomingCountElement =
+        document.getElementById("upcomingCount");
+
+    if (!upcomingCountElement) return;
+
+    const { data: { user }, error: userError } =
+        await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+        upcomingCountElement.textContent = "0";
+        return;
+    }
+
+    const todayString = localDateString(new Date());
+
+    const { count, error } = await supabaseClient
+        .from("appointments")
+        .select("*", { count: "exact", head: true })
+        .eq("owner_id", user.id)
+        .gte("appointment_date", todayString)
+        .in("status", ["pending", "confirmed"]);
+
+    if (error) {
+        console.error("Error counting upcoming appointments:", error);
+        upcomingCountElement.textContent = "—";
+        return;
+    }
+
+    upcomingCountElement.textContent = count ?? 0;
+}
+
+loadUpcomingCount();
+loadDashboardAppointments();
+
